@@ -1,0 +1,133 @@
+<html lang="en-gb">
+
+<head>
+    <title>A CMS and Framework that uses React Components</title>
+
+    <link rel="stylesheet" href="/styles.css"/>
+    <link rel="canonical" href="https://www.brill.software/brill_software/demo"/>
+
+    <meta name="description" content="Demonstration of the Brill Software components"/>
+    <meta name="keywords"
+        content="Brill, examples, mui-datatables, React, Typescript"/>
+    <meta name="author" content="Chris Bulcock" />
+    <meta http-equiv="Cache-Control" content="max-age=3600"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <meta property="og:title" content="Demonstration of Brill CMS React Components"/>
+    <meta property="og:url" content="https://www.brill.software/brill_software/demo"/>
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:type" content="article"/>
+    <meta property="article:published_time" content="2021-03-28"/>
+    <meta property="article:modified_time" content="2021-04-05"/>
+    <meta property="article:author " content="Chris Bulcock"/>
+    <meta property="article:tag " content="Brill, examples, mui-datatables, React, Typescript"/>
+</head>
+
+<body>
+    <h1>Demonstration of React Components supported by the Brill CMS</h1>
+
+
+    <h2>Components</h2>
+    <p>The Brill CMS is used for creating web applications. Each application is created as a
+        series pages. Pages are encoded as JSON and specify the components and attributes required to render the page.
+        Just like other CMS, the Brill CMS has a collection of static components for rendering text and images. As well
+        as static components, there are dynamic components that interact with the server and with other components.
+        Actually most of the components are dynamic and interact with the server. Even a simple text component can get
+        the text dynamically from the server.</p>
+    <p>The components are React components written in Typescript or JavaScript. A comprehensive set of components is
+        supplied but you may wish to develop your own custom components. Custom components can be based on the existing
+        components and make use of the Message Broker for communications with the server. There&rsquo;s no limit to the
+        components you can develop other than what is supported by React and the web browser. Custom components can be
+        added to the CMS and dragged and dropped into pages.</p>
+    <h2>Data Table example</h2>
+    <p>The table below is an example of a Data Table component that gets its data from the server and a MySQL database.
+        It&rsquo;s a fully working table, not a screenshot! You can sort by clicking on column headers, search, filter,
+        hide columns, resize columns, download the data as a CSV file etc. The delete option only deletes rows from the
+        local table. Deletion from the MySQL database has not been implemented as otherwise we&rsquo;d end up with no
+        data left in the table!</p>
+
+    <p>The Data Table component uses server side searching, sorting and filtering and can therefore be used with tables
+        that have millions of rows. Only the data for the currently displayed page is transferred to the client. The
+        component is based on the mui-datatables component.</p>
+    <p>To insert a Data Table component within a page, the CMS would insert JSON similar to the following:</p>
+    <ac:structured-macro ac:name="code" ac:schema-version="1" ac:macro-id="a8b6d5d4-5973-4908-bc91-bec1abe28f97">
+        <ac:parameter ac:name="language">json</ac:parameter>
+        <ac:plain-text-body>
+            <![CDATA[{
+    "id": "Table1",
+    "module": "material_ui/table/DataTable",
+    "attributes": {
+        "title": "Employees",
+        "subscribeToTopic": "/Database/employee/readPage.js",
+        "columns": [
+            {"name": "employee_id", "label": "Employee Id"},
+            {"name": "first_name", "label": "First Name"},
+            {"name": "last_name", "label": "Last Name"},
+            {"name": "department", "label": "Department"}],
+        "options": {                                        
+            "serverSide": true,
+            "rowsPerPage": 15,
+        },
+        "newRoute": "",
+        "editRoute": "",
+        "duplicateRoute": "",
+        "deleteRoute": ""
+}]]>
+        </ac:plain-text-body>
+    </ac:structured-macro>
+    <p>When inserting the Data Table, the CMS prompts the user for the various attributes. The <code>module</code> is
+        the React component name. The <code>subscribeToTopic</code> attribute specifies how the component gets its data.
+        In this case the data is obtained by running JavaScript on the server The JavaScript formats and executes a
+        query and returns the results to the component. The Data Table component also supports client side searching,
+        filtering and sorting. In which case a simple query that retrieves the whole table is all that is required. The
+        downside of using the client side is that performance will be impacted if the table contains tens of thousands
+        or more rows.</p>
+    <p>The Data Table component has support for adding an additional &ldquo;Actions&rdquo; column that has edited,
+        duplicated or deleted buttons. A &ldquo;New&rdquo; button can be added to top bar to allow a new row to be
+        added. The buttons can display a form either as a modal window or a pull out side bar or on a new page.</p>
+    <p>A new column can be added to the database and made available in the application without having to do a code
+        release. The JavaScript may need to be updated in the CMS if the new column is searchable but otherwise the
+        JavaScript doesn&rsquo;t need to be updated. The CMS can be used to add the extra column to the Data Table
+        component and the new page published. Users will then be able to see the new column, all without a code release.
+    </p>
+    <h2>Forms</h2>
+    <p>Forms are very common on transactional web sites. Various components are provided for drop down lists, text entry
+        fields etc. The data is shared between the components using the Message Broker. One common feature of forms is
+        client side validation of data, as well as server side validation. The Brill CMS allows data entry components to
+        specify JavaScript that performs client side validation and display of error messages, as well as supporting
+        server side validation.</p>
+    <h2>Drag and Drop (DND)</h2>
+    <p>Many e-learning applications require custom DND components. For example, a student might drag and drop labels
+        onto a diagram. A number of DND components are supplied that can be customised.</p>
+    <p>The Brill CMS uses DND to allow a user to drag components from the component bar onto a page. The user can also
+        move components around on a page using DND.</p>
+    <p>At the bottom of this page is a link to a demo of the DND component used by the Brill CMS page editor.</p>
+    <h2>Summary</h2>
+    <p>Instead of developing pages using code, the pages are created as JSON and maintained using a CMS. This allows
+        more rapid development and easier maintenance. Changes to text, layout and images can be made by business users,
+        without the need for developer input and no need to wait for the next code release. Developers can still write
+        their own custom components and include them into the CMS and are not in any way limited as to what&rsquo;s
+        possible. Components can be developed quicker because the middleware and server infrastructure are already in
+        place and there are lots of examples to copy.</p>
+    <p>It&rsquo;s perfectly possible to migrate existing React applications a step at a time. An existing React
+        application can embed a page that was created using the Brill CMS using a component called EmbedPage. Existing
+        React applications can also make use of the Brill Message Broker, Brill Middleware and Brill Server.</p>
+    <p>The end result is a better looking web site that&rsquo;s easier to maintain and didn&rsquo;t require lots of code
+        to be developed. Overall a flexible &ldquo;low code&rdquo; solution.</p>
+
+        <p><a href="https://www.brill.software">Brill Software Home</a></p>
+        <p />
+        <p><a href="https://www.brill.software/brill_software/demo">Brill Demo</a></p>
+        <p />
+        <p><a href="https://www.brill.software/brill_software/cms">Brill CMS</a></p>
+        <p />
+        <p><a href="https://www.brill.software/brill_storybook/home">Brill Storybook</a></p>
+        <p />
+        <p><a href="https://www.brill.software/brill_software/middleware">Brill Middleware</a></p>
+        <p />
+        <p><a href="https://www.brill.software/brill_software/developers_guide">Brill Developers Guide</a></p>
+        <p />
+        <p><a href="https://www.brill.software/brill_software/contact_us">Contact Us</a></p>
+        <p />
+    </body>
+    </html>

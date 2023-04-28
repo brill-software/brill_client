@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <entry>
+        <link href="https://www.brill.software" />
+        <updated>2021-04-02T10:00:00+01:00</updated>
+    </entry>
+    <entry>
+       <link href="https://www.brill.software/brill_software/demo" />
+        <updated>2021-04-02T10:00:00+01:00</updated>
+    </entry>
+    <entry>
+        <link href="https://www.brill.software/brill_software/cms" />
+        <updated>2021-04-02T10:00:00+01:00</updated>
+    </entry>
+        <entry>
+       <link href="https://www.brill.software/brill_storybook/home" />
+        <updated>2021-04-02T10:00:00+01:00</updated>
+    </entry>
+        <entry>
+       <link href="https://www.brill.software/brill_software/middleware" />
+        <updated>2021-04-02T10:00:00+01:00</updated>
+    </entry>
+        <entry>
+       <link href="https://www.brill.software/brill_software/developers_guide" />
+        <updated>2021-04-02T10:00:00+01:00</updated>
+    </entry>
+        <entry>
+       <link href=">https://www.brill.software/brill_software/contact_us" />
+        <updated>2021-04-02T10:00:00+01:00</updated>
+    </entry>
+</feed>

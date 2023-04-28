@@ -1,0 +1,133 @@
+body {
+    background-color: white;
+    margin: 10px;
+}
+
+h1 {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #172b40;
+}
+
+h2 {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #172b40;
+}
+
+h3 {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 1.0rem;
+    font-weight: 600;
+    color: #172b40;
+}
+
+h4 {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #172b40;
+}
+
+h5 {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #172b40;
+}
+
+h5 {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #172b40;
+}
+
+h6 {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #308046;
+}
+
+p {
+    font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 0.9rem;
+    color: #172b40;
+}
+
+pre {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    color: #303030;
+    page-break-inside: avoid;
+    font: normal normal 14px/16px Courier New, Courier, Monospace;
+    font-size: 0.9rem;
+    line-height: 1.0;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    padding: .5em 1em;
+    display: block;
+    word-wrap: break-word;
+    overflow: auto;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    counter-reset: line;
+}
+
+code {
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    color: #303030;
+    page-break-inside: avoid;
+    font: normal normal 14px/16px Courier New, Courier, Monospace;
+    font-size: 0.9rem;
+    line-height: 1.0;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    padding: .5em 1em;
+    display: block;
+    word-wrap: break-word;
+    overflow: auto;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    counter-reset: line;
+}
+
+@media (min-width: 700px) {
+    body {
+        margin: 40px;
+    }
+    h1 {
+        font-size: 2rem
+    }
+    h2 {
+        font-size: 1.63rem
+    }
+    h3 {
+        font-size: 1.2rem
+    }
+    h3 {
+        font-size: 1.2rem
+    }
+    h4 {
+        font-size: 1.15rem
+    }
+    h5 {
+        font-size: 1.15rem
+    }
+    h6 {
+        font-size: 1.05rem
+    }
+    p {
+        font-size: 1.15rem;
+    }
+    pre {
+        font-size: 1.15rem;
+    }
+    code {
+        font-size: 1.15rem;
+    }
+}

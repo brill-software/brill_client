@@ -136,10 +136,6 @@ export class WebSocketClient {
             case "response":
                 MB.publishReceivedFromServer(message.topic, message.content)
                 break
-            // case "authentication_success":   // Can possible be removed. Not used aymore?
-            // case "authentication_failed":
-            //     MB.callAuthenticateCallback(message)
-            //     break
             case "error":
                 MB.handleServerReportedError(message.topic, message.content)
                 break

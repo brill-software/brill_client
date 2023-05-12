@@ -51,14 +51,14 @@ the following copyright notice:
 The MIT license is a short simple permissive license with conditions only requiring preservation of copyright and 
 license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
 
-You may wish to mark any code modification you make with your own copyright and license details. For example:
+You may wish to mark any code modification you make with your own copyright notice. For example:
 
 ```
 // Original: © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
 // Modifications: © 2023 Trading Enterprises Inc. - Trader project, distributed under the Trader Enterprises Inc. license.
 ```
 
-You don't need to identify the exact lines of code that were changed as these can be identified using Git and a differences tool.
+You don't need to identify the exact lines of code that were changed, as these can be identified using Git and a differences tool.
 
 It would be appreciated if you were able to make any generic fixes and changes under the MIT license, so that they could be 
 included into future releases of the Brill Framework.

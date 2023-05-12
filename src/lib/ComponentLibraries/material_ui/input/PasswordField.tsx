@@ -25,6 +25,7 @@ const COMMON_PASSWORDS = ["12345", "abcdef", "qwerty", "password", "abc123", "il
                           "princess", "letmein", "54321", "monkey", "1qaz", "superman", "asdfg", "2wsx", "ghjkl", "00000", "yuiop", "56789",
                           "azerty", "football", "ashley", "baseball", "basketball", "secret", "starwars", "batman", "login", "admin"]
 
+const MIN_PWD_LEN = 8                          
 interface Props {
     id: string
     theme: Theme
@@ -92,7 +93,7 @@ class PasswordField extends Component<Props, State> {
     }
 
     isAcceptablePassword(pwd: string) {
-        if (pwd.length < 8) {
+        if (pwd.length < MIN_PWD_LEN) {
             return false
         }
         const lowerCasePwd = pwd.toLowerCase()

@@ -18,7 +18,7 @@ development Brill Server running on port 8080. The port numbers can be changed i
 yarn
 ```
 
-- Start the Brill Server.
+- Start the Brill Server on port 8080.
 
 - Start the NodeJS development web server on port 3000 :
 ```
@@ -58,7 +58,7 @@ You may wish to mark any code modification you make with your own copyright noti
 // Modifications: © 2023 Trading Enterprises Inc. - Trader project, distributed under the Trader Enterprises Inc. license.
 ```
 
-You don't need to identify the exact lines of code that were changed, as these can be identified using Git and a differences tool.
+You don't need to identify the exact lines of code that were changed, as these can be found using Git.
 
 It would be appreciated if you were able to make any generic fixes and changes under the MIT license, so that they could be 
 included into future releases of the Brill Framework.

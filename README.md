@@ -39,38 +39,6 @@ the contents of the Brill Client **/build** directory need to be copied over to 
 task for copying the files over. In production, the Brill Server acts a a Web Server and serves the files that are in the static
 content directory. 
 
-## Licenses
-
-The Brill Framework (Client, Middleware and Server) is distributed under the MIT license. The Brill Framework modules are marked with
-the following copyright notice:
-
-```
-// © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
-```
-
-The MIT license is a short simple permissive license with conditions only requiring preservation of copyright and 
-license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
-
-You may wish to mark any code modification you make with your own copyright notice. For example:
-
-```
-// Original: © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
-// Modifications: © 2023 Trading Enterprises Inc. - Trader project, distributed under the Trader Enterprises Inc. license.
-```
-
-You don't need to identify the exact lines of code that were changed, as these can be found using Git.
-
-It would be appreciated if you were able to make any generic fixes and changes under the MIT license, so that they could be 
-included into future releases of the Brill Framework.
-
-You can distribute any web applications and components you develop under your own license.
-
-The Brill CMS is distributed under the Brill Software Apps license. Brill CMS components have the following copyright notice:
-
-```
-// © 2023 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
-```
-
 ## Documentation
 
 [Brill Software Website](https://www.brill.software "Brill Software")

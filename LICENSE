@@ -3,23 +3,36 @@ Introduction
 MIT License
 -----------
 
-The Brill Framework is distributed under the MIT License, a copy of which 
-is below. All source code modules covered by the MIT license contain the 
-following first line:
+The Brill Framework (Client, Middleware and Server) is distributed under the MIT License, a copy of which 
+is below. All source code modules covered by the MIT license contain the following first line:
 
-// © 2022 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
 
 The MIT license is a permissive license, meaning it carries very few restrictions 
 and basically allows you to do whatever you want with the code.
+
+Your modifications
+------------------
+
+You can make modification to the Brill Framework modules and mark the changes with your own choice
+of license. For example:
+
+// Original: © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// Modifications: // © 2023 Traders Inc. - Trading App, distributed under the Traders Inc. license.
+
+You don't need to identify the exact lines of code that were changed, as these can be found using Git.
+
+It would be appreciated if you were able to make any generally applicable changes and fixes under the MIT 
+license, so that they could be included into future releases of the Brill Framework.
 
 Your Applications and Components
 --------------------------------
 
 Any applications developed by you using the Brill Framework are by default 
 your copyright with "all rights reserved". To change this, place a copyright
-notice on the first line of each module and specify the license. e.g.
+notice on the first line of each module and specify the license. For example:
 
-// © 2022 Traders Inc. - Trading App, distributed under the Traders Inc. License.
+// © 2023 Traders Inc. - Trading App, distributed under the Traders Inc. License.
 
 You can sell any applications and components you develop, using your choice of license. 
 Make sure to read and follow the license terms of any third party components you use.
@@ -57,7 +70,7 @@ Brill Software Apps License
 ===========================
 
 Version 1.0 25th April 2022.
-Copyright (c) Brill Software (https://brill.software)
+Copyright (c) Brill Software (https://www.brill.software)
 Contact: Chris Bulcock (chris.bulcock@brill.software)
 
 Everyone is permitted to copy and distribute verbatim copies of this
@@ -83,7 +96,10 @@ other person or organisation related in any way to the licensee.
 1. Usage
 
 You are free to download, copy, compile, study and refer to the source code, pages, 
-database scripts and other resource files for any personal use of yours.
+database scripts and other resource files for an evaluation period of 30 days.
+
+After the 30 day evaluation period, if you wish to continue to use the App, you need
+to purchase a license. See the Brill Software Pricing page for more details.
 
 Usage by you of any work covered by this license should not, directly or indirectly, 
 enable its usage by any other individual or organisation.
@@ -93,7 +109,9 @@ enable its usage by any other individual or organisation.
 You are free to make any modifications to the source code, pages, database scripts 
 and other resource files covered by this license. You are also free to compile the 
 source after modifying it and using the complied product obtain thereafter in 
-compliance with this License.
+compliance with this License. You may provide such modifications back to Brill 
+Software, as you see fit, but there is no obligation on the part of Brill Software 
+to include such modifications into future releases.
 
 3. Redistribution
 

@@ -65,8 +65,7 @@ included into future releases of the Brill Framework.
 
 You can distribute any web applications and components you develop under your own license.
 
-The Brill CMS is distributed under the Brill Software Apps license. Components that are used by the Brill CMS 
-have the following copyright notice:
+The Brill CMS is distributed under the Brill Software Apps license. Brill CMS components have the following copyright notice:
 
 ```
 // © 2023 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.

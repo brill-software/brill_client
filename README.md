@@ -4,7 +4,7 @@
 
 The Brill Client is part of the Brill Framework. The Brill Client is a React application 
 written using TypeScript, that runs on the Web Browser. The Brill Client communicates with
-the Brill Server using the Brill Middleware, which is based on WebSockets.
+the Brill Server using the Brill Middleware.
 
 ## Development
 
@@ -13,7 +13,7 @@ development Brill Server running on port 8080. The port numbers can be changed i
 
 ### Starting the Dev Server
 
-- Get the node_modules directory setup:
+- Get the node_modules directories setup:
 ```
 yarn
 ```
@@ -34,7 +34,7 @@ To build:
 yarn build
 ```
 
-The build takes a while and the resulting build can be found in the **/build** directory. Before building the Brill Server,
+The build takes a while and the resulting build can be found in the Brill Client **/build** directory. Before building the Brill Server,
 the contents of the **/build** directory need to be copied over to the Brill Server static content directory. There's Gradle 
 task for copying the files over. In production, the Brill Server acts a a Web Server and serves the files in the static
 content directory. 
@@ -50,7 +50,7 @@ You may wish to mark any code modification you make with your own copyright and 
 
 ```
 // Original: © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
-// Modifications: © 2023 Trading Enterprises Inc. - Trader project, distributed under the Trader Enterprices Inc. license.
+// Modifications: © 2023 Trading Enterprises Inc. - Trader project, distributed under the Trader Enterprises Inc. license.
 ```
 
 You don't need to identify the exact lines of code that were changed as these can be identified using Git and a differences tool.
@@ -58,9 +58,14 @@ You don't need to identify the exact lines of code that were changed as these ca
 It would be appreciated if you were able to make any generic fixes and changes under the MIT license, so that they could be 
 included into future releases of the Brill Framework.
 
-You can distribute any applications you develop under your own license or any license you choose.
+You can distribute any web applications and components you develop under your own license.
 
-The Brill CMS is distributed under the Brill Software Appplications license.
+The Brill CMS is distributed under the Brill Software Apps license. Components that are used by the Brill CMS 
+have the following copyright line:
+
+```
+// © 2023 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+```
 
 ## Documentation
 

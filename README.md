@@ -35,13 +35,18 @@ yarn build
 ```
 
 The build takes a while and the resulting build can be found in the Brill Client **/build** directory. Before building the Brill Server,
-the contents of the **/build** directory need to be copied over to the Brill Server static content directory. There's Gradle 
-task for copying the files over. In production, the Brill Server acts a a Web Server and serves the files in the static
+the contents of the Brill Client **/build** directory need to be copied over to the Brill Server static content directory. There's Gradle 
+task for copying the files over. In production, the Brill Server acts a a Web Server and serves the files that are in the static
 content directory. 
 
 ## Licenses
 
-The Brill Framework (Client, Middleware and Server) is distributed under the MIT license. See the LICENSE file.
+The Brill Framework (Client, Middleware and Server) is distributed under the MIT license. The Brill Framework modules are marked with
+the following copyright notice:
+
+```
+// © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
+```
 
 The MIT license is a short simple permissive license with conditions only requiring preservation of copyright and 
 license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
@@ -61,7 +66,7 @@ included into future releases of the Brill Framework.
 You can distribute any web applications and components you develop under your own license.
 
 The Brill CMS is distributed under the Brill Software Apps license. Components that are used by the Brill CMS 
-have the following copyright line:
+have the following copyright notice:
 
 ```
 // © 2023 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.

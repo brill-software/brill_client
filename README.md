@@ -41,8 +41,6 @@ content directory.
 
 ## Documentation
 
-[Brill Software Website](https://www.brill.software "Brill Software")
-
 [Brill Software Developer Guide](https://www.brill.software/brill_software/developers_guide "Developers Guide")
 
 [Brill Software Middleware](https://brill.software/brill_software/middleware "Brill Middleware")

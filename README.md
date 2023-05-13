@@ -6,6 +6,21 @@ The Brill Client is part of the Brill Framework. The Brill Client is a React app
 written using TypeScript, that runs on the Web Browser. The Brill Client communicates with
 the Brill Server using the Brill Middleware.
 
+## Git Repository
+
+The master copy of the Brill Client project is kept at 
+
+- Bitbucket (git@bitbucket.org:brill-software/brill_client.git)
+
+The project is also available from:
+
+- Sourceforce (git://git.code.sf.net/p/brill-software/brill_client)
+- GitLab (git@gitlab.com:brill-software/brill_client.git)
+- GitHub (git@github.com:brill-software/brill_client.git)
+
+To make changes, you either need permission to write to the Bitbucket repository or create a fork repository.
+You can create a fork repository on Bitbucket, Sourceforge, GitLab, GitHub, AWS CodeCommit or your own Git Server.
+
 ## Development
 
 A NodeJS server is used for development purposes. This runs on port 3000 and connects to a

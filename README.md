@@ -44,3 +44,7 @@ content directory.
 [Brill Software Developer Guide](https://www.brill.software/brill_software/developers_guide "Developers Guide")
 
 [Brill Software Middleware](https://brill.software/brill_software/middleware "Brill Middleware")
+
+## Licensing
+
+See the LICENSE file in the root directory and the [Brill Software Website](https://www.brill.software "Brill Software") for more details.

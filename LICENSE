@@ -41,9 +41,10 @@ Brill Software Apps License
 ---------------------------
 
 Applications developed by Brill Software are covered by the Brill Software Apps license, 
-a copy of which is below. All modules covered by the license contain the following first line:
+a copy of which is below. Modules covered by the Brill Software Apps license contain the 
+following first line copyright notice or similar depending on the App:
 
-// © 2023 Brill Software Limited - Timesheet, distributed under the Brill Software Apps License.
+// © 2023 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps License.
 
 MIT License
 ===========
@@ -147,7 +148,7 @@ Brill Software to ask for permission.
 
 7. No Warranty
 
-The source code licensed under this license is shared "as it". Since it is intended for 
+The source code licensed under this license is shared "as is". Since it is intended for 
 sharing as reference, there is no warranty, of either source code, or the app compiled
 from it. The entire risk of quality or performance of the app is with you.
 

@@ -1,3 +1,4 @@
+http://brill.software
 https://www.brill.software
 https://www.brill.software/brill_software/demo
 https://www.brill.software/brill_software/cms

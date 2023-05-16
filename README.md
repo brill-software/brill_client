@@ -4,7 +4,7 @@
 
 The Brill Client is part of the Brill Framework. The Brill Client is a React application 
 written using TypeScript, that runs on the Web Browser. The Brill Client communicates with
-the Brill Server using the [Brill Middleware](https://brill.software/brill_software/middleware "Brill Middleware").
+the Brill Server using the [Brill Middleware](https://www.brill.software/brill_software/middleware "Brill Middleware").
 
 ## Git Repository
 

@@ -3,16 +3,19 @@
 <head>
     <title>Developers Guide for the Brill Framework and CMS</title>
 
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="https://www.brill.software/styles.css" />
     <link rel="canonical" href="https://www.brill.software/brill_software/developers_guide"/>
     
     <meta name="description" content="Brill Software, Developers Guide." />
-    <meta name="keywords" content="Brill, React, Typescript, JSON, Message Broker, Java, Spring Boot">
+    <meta name="keywords" content="Brill Software, React CMS, Typescript Compnents, JSON WebSockets, WebSockets Message Broker, Java Spring Boot">
     <meta name="author" content="Chris Bulcock">
     <meta http-equiv="Cache-Control" content="max-age=3600" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta property="og:title" content="Demonstration of Brill CMS React Components" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Dev Guide">
+
+    <meta property="og:title" content="Brill Software Developers Guide" />
     <meta property="og:url" content="https://www.brill.software/brill_software/developers_guide" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:type" content="article" />
@@ -266,7 +269,7 @@ export default withStyles(defaultCardStyles, { name: "Card", withTheme: true})(C
 <p>The ID on the components in the JSON page file is used as the <code>key</code>. What this means is that a unique ID must be allocated for each component within the application, unless the components really are identical. Should the same ID be used more than once, a component might not get rendered when it should be. The CMS checks the IDs and warns of any issues.</p>
 <h4>Mapping URL&rsquo;s and paths to pages</h4>
 <p>The Router handles mapping of URLs to page files and the loading and rendering of pages. URL&rsquo;s contain the application name in the path followed by the page. For example:</p>
-<p><a href="https://brill.software/brill_software/home">https://brill.software/brill_software/home</a> is mapped to the page file <code>brill_software/Pages/home.json</code></p>
+<p><a href="https://www.brill.software/brill_software/home">https://www.brill.software/brill_software/home</a> is mapped to the page file <code>brill_software/Pages/home.json</code></p>
 <p>The <code>Pages</code> directory can have subdirectories.</p>
 <h2>Developing new Server Event Controllers</h2>
 <p>The Brill Server is written in Java and uses Spring Boot. The web server is Apache Tomcat.</p>
@@ -432,7 +435,7 @@ server:
 <p>Then you need to check the pages using both Bing Webmaster Tools and Google Search Console. There&rsquo;s a faster turnaround using the Bing Tools. It&rsquo;s therefore suggested that you use Bing first and then move onto Google.</p>
 <p>Your search results raking will largely depend on the number of existing websites that have links to your website.</p>
 
-    <p><a href="https://www.brill.software">Brill Software Home</a></p>
+    <p><a href="https://www.brill.software">Brill Software</a></p>
     <p />
     <p><a href="https://www.brill.software/brill_software/demo">Brill Demo</a></p>
     <p />

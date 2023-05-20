@@ -4,8 +4,11 @@
         <loc>http//brill.software</loc>
     </url>
     <url>
+        <loc>https://www.brill.software</loc>
+    </url>
+    <url>
         <loc>https://www.brill.software/brill_software/demo</loc>
-    </url>gzip sitemap.xml
+    </url>
     <url>
         <loc>https://www.brill.software/brill_software/cms</loc>
     </url>

@@ -108,6 +108,8 @@ export default class EmbeddedPage extends Component<Props, State> {
     }
 
     render() {
+        const {theme, classes, subscribeToTopic, ...other} = this.props
+
         if (this.state.error !== undefined) {
             return <div><p>Error while loading page: {this.state.error.message}</p></div>
         }
@@ -119,7 +121,7 @@ export default class EmbeddedPage extends Component<Props, State> {
         const reactElements: React.CElement<any,any> = PageService.createReactElements(this.state.page.rootComponent)
 
         return (
-            <div>
+            <div {...other}>
                 {reactElements}
             </div>
             )

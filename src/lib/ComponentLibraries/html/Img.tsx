@@ -13,7 +13,8 @@ import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 interface Props {
     theme: Theme
     classes: any
-    subscribeToTopic: string // The topic for the image.
+    src?: string              // The URL for the image.
+    subscribeToTopic?: string // The topic for the image.
     [propName: string]: any
 }
 
@@ -33,10 +34,12 @@ class Img extends Component<Props, State> {
     }
 
     componentDidMount() {
-        this.token = MB.subscribe(
-            this.props.subscribeToTopic, 
-            (topic, image) => this.dataLoadedCallback(topic, image), 
-            (topic, error) => this.errorCallback(topic, error), this.props.filter)
+        if (this.props.subscribeToTopic) {
+            this.token = MB.subscribe(
+                this.props.subscribeToTopic, 
+                (topic, image) => this.dataLoadedCallback(topic, image), 
+                (topic, error) => this.errorCallback(topic, error), this.props.filter)
+        }
     }
 
     componentWillUnmount() {
@@ -48,11 +51,18 @@ class Img extends Component<Props, State> {
     }
 
     errorCallback(topic: string, error: ErrorMsg) {
-        console.warn(`Image component error for topic {topic} : {error.detail}`)
+        console.warn(`Img component error for topic {topic} : {error.detail}`)
     }
 
     render() {
-        const {theme, classes, subscribeToTopic, ...other} = this.props
+        const {theme, classes, src, subscribeToTopic, ...other} = this.props
+
+        if (src) {
+            return (
+                <img className={classes.root} src={src} alt="" {...other} />
+            )
+        }
+
         if (!this.state.image) {
             return null
         }

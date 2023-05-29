@@ -6,15 +6,16 @@ import React, {Component} from "react"
 /**
  * HTML Div component.
  * 
- * Background images need to be specified using the bgImageTopic prop, rather than using the
- * style attribute backgroundImage. 
+ * Background images need to be specified using either a URL and the backgroundImage prop or
+ * a topic and the bgImageTopic prop. 
  * 
  */
 
 interface Props {
     subscribeToTopic?: string
     text?: string,
-    bgImageTopic?: string // The topic of an image to use for the background.
+    backgroundImage?: string, // Background image URL.
+    bgImageTopic?: string     // The topic of an image to use for the background.
     children?: any
     [propName: string]: any
 }
@@ -40,6 +41,7 @@ export default class Div extends Component<Props, State> {
                 (topic, error) => this.errorCallback(topic, error)))
         }
         if (this.props.bgImageTopic) {
+            console.log("Div Subscribing to topic:" + this.props.bgImageTopic)
             this.tokens.push(MB.subscribe(
                 this.props.bgImageTopic,
                 (topic, image) => this.backgroundImageCallback(topic, image),
@@ -60,6 +62,7 @@ export default class Div extends Component<Props, State> {
     }
 
     backgroundImageCallback(topic: string, image: string) {
+        console.log("Loaded background image. Length = " + image.length)
         this.setState({backgroundImage: image})
     }
 
@@ -68,11 +71,19 @@ export default class Div extends Component<Props, State> {
     }
 
     render() {
-        const {subscribeToTopic, text, children, style, bgImageTopic, ...other} = this.props
+        const {subscribeToTopic, text, children, style, backgroundImage, bgImageTopic, ...other} = this.props
+
         let updatedStyle = style ? {...style} : []
-        if (bgImageTopic) {
-            updatedStyle["backgroundImage"] = "url('" + this.state.backgroundImage + "')"
+
+        if (backgroundImage) {
+            updatedStyle["backgroundImage"] = "url('" + backgroundImage + "')"
+        } else {
+            if (bgImageTopic) {
+                updatedStyle["backgroundImage"] = "url('" + this.state.backgroundImage + "')"
+                console.log("Rendering Div. Length = " + this.state.backgroundImage.length)
+            }
         }
+        
         return <div style={updatedStyle} {...other}>{this.state.text}{children}</div>
     }
 }

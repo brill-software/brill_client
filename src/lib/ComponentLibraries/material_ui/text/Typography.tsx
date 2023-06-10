@@ -64,7 +64,7 @@ class Typography extends Component<Props, State> {
         return (
             <MuiTypography
                 {...other}
-                dangerouslySetInnerHTML={{__html: Html.sanitize(text)}}
+                dangerouslySetInnerHTML={{__html: Html.sanitize(this.state.text)}}
             />
         )
     }

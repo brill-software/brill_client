@@ -24,6 +24,8 @@ class PagePreviewActionsIcons extends Component<Props, State> {
                    publishToTopic={publishToTopic} action="revert" />
                 <IconButton iconName="SaveTwoTone" tooltip="Save" 
                     publishToTopic={publishToTopic} action="save" />
+                <IconButton iconName="ListAltTwoTone" tooltip="Topics" 
+                    publishToTopic={publishToTopic} action="topics" />
             </div>
         )
     }

@@ -12,6 +12,7 @@ import { PageService } from "lib/PageService/PageService"
 import { EdType, UnsavedChanges } from "./UnsavedChanges"
 import { CurrentEditor } from "./CurrentEditor"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
+import TopicsPopover from "lib/ComponentLibraries/cms/TopicsPopover"
 
 /**
  * Page Preview of a page including preview of any unsaved changes.
@@ -113,6 +114,11 @@ class PagePreview extends Component<Props, State> {
         if (command === "revert" && this.textChanged && this.originalText.length > 2) {
             MB.publish(`PagePreview.discardChangesDialog.open.${this.props.id}`,
                 `Are you sure you want to discard your changes to ${this.props.fileName} and revert back to the last saved version?`)
+            return
+        }
+        if (command === "topics") {
+            MB.publish(`brill_cms.PagePreview.topicsDialog.open.${this.props.id}`,"")
+            return
         }
     }
 
@@ -144,6 +150,7 @@ class PagePreview extends Component<Props, State> {
                 <ConfirmDialog title="Please confirm" prompt=""
                     subscribeToTopic={`PagePreview.discardChangesDialog.open.${this.props.id}`}
                     publishToTopic={`PagePreview.discardChanges.${this.props.id}`} />
+                <TopicsPopover subscribeToTopic={`brill_cms.PagePreview.topicsDialog.open.${id}`} />
             </div>
         )
     }

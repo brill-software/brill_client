@@ -36,6 +36,9 @@ export class MB {
     private static topicMap: Map<string, TopicEntry> = new Map<string, TopicEntry>()
     private static currentApp: string = "brill_cms"
 
+    public static ALL_TOPICS_TOPIC: string = "app:all:"
+    private static ALL_TOPICS_MAX_VALUE_LEN = 160
+
     /**
      * Sets the default app name.
      * 
@@ -70,9 +73,14 @@ export class MB {
         const resolvedTopic = this.resolve(topic, false)
        
         let topicEntry = MB.topicMap.get(resolvedTopic)
+
         if (topicEntry === undefined) {
             // There are no existing subscriptions to Topic.
             topicEntry = new TopicEntry(resolvedTopic, undefined, callbackFunc, errorCallback, filter)
+            if (topic === MB.ALL_TOPICS_TOPIC) {
+                topicEntry.setData(this.getAllTopicsTable())
+                topicEntry.deliver(callbackFunc)
+            }
             MB.topicMap.set(resolvedTopic, topicEntry)
         } else {
             // There's already at least one subscription to the Topic.
@@ -97,6 +105,37 @@ export class MB {
 
         MB.refreshTopicFromServer(topicEntry)
         return new Token(this.currentApp, resolvedTopic, callbackFunc, errorCallback)
+    }
+
+    /**
+     * Returns a table containing all the topics and values, for subscribers to app:all:
+     * The table is displayed on the Page Preview page. Topics used by the CMS are excluded.
+     * 
+     * @returns An array of objects containing the fields topic and value.
+     * 
+     */
+    private static getAllTopicsTable(): any[] {
+        let table: any[] = []
+        for (const [topic, topicEntry] of MB.topicMap) {
+            const value = this.convertToStr(topicEntry.getData()) 
+            if (value !== undefined && topic !== "app:all:" && !topic.startsWith("app:tabBarPane") && !topic.startsWith("app:TabBarName") &&
+                !topic.startsWith("app:brill_cms.") && !topic.startsWith("app:TabName") && !topic.startsWith("app:home") &&
+                !topic.startsWith("app:versionControl") && topic !== "file:/" && !topic.startsWith("app:treeView") && !topic.startsWith("git:") &&
+                !topic.startsWith("app:cms.treeItem") && !topic.includes(":/brill_cms/") &&
+                (topic !== "app:errors:" || value !== "null") && !topic.startsWith("app:router") && !topic.startsWith("app:loginForm")) {
+
+                table.push({topic: topic, value: this.convertToStr(topicEntry.getData())})
+            } 
+        }
+        return table.reverse()
+    }
+
+    private static convertToStr(data: any): string  {
+        const str = JSON.stringify(data)
+        if (str === undefined || str.length < MB.ALL_TOPICS_MAX_VALUE_LEN) {
+            return str
+        }
+        return str.substring(0, MB.ALL_TOPICS_MAX_VALUE_LEN) + "..."
     }
 
     /**
@@ -276,10 +315,6 @@ export class MB {
         }
 
         MB.publishTopicToOthers(topicEntry)
-        // Publish to app:any: if there are any subscribers.
-        if (topic !== "app:any:" && topic !== "app:errors:" && MB.topicMap.has("app:any:")) {
-            MB.publish("app:any:", {topic: topic, data: newData})
-        }
         
         // When the topic has a field name (e.g. userForm#username ) update the parent topic.
         // Note that subscribers to the parent topic are not notified of the change.
@@ -292,6 +327,14 @@ export class MB {
                 MB.topicMap.set(parentTopic, parentEntry)
             }
             parentEntry.setDataField(fieldName, newData)
+        }
+
+        if (MB.topicMap.has(this.ALL_TOPICS_TOPIC)) {
+            let allTopicsEntry = MB.topicMap.get(this.ALL_TOPICS_TOPIC)
+            if (allTopicsEntry !== undefined) {
+                allTopicsEntry.setData(this.getAllTopicsTable())
+                allTopicsEntry.callCallbacks()
+            }
         }
     }
 

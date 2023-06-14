@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">>
     <url>
-        <loc>http://www.brill.software</loc>
-    </url>
-    <url>
-        <loc>https://www.brill.software</loc>
+        <loc>https://www.brill.software/brill_software/home</loc>
     </url>
     <url>
         <loc>https://www.brill.software/brill_software/demo</loc>
@@ -22,7 +19,12 @@
         <loc>https://www.brill.software/brill_software/developers_guide</loc>
     </url>
     <url>
+        <loc>https://www.brill.software/brill_software/pricing</loc>
+    </url>
+    <url>
+        <loc>https://www.brill.software/brill_software/downloads</loc>
+    </url>
+    <url>
         <loc>https://www.brill.software/brill_software/contact_us</loc>
     </url>
-     
 </urlset>

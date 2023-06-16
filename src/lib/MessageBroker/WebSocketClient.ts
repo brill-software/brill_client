@@ -44,18 +44,6 @@ export class WebSocketClient {
 
     private static connectionLost: boolean = false
 
-    public static sendMessage(message: string) {
-        if (!this.connected) {
-            this.openConnection()
-            this.msgQueue.push(message)
-        } else {
-            this.webSocket.send(message)
-            if (process.env.NODE_ENV !== "production") {
-                console.log("Sent: " + WebSocketClient.truncate(message))
-            }
-        }
-    }
-
     /**
      * Opens a connection either using either the SocksJS protocol or just plain WebSockets. The Brill Server makes available two endpoints, /brill_ws and /brill_socksjs.
      * 
@@ -124,6 +112,18 @@ export class WebSocketClient {
         console.error("Error: " + topic + " : "  + error.title + " " + error.detail)
     }
 
+    public static sendMessage(message: string) {
+        if (!WebSocketClient.connected) {
+            WebSocketClient.openConnection()
+            WebSocketClient.msgQueue.push(message)
+        } else {
+            WebSocketClient.webSocket.send(message)
+            if (process.env.NODE_ENV !== "production") {
+                console.log("Sent: " + WebSocketClient.truncate(message))
+            }
+        }
+    }
+
     private static messageReceived(event: any) {
         if (process.env.NODE_ENV !== "production") {
             console.log("Received: " + WebSocketClient.truncate(event.data))
@@ -165,7 +165,7 @@ export class WebSocketClient {
      */
     private static connectionClosed(event: Event) {
         console.log("Connection closed")
-        this.connected = false
+        WebSocketClient.connected = false
         WebSocketClient.retryCount++
         let retryTimeout = Math.floor(Math.random() * WebSocketClient.retryCount * 1000) + WebSocketClient.MIN_RETRY_INTERVAL
         if (retryTimeout > WebSocketClient.MAX_RETRY_INTERVAL) {

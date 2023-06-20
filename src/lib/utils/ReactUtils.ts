@@ -26,9 +26,39 @@ export class ReactUtils {
         // bundle size using 'yarn analyze'.
         //
         switch (name) {
-            // General use icons
+            // General use icons and icons used in the code.
             case "Home":
                 resolved = require("@material-ui/icons/Home.js").default
+                break
+            case "Close":
+                resolved = require("@material-ui/icons/Close.js").default
+                break
+            case "HorizontalSplitTwoTone":
+                resolved = require("@material-ui/icons/HorizontalSplitTwoTone.js").default
+                break
+            case "VerticalSplitTwoTone":
+                resolved = require("@material-ui/icons/VerticalSplitTwoTone.js").default
+                break
+            case "ExpandMore":
+                resolved = require("@material-ui/icons/ExpandMore.js").default
+                break
+            case "ChevronRight":
+                resolved = require("@material-ui/icons/ChevronRight.js").default
+                break
+            case "GridOffTwoTone":
+                resolved = require("@material-ui/icons/GridOffTwoTone.js").default
+                break
+            case "GridOnTwoTone":
+                resolved = require("@material-ui/icons/GridOnTwoTone.js").default
+                break
+            case "Brightness4":
+                resolved = require("@material-ui/icons/Brightness4.js").default
+                break
+            case "Brightness7":
+                resolved = require("@material-ui/icons/Brightness7.js").default
+                break        
+            case "Edit":
+                resolved = require("@material-ui/icons/Edit.js").default
                 break
 
             // CMS Editor Icons

@@ -9,9 +9,9 @@ import DOMPurify from "dompurify"
 export class Html {
 
     static ALLOWED_TAGS: string[] = ["p", "span", "b", "strong", "i", "em", "mark", "small", "s" ,"sub", "sup", "code", "ol", "ul", "li", 
-                    "font", "span", "br", "hr", "pre", "img", "table", "thead", "tbody", "th", "tr", "td"]
+                    "font", "span", "br", "hr", "pre", "img", "table", "thead", "tbody", "th", "tr", "td", "svg", "path"]
 
-    static ALLOWED_ATTRIBUTES: string[] = ["style", "height", "width", "src", "border", "cellpadding", "cellspacing", "bgcolor", "color"]
+    static ALLOWED_ATTRIBUTES: string[] = ["style", "height", "width", "src", "border", "cellpadding", "cellspacing", "bgcolor", "color", "d", "opacity"]
 
     /**
      * Removes any dangerous HTML tags for when using dangerouslySetInnerHTML.

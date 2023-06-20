@@ -1,9 +1,11 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withTheme, SvgIcon } from "@material-ui/core"
+import { withTheme, SvgIcon, withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
+import { ReactUtils } from "lib/utils/ReactUtils"
+import { Html } from "lib/utils/HtmlUtils"
 
 /**
  * Supports Icons that are 24x24 and have a single colour. Supports Material UI Icons from
@@ -29,19 +31,27 @@ interface Props {
 
 interface State {
     muiIcon: boolean
-    path_d: string
+    svgHtml: string
 }
 
 class FixedSizeIcon extends Component<Props, State> { 
     token: Token
 
+    static defaultStyles(theme: Theme): any {
+        return  { svgRoot: {
+            height: "24px",
+            width: "24px",
+            ...theme.overrides?.FixedSizeIcon?.svgRoot }}
+    } 
+
     constructor(props: Props) {
         super(props)
-        this.state = {muiIcon: false, path_d: ""}
+        this.state = {muiIcon: false, svgHtml: ""}
     }
 
     componentDidMount() {
         const {nameOrTopic} = this.props
+        //If the topic contains no slash and no '.', it's a MUI Icon name.
         const muiIcon: boolean = !(nameOrTopic && (nameOrTopic.indexOf("/") !== -1 || nameOrTopic.indexOf(".") !== -1))
         if (!muiIcon) {
             this.token = MB.subscribe(this.props.nameOrTopic, (topic, path_d) => this.dataLoadedCallback(topic, path_d), (topic, error) => this.errorCallback(topic, error))
@@ -54,9 +64,12 @@ class FixedSizeIcon extends Component<Props, State> {
             MB.unsubscribe(this.token)
         }
     }
-    
-    dataLoadedCallback(topic: string, path_d: any) {
-        this.setState({path_d: path_d})
+
+    dataLoadedCallback(topic: string, base64SvgHtml: any) {
+        if (base64SvgHtml && base64SvgHtml.base64) {
+            const svgHtml: string = atob(base64SvgHtml.base64)
+            this.setState({svgHtml: svgHtml})
+        }
     }
 
     errorCallback(topic: string, error: ErrorMsg) {
@@ -64,7 +77,7 @@ class FixedSizeIcon extends Component<Props, State> {
     }    
 
     render() {
-        const {id, theme, nameOrTopic, ...other} = this.props
+        const {id, theme, classes, nameOrTopic, ...other} = this.props
         
         if (!nameOrTopic) {
             return (
@@ -72,24 +85,20 @@ class FixedSizeIcon extends Component<Props, State> {
             )
         }
 
-        if (!this.state.muiIcon) {
-            if (this.state.path_d.length > 0) {
-                return (<SvgIcon {...other}><path d={this.state.path_d} /></SvgIcon> )
+        if (!this.state.muiIcon) { 
+            // SVG Icon
+            if (this.state.svgHtml.length > 0) {
+                return (
+                    <div className={classes.svgRoot} {...other}
+                    dangerouslySetInnerHTML={{__html: Html.sanitize(this.state.svgHtml)}} /> )
             } 
             return <div>?</div> 
         }
 
-        let resolved: any
-        try {
-            resolved = require(`@material-ui/icons/${nameOrTopic}.js`).default
-        } catch (error) {
-            console.warn(`Unable to load icon ${nameOrTopic}`);
-            resolved = require(`@material-ui/icons/ErrorTwoTone.js`).default
-        }
-    
+        // Material-UI Icon
         const attribs: any = other
-        return React.createElement(resolved, attribs)
+        return ReactUtils.resolveIcon(nameOrTopic, attribs)
     }
 }
 
-export default withTheme(FixedSizeIcon) 
+export default withStyles(FixedSizeIcon.defaultStyles, {withTheme: true})(FixedSizeIcon)

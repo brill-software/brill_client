@@ -22,13 +22,13 @@ class PageEditorActionsIcons extends Component<Props, State> {
         const {theme, fileName, publishToTopic, ...other} = this.props
         return (
             <div style={{display: "flex",flexDirection: "row"}} {...other}>               
-                <IconButton iconName="UndoTwoTone" tooltip="Undo - Cmd Z" 
+                <IconButton iconName="Undo" tooltip="Undo - Cmd Z" 
                    publishToTopic={publishToTopic} action="undo" />
-                <IconButton iconName="RedoTwoTone" tooltip="Redo - Shift Cmd Z" 
+                <IconButton iconName="Redo" tooltip="Redo - Shift Cmd Z" 
                     publishToTopic={publishToTopic} action="redo" />
                 <IdsOnOffIcon key={IdGen.next()}
                     publishToTopic={publishToTopic} onAction="showIds" offAction="hideIds"/>
-                <IconButton iconName="RestoreTwoTone" tooltip="Revert to last saved changes" 
+                <IconButton iconName="Restore" tooltip="Revert to last saved changes" 
                    publishToTopic={publishToTopic} action="revert" />
                 <IconButton iconName="SaveTwoTone" tooltip="Save - Cmd S" 
                     publishToTopic={publishToTopic} action="save" />

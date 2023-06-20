@@ -4,7 +4,7 @@ import { Dialog, withStyles } from '@material-ui/core'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { IdGen } from "lib/utils/IdGen"
 import ToolTip from "@material-ui/core/Tooltip"
-import { InsertPhotoTwoTone } from "@material-ui/icons"
+import InsertPhotoTwoTone from "@material-ui/icons/InsertPhotoTwoTone"
 import { MB } from "lib/MessageBroker/MB"
 import { Button, DialogActions, DialogContent, DialogContentText, IconButton, TextField, Typography } from '@material-ui/core'
 import CloseIcon from "@material-ui/icons/Close"

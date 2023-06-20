@@ -25,28 +25,28 @@ class XhtmlEditorActionsIcons extends Component<Props, State> {
         const {id, theme, subscribeToTopic, publishToTopic, ...other} = this.props
         return (
             <div style={{display: "flex",flexDirection: "row"}} {...other}>
-                <IconButton key={IdGen.next()} iconName="UndoTwoTone" tooltip="Undo - Cmd Z ***" 
+                <IconButton key={IdGen.next()} iconName="Undo" tooltip="Undo - Cmd Z ***" 
                     publishToTopic={publishToTopic} action={{command: "undo"}}/>
-                <IconButton key={IdGen.next()} iconName="RedoTwoTone" tooltip="Redo - Shift Cmd Z" 
+                <IconButton key={IdGen.next()} iconName="Redo" tooltip="Redo - Shift Cmd Z" 
                     publishToTopic={publishToTopic} action={{command: "redo"}} />
-                <IconButton iconName="RestoreTwoTone" tooltip="Revert to last saved changes" 
+                <IconButton iconName="Restore" tooltip="Revert to last saved changes" 
                    publishToTopic={publishToTopic} action={{command: "revert"}} />
                 <IconButton key={IdGen.next()} iconName="SaveTwoTone" tooltip="Save - Cmd S" 
                     publishToTopic={publishToTopic} action={{command: "save"}} />
                 <StylesDropdown key={IdGen.next()} subscribeToTopic={subscribeToTopic} publishToTopic={publishToTopic}/>
-                <IconButton key={IdGen.next()} iconName="FormatBoldTwoTone" tooltip="Bold - Cmd B" 
+                <IconButton key={IdGen.next()} iconName="FormatBold" tooltip="Bold - Cmd B" 
                     publishToTopic={publishToTopic} action={{command: "BOLD"}} />
-                <IconButton key={IdGen.next()} iconName="FormatItalicTwoTone" tooltip="Italic - Cmd I" 
+                <IconButton key={IdGen.next()} iconName="FormatItalic" tooltip="Italic - Cmd I" 
                     publishToTopic={publishToTopic} action={{command: "ITALIC"}} />
-                <IconButton key={IdGen.next()} iconName="FormatUnderlinedTwoTone" tooltip="Underline - Cmd U" 
+                <IconButton key={IdGen.next()} iconName="FormatUnderlined" tooltip="Underline - Cmd U" 
                     publishToTopic={publishToTopic} action={{command: "UNDERLINE"}} />
-                <IconButton key={IdGen.next()} iconName="StrikethroughSTwoTone" tooltip="Striketrough" 
+                <IconButton key={IdGen.next()} iconName="StrikethroughS" tooltip="Striketrough" 
                     publishToTopic={publishToTopic} action={{command: "STRIKETHROUGH"}} />
-                <IconButton key={IdGen.next()} iconName="CodeTwoTone" tooltip="Code" 
+                <IconButton key={IdGen.next()} iconName="Code" tooltip="Code" 
                     publishToTopic={publishToTopic} action={{command: "CODE"}} />
-                <IconButton key={IdGen.next()} iconName="FormatListBulletedTwoTone" tooltip="Unordered List" 
+                <IconButton key={IdGen.next()} iconName="FormatListBulleted" tooltip="Unordered List" 
                     publishToTopic={publishToTopic} action={{command: "unordered-list-item"}} />
-                <IconButton key={IdGen.next()} iconName="FormatListNumberedTwoTone" tooltip="Ordered List" 
+                <IconButton key={IdGen.next()} iconName="FormatListNumbered" tooltip="Ordered List" 
                     publishToTopic={publishToTopic} action={{command: "ordered-list-item"}} />
                 <ImageIcon key={IdGen.next()}
                     publishToTopic={publishToTopic} />

@@ -20,7 +20,7 @@ class PagePreviewActionsIcons extends Component<Props, State> {
         const {id, theme, fileName, publishToTopic, ...other} = this.props
         return (
             <div style={{display: "flex",flexDirection: "row"}} {...other}>
-                <IconButton iconName="RestoreTwoTone" tooltip="Revert to last saved changes" 
+                <IconButton iconName="Restore" tooltip="Revert to last saved changes" 
                    publishToTopic={publishToTopic} action="revert" />
                 <IconButton iconName="SaveTwoTone" tooltip="Save" 
                     publishToTopic={publishToTopic} action="save" />

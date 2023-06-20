@@ -4,7 +4,8 @@ import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import ToolTip from "@material-ui/core/Tooltip"
 import { MB } from "lib/MessageBroker/MB"
-import { GridOffTwoTone, GridOnTwoTone } from "@material-ui/icons"
+import GridOffTwoTone from "@material-ui/icons/GridOffTwoTone"
+import GridOnTwoTone from "@material-ui/icons/GridOnTwoTone"
 
 /**
  * Brill CMS Page Editor Hide/Show ids and outline boxes icon.

@@ -21,17 +21,17 @@ class TextEditorActionsIcons extends Component<Props, State> {
         const {id, theme, fileName, publishToTopic, ...other} = this.props
         return (
             <div style={{display: "flex",flexDirection: "row"}} {...other}>
-                <IconButton iconName="UndoTwoTone" tooltip="Undo - Cmd Z" 
+                <IconButton iconName="Undo" tooltip="Undo - Cmd Z" 
                    publishToTopic={publishToTopic} action="undo" />
-                <IconButton iconName="RedoTwoTone" tooltip="Redo - Shift Cmd Z" 
+                <IconButton iconName="Redo" tooltip="Redo - Shift Cmd Z" 
                     publishToTopic={publishToTopic} action="redo" />
-                <IconButton iconName="RestoreTwoTone" tooltip="Revert to last saved changes" 
+                <IconButton iconName="Restore" tooltip="Revert to last saved changes" 
                    publishToTopic={publishToTopic} action="revert" />
                 <IconButton iconName="SaveTwoTone" tooltip="Save - Cmd S" 
                     publishToTopic={publishToTopic} action="save" />
-                <IconButton iconName="SearchTwoTone" tooltip="Find - Cmd F" 
+                <IconButton iconName="Search" tooltip="Find - Cmd F" 
                     publishToTopic={publishToTopic} action="actions.find" />
-                <IconButton iconName="FindReplaceTwoTone" tooltip="Find Replace" 
+                <IconButton iconName="FindReplace" tooltip="Find Replace" 
                     publishToTopic={publishToTopic} action="editor.action.startFindReplaceAction" />
                 {!fileName.endsWith(".xhtml") &&
                     <IconButton iconName="FormatPaintTwoTone" tooltip="Format - Shift Alt F" 

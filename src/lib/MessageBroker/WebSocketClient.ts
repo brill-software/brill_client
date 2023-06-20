@@ -18,8 +18,8 @@ export class WebSocketClient {
     // The topic to send a copy of all error messages to.
     public static APP_ERRORS_TOPIC = "app:errors:"
 
-    // By default set USE_SOCKS_JS to true. Only set to false if you wish to view messages using the Chrome Developer tools.
-    private static USE_SOCKS_JS: boolean = true
+    // SockJS shouldn't be needed, so set to false.
+    private static USE_SOCKS_JS: boolean = false
 
     private static MIN_RETRY_INTERVAL: number = 1000
     private static MAX_RETRY_INTERVAL: number = 15000

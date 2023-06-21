@@ -1,6 +1,5 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import { MB } from "./MB"
-import SockJS from "sockjs-client"
 import { ErrorMsg } from "./ErrorMsg"
 import { User } from "lib/ComponentLibraries/material_ui/button/LoginButton"
 import { CryptoService } from "./CryptoService"
@@ -18,19 +17,13 @@ export class WebSocketClient {
     // The topic to send a copy of all error messages to.
     public static APP_ERRORS_TOPIC = "app:errors:"
 
-    // SockJS shouldn't be needed, so set to false.
-    private static USE_SOCKS_JS: boolean = false
-
     private static MIN_RETRY_INTERVAL: number = 1000
     private static MAX_RETRY_INTERVAL: number = 15000
 
     private static MAX_LOG_ENTRY_LEN = 1000
 
-    // TODO Possibly need to remove localhost.
-    private static WS_DEV_SERVER_URL: string = "localhost:8080/brill_ws"    
-    private static SOCKS_JS_DEV_SERVER_URL: string = "localhost:8080/brill_socksjs"    
+    private static WS_DEV_SERVER_URL: string = "localhost:8080/brill_ws"       
     private static WS_SERVER_URL: string = "/brill_ws"
-    private static SOCKS_JS_SERVER_URL: string = "/brill_socksjs"
 
     private static webSocket: WebSocket
 
@@ -45,29 +38,19 @@ export class WebSocketClient {
     private static connectionLost: boolean = false
 
     /**
-     * Opens a connection either using either the SocksJS protocol or just plain WebSockets. The Brill Server makes available two endpoints, /brill_ws and /brill_socksjs.
-     * 
-     * SocksJS has fallback modes that will work even when WebSockets are blocked. The downside is that the messages can't be viewed using the Chrome Developer Network tool.
-     * 
+     * Opens a connection using WebSockets. The Brill Server makes available the endpoint /brill_ws.
+     *  
      */
     private static openConnection() {
         console.log("Opening WebSocket connection. Environment = " + process.env.NODE_ENV)
         
-        if (WebSocketClient.USE_SOCKS_JS) {
-            const wsUrl = window.location.protocol + "//" + (process.env.NODE_ENV === "production" ? window.location.host + WebSocketClient.SOCKS_JS_SERVER_URL : WebSocketClient.SOCKS_JS_DEV_SERVER_URL)
-            const sockJsProtocols = [ "websocket", "xhr-streaming", "xhr-polling"] 
-            WebSocketClient.webSocket = new SockJS(wsUrl, null, {transports: sockJsProtocols})
-        } else {
-            const wsUrl = (window.location.protocol === "https:" ? "wss://" : "ws://") +
+        const wsUrl = (window.location.protocol === "https:" ? "wss://" : "ws://") +
             (process.env.NODE_ENV === "production" ? window.location.host + WebSocketClient.WS_SERVER_URL : WebSocketClient.WS_DEV_SERVER_URL)
-            WebSocketClient.webSocket = new WebSocket(wsUrl)
-        }
-
+        WebSocketClient.webSocket = new WebSocket(wsUrl)
         WebSocketClient.webSocket.addEventListener("open", WebSocketClient.connectionOpened)
         WebSocketClient.webSocket.addEventListener("error", WebSocketClient.socketError)
         WebSocketClient.webSocket.addEventListener("message", WebSocketClient.messageReceived)
         WebSocketClient.webSocket.addEventListener("close", WebSocketClient.connectionClosed)
-
     }
 
     private static async connectionOpened(event: any) {

@@ -69,6 +69,14 @@ export class IconUtils {
             case "Edit":
                 resolved = require("@material-ui/icons/Edit.js").default
                 break
+            
+            // CMS file upload dialog
+            case "HourglassEmpty":
+                resolved = require("@material-ui/icons/HourglassEmpty.js").default
+                break
+            case "Check":
+                resolved = require("@material-ui/icons/Check.js").default
+                break
 
             // CMS Editor Icons
             case "ArrowDownward":

@@ -10,7 +10,7 @@ import { TopicUtils } from "lib/utils/TopicUtils"
 import { IdGen } from "lib/utils/IdGen"
 import Alert from "@material-ui/lab/Alert"
 import { ConversionUtils } from "lib/utils/ConversionUtils"
-import { ReactUtils } from "lib/utils/ReactUtils"
+import { IconUtils } from "lib/utils/IconUtils"
 
 /**
  * Displays a modal dialog for uploading files. Supports both drag and drop and selection of files.
@@ -226,10 +226,10 @@ class UploadFileDialog extends Component<Props, State> {
             const selected: boolean = (fileName === this.state.selectedFileName)
             elements.push(
                 <ListItem key={IdGen.next()} selected={selected} onClick={() => this.onListItemClick(fileName)}>
-                    <ListItemIcon>{ReactUtils.resolveIcon(iconName)}</ListItemIcon>
+                    <ListItemIcon>{IconUtils.resolveIcon(iconName)}</ListItemIcon>
                     <ListItemText>{fileName}</ListItemText>
                     <ListItemSecondaryAction>
-                        <IconButton edge="end" onClick={() => this.onDelete(fileName)}>{ReactUtils.resolveIcon("DeleteTwoTone")}</IconButton>
+                        <IconButton edge="end" onClick={() => this.onDelete(fileName)}>{IconUtils.resolveIcon("DeleteTwoTone")}</IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
             )

@@ -4,7 +4,7 @@ import { Button as MuiButton, CircularProgress, withStyles } from '@material-ui/
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import Router from "lib/Router/Router"
-import { ReactUtils } from 'lib/utils/ReactUtils'
+import { IconUtils } from 'lib/utils/IconUtils'
 
 /**
  * Submit Button. Sneds field data to the server using request/response messaging.
@@ -83,8 +83,8 @@ class SubmitButton extends Component<Props, State> {
 
     render() {
         const {theme, classes, subscribeToTopic, requestTopic, publishToTopic, action, startIcon, title, endIcon, route, ...other} = this.props
-        const startIconAttr = {startIcon: ReactUtils.resolveIcon(startIcon)}
-        const endIconAttr = {endIcon: ReactUtils.resolveIcon(endIcon)}
+        const startIconAttr = {startIcon: IconUtils.resolveIcon(startIcon)}
+        const endIconAttr = {endIcon: IconUtils.resolveIcon(endIcon)}
 
         return (
             <div style={{position: "relative"}}>

@@ -1,29 +1,37 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
 
-/**
- * React Utilities
- * 
- */
-
 import React from "react";
 
-export class ReactUtils {                         
-    /**
-     * Loads an Icon.
-     */
-    static resolveIcon(name: string | undefined, attribs: any = {}): React.CElement<any, any> | undefined {
-        if (!name) return undefined
+/**
+ * Icon Utilities
+ * 
+ * There are a very large number of Material UI Icons and loading them all would increase the bunddle size
+ * by 6MB. For performance reasons, only the icons that are required should be loaded. 
+ * 
+ * Additional Material UI icons can be added to the switch statement below.
+ * 
+ * You can also use the CMS to upload custom SVG icons.
+ * 
+ */
+export class IconUtils {    
 
-        let resolved: any = undefined
+    /**
+     * Gets a Material UI icon, given the icon name.
+     * 
+     * @param name Name of the Material UI icon.
+     * @param attribs Optional parameters containing attributes for the icon.
+     * @returns React element for the icon or the Error icon.
+     */
+    static resolveIcon(name: string | undefined, attribs: any = {}): React.CElement<any, any> {
+        let resolved: any
         
-        // IMPORTANT: Please DO NOT replace the switch statement below with:
+        // IMPORTANT: Don't be tempted to replace the switch statement with:
         //
         //    resolved = require(`@material-ui/icons/${nameOrTopic}.js`).default
         //
         // Doing so would result in the Bundler including every single icon file
-        // from @material-ui/icons and tripple the bundle size by adding 6MB of
-        // icon files. Only include icons that will actually be used and check the
-        // bundle size using 'yarn analyze'.
+        // from @material-ui/icons. You can check the bundle size using: 
+        // % yarn analyze
         //
         switch (name) {
             // General use icons and icons used in the code.
@@ -114,7 +122,7 @@ export class ReactUtils {
                 resolved = require("@material-ui/icons/Undo.js").default
                 break
 
-            // CMS Files Tree View icons in Theme
+            // CMS Files Tree View icons specified in the CMS themes
             case "SubjectTwoTone":
                 resolved = require("@material-ui/icons/SubjectTwoTone.js").default
                 break   
@@ -178,7 +186,7 @@ export class ReactUtils {
                 break
 
             default:
-                console.warn(`Material UI Icon ${name} not currently supported. Update ReactUtils.ts to add support.`);
+                console.warn(`Material UI Icon ${name} not currently supported. Update IconUtils.ts to add support.`);
                 resolved = require("@material-ui/icons/ErrorTwoTone.js").default
         }
 

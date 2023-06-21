@@ -7,7 +7,7 @@ import Router from "lib/Router/Router"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { WebSocketClient } from "lib/MessageBroker/WebSocketClient"
 import { CryptoService } from "lib/MessageBroker/CryptoService"
-import { ReactUtils } from "lib/utils/ReactUtils"
+import { IconUtils } from "lib/utils/IconUtils"
 
 /**
  * Login button.
@@ -108,8 +108,8 @@ class LoginButton extends Component<Props, State> {
 
     render() {
         const {theme, classes, subscribeToTopic, requestTopic, startIcon, title, endIcon, successRoute, changePasswordRoute, ...other} = this.props
-        const startIconAttr = {startIcon: ReactUtils.resolveIcon(startIcon)}
-        const endIconAttr = {endIcon: ReactUtils.resolveIcon(endIcon)}
+        const startIconAttr = {startIcon: IconUtils.resolveIcon(startIcon)}
+        const endIconAttr = {endIcon: IconUtils.resolveIcon(endIcon)}
      
         return (
             <div>

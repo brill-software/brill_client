@@ -7,7 +7,7 @@ import Router from "lib/Router/Router"
 import { WebSocketClient } from 'lib/MessageBroker/WebSocketClient'
 import { ErrorMsg } from 'lib/MessageBroker/ErrorMsg'
 import ConfirmDialog from '../dialog/ConfirmDialog'
-import { ReactUtils } from 'lib/utils/ReactUtils'
+import { IconUtils } from 'lib/utils/IconUtils'
 
 /**
  * Logout button.
@@ -69,8 +69,8 @@ class LogoutButton extends Component<Props, State> {
 
     render() {
         const {theme, classes, startIcon, title, endIcon, route, publishToTopic, ...other} = this.props
-        const startIconAttr = {startIcon: ReactUtils.resolveIcon(startIcon)}
-        const endIconAttr = {endIcon: ReactUtils.resolveIcon(endIcon)}
+        const startIconAttr = {startIcon: IconUtils.resolveIcon(startIcon)}
+        const endIconAttr = {endIcon: IconUtils.resolveIcon(endIcon)}
       
         return (
             <div>

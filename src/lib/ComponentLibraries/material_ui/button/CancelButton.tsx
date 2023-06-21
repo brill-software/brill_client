@@ -3,7 +3,7 @@ import React, {Component} from "react"
 import { Button as MuiButton, withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import Router from "lib/Router/Router"
-import { ReactUtils } from "lib/utils/ReactUtils"
+import { IconUtils } from "lib/utils/IconUtils"
 import { MB } from "lib/MessageBroker/MB"
 
 /**
@@ -49,8 +49,8 @@ class CancelButton extends Component<Props, State> {
 
     render() {
         const {theme, classes, startIcon, title, endIcon, route, publishToTopic, action, ...other} = this.props
-        const startIconAttr = {startIcon: ReactUtils.resolveIcon(startIcon)}
-        const endIconAttr = {endIcon: ReactUtils.resolveIcon(endIcon)}
+        const startIconAttr = {startIcon: IconUtils.resolveIcon(startIcon)}
+        const endIconAttr = {endIcon: IconUtils.resolveIcon(endIcon)}
         
         return (
             <div>

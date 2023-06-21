@@ -4,7 +4,7 @@ import { Button as MuiButton } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import Router from "lib/Router/Router"
 import { withStyles } from "@material-ui/core"
-import { ReactUtils } from "lib/utils/ReactUtils"
+import { IconUtils } from "lib/utils/IconUtils"
 
 /**
  * Link Button component.
@@ -36,8 +36,8 @@ class LinkButton extends Component<Props, State> {
 
     render() {
         const {theme, classes, startIcon, title, endIcon, ...other} = this.props
-        const startIconAttr = {startIcon: ReactUtils.resolveIcon(startIcon)}
-        const endIconAttr = {endIcon: ReactUtils.resolveIcon(endIcon)}
+        const startIconAttr = {startIcon: IconUtils.resolveIcon(startIcon)}
+        const endIconAttr = {endIcon: IconUtils.resolveIcon(endIcon)}
 
         return (
             <MuiButton 

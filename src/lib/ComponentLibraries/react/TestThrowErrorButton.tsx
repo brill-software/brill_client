@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import { Button as MuiButton, withStyles } from '@material-ui/core'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
-import { ReactUtils } from 'lib/utils/ReactUtils'
+import { IconUtils } from 'lib/utils/IconUtils'
 
 /**
  * Test button for testing the Error Boundary component.
@@ -55,8 +55,8 @@ class TestThrowErrorButton extends Component<Props, State> {
 
     render() {
         const {theme, classes, subscribeToTopic, requestTopic, startIcon, title, endIcon, route, ...other} = this.props
-        const startIconAttr = {startIcon: ReactUtils.resolveIcon(startIcon)}
-        const endIconAttr = {endIcon: ReactUtils.resolveIcon(endIcon)}
+        const startIconAttr = {startIcon: IconUtils.resolveIcon(startIcon)}
+        const endIconAttr = {endIcon: IconUtils.resolveIcon(endIcon)}
         
         return (
             <div>

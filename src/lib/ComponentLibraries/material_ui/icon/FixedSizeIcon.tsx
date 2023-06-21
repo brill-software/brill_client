@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
-import { ReactUtils } from "lib/utils/ReactUtils"
+import { IconUtils } from "lib/utils/IconUtils"
 import { Html } from "lib/utils/HtmlUtils"
 
 /**
@@ -66,7 +66,7 @@ class FixedSizeIcon extends Component<Props, State> {
     }
 
     dataLoadedCallback(topic: string, base64SvgHtml: any) {
-        if (base64SvgHtml && base64SvgHtml.base64) {
+        if (base64SvgHtml?.base64) {
             const svgHtml: string = atob(base64SvgHtml.base64)
             this.setState({svgHtml: svgHtml})
         }
@@ -97,7 +97,7 @@ class FixedSizeIcon extends Component<Props, State> {
 
         // Material-UI Icon
         const attribs: any = other
-        return ReactUtils.resolveIcon(nameOrTopic, attribs)
+        return IconUtils.resolveIcon(nameOrTopic, attribs)
     }
 }
 

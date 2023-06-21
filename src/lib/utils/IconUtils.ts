@@ -22,7 +22,8 @@ export class IconUtils {
      * @param attribs Optional parameters containing attributes for the icon.
      * @returns React element for the icon or the Error icon.
      */
-    static resolveIcon(name: string | undefined, attribs: any = {}): React.CElement<any, any> {
+    static resolveIcon(name: string | undefined, attribs: any = {}): React.CElement<any, any> | undefined {
+        if (!name) return undefined
         let resolved: any
         
         // IMPORTANT: Don't be tempted to replace the switch statement with:

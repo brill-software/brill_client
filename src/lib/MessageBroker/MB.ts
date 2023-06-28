@@ -121,7 +121,7 @@ export class MB {
             if (value !== undefined && topic !== "app:all:" && !topic.startsWith("app:tabBarPane") && !topic.startsWith("app:TabBarName") &&
                 !topic.startsWith("app:brill_cms.") && !topic.startsWith("app:TabName") && !topic.startsWith("app:home") &&
                 !topic.startsWith("app:versionControl") && topic !== "file:/" && !topic.startsWith("app:treeView") && !topic.startsWith("git:") &&
-                !topic.startsWith("app:cms.treeItem") && !topic.includes(":/brill_cms/") &&
+                !topic.startsWith("app:cms.treeItem") && !topic.includes(":/brill_cms/") && !topic.startsWith("config:/") &&
                 (topic !== "app:errors:" || value !== "null") && !topic.startsWith("app:router") && !topic.startsWith("app:loginForm")) {
 
                 table.push({topic: topic, value: this.convertToStr(topicEntry.getData())})

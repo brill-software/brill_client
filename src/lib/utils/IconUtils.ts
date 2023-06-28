@@ -42,6 +42,21 @@ export class IconUtils {
             case "Close":
                 resolved = require("@material-ui/icons/Close.js").default
                 break
+            case "Cancel":
+                resolved = require("@material-ui/icons/Cancel.js").default
+                break
+            case "Delete":
+                resolved = require("@material-ui/icons/Delete.js").default
+                break
+            case "FastRewindTwoTone":
+                resolved = require("@material-ui/icons/FastRewindTwoTone.js").default
+                break
+            case "PlayArrowTwoTone":
+                resolved = require("@material-ui/icons/PlayArrowTwoTone.js").default
+                break
+            case "FastForwardTwoTone":
+                resolved = require("@material-ui/icons/FastForwardTwoTone.js").default
+                break
             case "HorizontalSplitTwoTone":
                 resolved = require("@material-ui/icons/HorizontalSplitTwoTone.js").default
                 break
@@ -69,7 +84,10 @@ export class IconUtils {
             case "Edit":
                 resolved = require("@material-ui/icons/Edit.js").default
                 break
-            
+            case "ExitToApp":
+                resolved = require("@material-ui/icons/ExitToApp.js").default
+                break
+    
             // CMS file upload dialog
             case "HourglassEmpty":
                 resolved = require("@material-ui/icons/HourglassEmpty.js").default

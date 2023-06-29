@@ -409,6 +409,7 @@ class ResizablePanels extends Component<Props, State> {
 
     closeAlert() {
         this.setState({error: null})
+        MB.publish("app:errors:", undefined)
     }
 
     render() {

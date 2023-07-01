@@ -112,9 +112,14 @@ class TreeView extends Component<Props, State> {
     }
 
     componentDidMount() {
+        let filter: any = {};
+        const userDetails = MB.getCurrentData("userDetails");
+        if (userDetails && userDetails.hidden_apps) {
+            filter["hiddenApps"] = userDetails.hidden_apps
+        }
         this.token = MB.subscribe(this.props.subscribeToTopic, 
             (topic, treeData) => this.dataLoadedCallback(topic, treeData), 
-            (topic, error) => this.errorCallback(topic, error))
+            (topic, error) => this.errorCallback(topic, error), filter)
         if (this.props.subscribeToSelectFileTopic) {
             this.token2 = MB.subscribe(this.props.subscribeToSelectFileTopic, 
                 (topic, fileTopic) => this.fileSelectedCallback(topic, fileTopic), 

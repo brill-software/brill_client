@@ -94,6 +94,7 @@ class LoginButton extends Component<Props, State> {
 
     handleSuccessResponse(topic: string, user: User) {
         MB.publish("username", user.username)
+        MB.publish("userDetails", user)
         WebSocketClient.saveAuthenticationResponse(user)
         if (user.changePassword === "Y") {
             Router.goToPage(this.props.changePasswordRoute)

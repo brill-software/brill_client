@@ -1,14 +1,14 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import { TreeView as MuiTreeView, TreeItem as MuiTreeItem } from "@material-ui/lab"
+import { TreeView as MuiTreeView, TreeItem as MuiTreeItem } from "@mui/lab"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { HtmlEntities } from "lib/utils/HtmlEntities"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Xhtml Index - Provides a tree index for a Xhtml component.
@@ -191,4 +191,4 @@ class XhtmlIndex extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, {withTheme: true})(XhtmlIndex)
+export default withStyles(defaultStyles)(XhtmlIndex)

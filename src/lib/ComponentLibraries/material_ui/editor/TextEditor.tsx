@@ -2,11 +2,9 @@
 import React, {Component} from "react"
 import ReactResizeDetector from 'react-resize-detector';
 import { MB, Token } from "lib/MessageBroker/MB"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import MonacoEditor from "react-monaco-editor"
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api"
-import { withTheme } from "@material-ui/core"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { IdGen } from "lib/utils/IdGen"
 import { JsonParser } from "lib/utils/JsonParser"
@@ -16,6 +14,7 @@ import ConfirmDialog from "lib/ComponentLibraries/material_ui/dialog/ConfirmDial
 import { TextUtils } from "lib/utils/TextUtils";
 import { CurrentEditor } from "./CurrentEditor";
 import { getLanguageService, TextDocument } from "vscode-json-languageservice"
+import withTheme from "@mui/styles/withTheme"
 
 /**
  * Text editor - based on the Microsoft Visual Studio Code Monaco Editor.
@@ -43,7 +42,6 @@ import { getLanguageService, TextDocument } from "vscode-json-languageservice"
 interface Props {
     id: string
     key: string
-    theme: Theme
     fileName: string
     subscribeToTopic: string
     subscribeToActionTopic?: string
@@ -58,6 +56,7 @@ interface Props {
 interface State {
     model: monacoEditor.editor.ITextModel | undefined
 }
+
 class TextEditor extends Component<Props, State> {
     tokens: Token[] = []
     unsubscribeSecondToken: Token
@@ -66,13 +65,40 @@ class TextEditor extends Component<Props, State> {
     changed: boolean = false
     externalChangesMade: boolean = false
     ignoreNextDataLoadedCallback: boolean = false
+    textAlreadyLoaded: boolean = false
     
     constructor(props: Props) {
         super(props)
         this.state = {model: undefined}
     }
 
+
     componentDidMount() {
+        // See if there's an existing unsaved changes model available
+        if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
+            const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
+            if (change.editor === EdType.TEXT_EDITOR) {
+                // Use existing model
+                this.setState({model: change.model})
+                return
+            }
+        }
+
+        // Create a new model
+        const language = this.getLanguage(this.props.subscribeToTopic)
+        const modelUri = monaco.Uri.parse(this.props.subscribeToTopic + "/" + IdGen.next())
+        const newModel = monaco.editor.createModel(this.initialText, language, modelUri)
+        this.setState({model: newModel})
+    }
+
+    editorDidMount(editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) {
+        this.editor = editor
+        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, this.save.bind(this))
+
+        if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
+            this.applyUnsavedChanges()
+        }
+
         if (this.props.schemasTopic) {
             this.tokens.push(MB.subscribe(this.props.schemasTopic, (topic, schema) => this.schemasLoadedCallback(topic, schema), (topic, error) => this.errorCallback(topic, error)))
         }
@@ -82,7 +108,82 @@ class TextEditor extends Component<Props, State> {
         }
         this.tokens.push(MB.subscribe(`TextEditor.discardChanges.${this.props.id}`, () => this.discardChanges(), (topic, error) => this.errorCallback(topic, error)))
         CurrentEditor.set(this.props.id)
+
     }
+
+    private applyUnsavedChanges() {
+        const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
+        
+        this.changed = change.textChanged
+        this.externalChangesMade = change.externalChangesMade
+        MB.publish(this.props.publishTextChangedTopic, change.textChanged)
+        this.editor.focus()
+
+        if (change.editor === EdType.TEXT_EDITOR) {
+            this.editor.restoreViewState(change.viewState)
+            UnsavedChanges.remove(this.props.subscribeToTopic)
+            this.textAlreadyLoaded = true
+           return
+        }
+        
+        this.state.model?.setValue(change.text)
+
+        if (change.selectedText) {
+            const match = TextUtils.findMatch(change.text, change.selectedText)
+            if (match !== null) {
+                const range: monaco.Range = new monaco.Range(match.startLine, 0, match.endLine, 0)
+                this.editor.setSelection(range)
+                const position = {lineNumber: match.startLine, column: 1}
+                this.editor.revealPositionNearTop(position)
+            }
+        } else {
+            const position = {lineNumber: change.cursorLineNumber, column: change.cursorColumn}
+            this.editor.setPosition(position)
+            this.editor.revealPositionNearTop(position)
+        }
+        UnsavedChanges.remove(this.props.subscribeToTopic)
+        this.textAlreadyLoaded = true
+    }
+
+    dataLoadedCallback(topic: string, data: any) {
+        if (this.ignoreNextDataLoadedCallback) {
+            this.ignoreNextDataLoadedCallback = false
+            return
+        }
+        // Check to see if the file has been deleted.
+        if (data === null) {
+            MB.publish("statusBar.message", "deleted...")
+            return
+        }
+
+        if (typeof data === "string") {
+            let secondTopic = data.replace("json:/", "file:/")
+            this.unsubscribeSecondToken = MB.subscribe(secondTopic, (topic, data) => this.secondDataLoadedCallback(topic, data), (topic, error)  => this.errorCallback(topic , error))
+            return
+        }
+
+        this.initialText = (data.base64) ? atob(data.base64) : JSON.stringify(data, null, 4)
+        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
+
+        // Prevent overwriting any unsaved changes and already set view state. 
+        if (this.changed || this.textAlreadyLoaded) {
+            this.textAlreadyLoaded =false
+            return
+        }
+        this.setEditorText(topic, this.initialText)
+    }
+
+    secondDataLoadedCallback(topic: string, data: any) {
+        MB.unsubscribe(this.unsubscribeSecondToken)
+        this.initialText = (topic.startsWith("json:/")) ? JSON.stringify(data, null, 4) : atob(data.base64)
+        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
+        if (this.changed || this.textAlreadyLoaded) {
+            this.textAlreadyLoaded = false
+            return
+        }
+        monaco.editor.setModelLanguage(this.editor.getModel() as any, this.getLanguage(topic))
+        this.setEditorText(topic, this.initialText)
+    } 
 
     componentWillUnmount() {
         if (this.editor) {
@@ -95,11 +196,6 @@ class TextEditor extends Component<Props, State> {
                 editorText, cursorLineNumber, cursorColumn, textChanged, this.externalChangesMade, "")
         }
         MB.unsubscribeAll(this.tokens)
-    }
-
-    editorDidMount(editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) {
-        this.editor = editor
-        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, this.save.bind(this))
     }
 
     async save(editor: monacoEditor.editor.IStandaloneCodeEditor) {
@@ -184,94 +280,17 @@ class TextEditor extends Component<Props, State> {
         } else {
             schemasObj = schemas // Assume json:/
         }
+        if (!monaco.languages.json || !monaco.languages.json.jsonDefaults) {
+            console.error("Check that webpack.config.js has the MonacoWebpackPlugin installed.")
+        }
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions(schemasObj)
     }
 
-    dataLoadedCallback(topic: string, data: any) {
-        if (this.ignoreNextDataLoadedCallback) {
-            this.ignoreNextDataLoadedCallback = false
-            return
-        }
-        // Check to see if the file has been deleted.
-        if (data === null) {
-            MB.publish("statusBar.message", "deleted...")
-            return
-        }
-
-        // Prevent a Save in other panes from overwriting any unsaved changes
-        if (this.changed) {
-            return
-        }
-        if (typeof data === "string") {
-            let secondTopic = data.replace("json:/", "file:/")
-            this.unsubscribeSecondToken = MB.subscribe(secondTopic, (topic, data) => this.secondDataLoadedCallback(topic, data), (topic, error)  => this.errorCallback(topic , error))
-            return
-        }
-        const text = (data.base64) ? atob(data.base64) : JSON.stringify(data, null, 4)
-        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
-        this.setEditorText(topic, text)
-    }
-
-    secondDataLoadedCallback(topic: string, data: any) {
-        MB.unsubscribe(this.unsubscribeSecondToken)
-        const text = (topic.startsWith("json:/")) ? JSON.stringify(data, null, 4) : atob(data.base64)
-        monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
-        this.setEditorText(topic, text)
-    } 
-
     private setEditorText(topic: string, text: string) {
         this.initialText = text
-
-        // See if there are any unsaved changes from when editor was open before
-        if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
-            const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
-            if (change.editor === EdType.TEXT_EDITOR) {
-                this.changed = change.textChanged
-                this.externalChangesMade = change.externalChangesMade
-                MB.publish(this.props.publishTextChangedTopic, change.textChanged)
-                this.setState({model: change.model})
-                if (this.editor && this.editor.focus && this.editor.restoreViewState) {
-                    this.editor.focus()
-                    this.editor.restoreViewState(change.viewState)
-                }
-                UnsavedChanges.remove(this.props.subscribeToTopic)
-                return
-            }
-            if (change.editor === EdType.XHTML_EDITOR || change.editor === EdType.PAGE_EDITOR) {
-                this.changed = change.textChanged
-                this.externalChangesMade = change.externalChangesMade
-                MB.publish(this.props.publishTextChangedTopic, change.textChanged)
-                const language = this.getLanguage(topic)
-                const modelUri = monaco.Uri.parse(topic + "/" + IdGen.next())
-                let model = monaco.editor.createModel(change.text, language, modelUri)
-                this.setState({model: model})
-                this.editor.focus()
-                if (change.selectedText) {
-                    const match = TextUtils.findMatch(change.text, change.selectedText)
-                    if (match !== null) {
-                        const range: monaco.Range = new monaco.Range(match.startLine, 0, match.endLine, 0)
-                        this.editor.setSelection(range)
-                        const position = {lineNumber: match.startLine, column: 1}
-                        this.editor.revealPositionNearTop(position)
-                    }
-                } else {
-                    const position = {lineNumber: change.cursorLineNumber, column: change.cursorColumn}
-                    this.editor.setPosition(position)
-                    this.editor.revealPositionNearTop(position)
-                }
-                UnsavedChanges.remove(this.props.subscribeToTopic)
-                return
-            }
-        }
-        MB.publish(this.props.publishTextChangedTopic, false)
-        const modelUri = monaco.Uri.parse(topic + "/" + IdGen.next())
-        const language = this.getLanguage(topic)
-        if (this.state.model) {
-            let model = this.state.model
+        let model = this.state.model
+        if (model) {
             model.setValue(this.initialText)
-            this.setState({model: model})
-        } else {
-            const model = monaco.editor.createModel(this.initialText, language, modelUri)
             this.setState({model: model})
         }
     }
@@ -296,6 +315,7 @@ class TextEditor extends Component<Props, State> {
             case "xhtml":
                 language = "html"
                 break
+            case "json":
             case "jsonc":
                 language = "json"
                 break
@@ -330,10 +350,17 @@ class TextEditor extends Component<Props, State> {
     }
 
     render() {
-        const {id, key, theme, name, subscribeToTopic, publishToTopic, schemasTopic, options, language, ...other} = this.props
-        const optionsObj = {model: this.state.model, ...options}
-        const editorTheme: string =  theme.palette.type === "dark" ? "vs-dark" : "vs-light"
+        const {id, theme, key, name, subscribeToTopic, publishToTopic, schemasTopic, options, language, ...other} = this.props
+        
+        // Handles both MUI v4 and MUI v5 themes.
+        let editorTheme: string =  "vs-light"
+        if ((theme.palette?.type && theme.palette.type === "dark") || 
+            (theme.palette?.mode && theme.palette.mode === "dark")) {
+            editorTheme = "vs-dark"
+        }
+
         if (this.state.model) {
+            const optionsObj = {model: this.state.model, ...options}
             return (
                 <div style={{height: "100%"}} onClick={(event) => this.onClickHandler(event)}>
                     <ReactResizeDetector
@@ -344,6 +371,7 @@ class TextEditor extends Component<Props, State> {
                         refreshRate={200} />
                     <MonacoEditor
                         height="100%"
+                        language={this.getLanguage(this.props.subscribeToTopic)}
                         theme={editorTheme}
                         options={optionsObj}
                         onChange={(newValue, e) => this.onChange(newValue, e)}
@@ -361,4 +389,4 @@ class TextEditor extends Component<Props, State> {
     }
 }
 
-export default withTheme(TextEditor)
+export default withTheme(TextEditor as any)

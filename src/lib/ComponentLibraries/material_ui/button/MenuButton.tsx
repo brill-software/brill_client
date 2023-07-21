@@ -1,10 +1,11 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { Button as MuiButton, withStyles } from "@material-ui/core"
+import { Button as MuiButton } from "@mui/material"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import Router, { ROUTER_CURRENT_ROUTE } from "lib/Router/Router"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Displays a button that acts as a menu bar link. If the current page matchs the link, a bar is displayed under the
@@ -79,4 +80,4 @@ class MenuButton extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "MenuButton", withTheme: true})(MenuButton)
+export default withStyles(defaultStyles, { name: "MenuButton"})(MenuButton)

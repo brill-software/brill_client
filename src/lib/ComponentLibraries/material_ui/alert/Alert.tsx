@@ -2,7 +2,7 @@
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { MB, Token } from "lib/MessageBroker/MB"
 import React, {Component} from "react"
-import { Alert, AlertTitle, Color } from "@material-ui/lab"
+import { Alert, AlertTitle, AlertColor } from "@mui/lab"
 import Draggable from "react-draggable"
 import { Html } from "lib/utils/HtmlUtils"
 
@@ -73,7 +73,7 @@ export default class Div extends Component<Props, State> {
                 <div style={{position: "relative"}}>
                     <div style={{position: "absolute", zIndex: 15}}>
                         <Draggable handle=".handle">
-                            <Alert className="handle" severity={severity as Color} onClose={() => {this.onClose()}} {...other}>
+                            <Alert className="handle" severity={severity as AlertColor} onClose={() => {this.onClose()}} {...other}>
                             <AlertTitle>{title}</AlertTitle>
                                 <div dangerouslySetInnerHTML={{__html: Html.sanitize(detail)}} />
                             </Alert>

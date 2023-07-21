@@ -1,17 +1,18 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, {ChangeEvent, Component} from "react"
-import { Menu, MenuItem, PopoverPosition, Tooltip, Typography, withTheme } from "@material-ui/core"
-import { TreeView as MuiTreeView, TreeItem as MuiTreeItem } from "@material-ui/lab"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import { Menu, MenuItem, PopoverPosition, Tooltip, Typography } from "@mui/material"
+import { TreeView as MuiTreeView, TreeItem as MuiTreeItem } from "@mui/lab"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import FixedSizeIcon from "lib/ComponentLibraries/material_ui/icon/FixedSizeIcon"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import IconButton from "lib/ComponentLibraries/material_ui/button/IconButton"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { IdGen } from "lib/utils/IdGen"
 import { FileClipboard } from "./FileClipboard"
+import { withTheme } from "@mui/styles"
+import { Theme } from "../material_ui/theme/Theme"
 
 /**
  * CMS Files / Folders TreeView - based on TreeView.
@@ -334,8 +335,9 @@ class TreeView extends Component<Props, State> {
         return (
             <MuiTreeItem key={node.id} nodeId={node.id}
             onContextMenu={(event) => {this.onContextMenu(event, node.id, node.type)}}
-            onIconClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
-            onLabelClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
+            // TODO onIconClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
+            // TODO onLabelClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
+            onClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
             label={
                     <div style={{display: 'flex',
                     alignItems: 'center'
@@ -392,5 +394,4 @@ class TreeView extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(TreeView)
+export default withTheme(TreeView as any)

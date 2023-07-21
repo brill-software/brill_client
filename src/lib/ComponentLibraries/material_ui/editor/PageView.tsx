@@ -1,7 +1,5 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, { Component } from "react"
-import { withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { Page } from "lib/PageService/Page"
@@ -18,7 +16,6 @@ import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 
 interface Props {
     id: string
-    theme: Theme
     fileName: string
     subscribeToTopic: string
     [propName: string]: any
@@ -30,7 +27,7 @@ interface State {
     renderCount: number
 }
 
-class PageView extends Component<Props, State> {
+export default class PageView extends Component<Props, State> {
     token: Token
     tokenCmd: Token
 
@@ -77,7 +74,7 @@ class PageView extends Component<Props, State> {
 
     render() {
 
-        const { id, theme, fileName, subscribeToTopic, publishTextChangedTopic, ...other } = this.props
+        const { id, fileName, subscribeToTopic, publishTextChangedTopic, ...other } = this.props
         
         if (this.state.page === undefined) {
             return <LoadingIndicator />
@@ -92,5 +89,3 @@ class PageView extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(PageView)

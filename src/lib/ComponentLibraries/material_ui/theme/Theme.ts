@@ -1,11 +1,11 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
-import { Theme as MuiTheme} from "@material-ui/core/styles"
-import { Mixins as MuiMixins } from "@material-ui/core/styles/createMixins"
-import { Overrides as MuiOverrides} from "@material-ui/core/styles/overrides"
-import { Typography as MuiTypography } from "@material-ui/core/styles/createTypography"
+import { Theme as MuiTheme} from "@mui/material"
+import { Mixins as MuiMixins } from "@mui/material/styles/createMixins"
+// TODO import { Overrides as MuiOverrides} from "@mui/material/styles/overrides"
+import { Typography as MuiTypography } from "@mui/material/styles/createTypography"
 
 /**
- * Extends the MUI Theme interface to include our own mixins, overrides and typography.
+ * Extends the Mui Theme interface to include our own mixins, overrides and typography.
  * 
  */
 
@@ -13,9 +13,15 @@ interface Mixins extends MuiMixins {
     [propName: string]: any
 }
 
-interface Overrides extends MuiOverrides {
+// interface Overrides extends MuiOverrides {
+interface Overrides {
     [propName: string]: any
 }
+
+// interface Components extends MuiComponents {
+    interface Components {
+        [propName: string]: any
+    }
 
 interface Typography extends MuiTypography {
     html?: {style: object}
@@ -30,6 +36,7 @@ interface Typography extends MuiTypography {
 
 export interface Theme extends MuiTheme {
     mixins: Mixins
-    overrides?: Overrides
+    components?: Components   // v5 
+    overrides?: Overrides  // v4
     typography: Typography
 }

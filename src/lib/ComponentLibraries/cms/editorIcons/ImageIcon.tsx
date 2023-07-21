@@ -1,13 +1,14 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, { Component } from "react"
-import { Dialog, withStyles } from '@material-ui/core'
+import { Dialog } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { IdGen } from "lib/utils/IdGen"
-import ToolTip from "@material-ui/core/Tooltip"
-import InsertPhotoTwoTone from "@material-ui/icons/InsertPhotoTwoTone"
+import ToolTip from "@mui/material/Tooltip"
+import InsertPhotoTwoTone from "@mui/icons-material/InsertPhotoTwoTone"
 import { MB } from "lib/MessageBroker/MB"
-import { Button, DialogActions, DialogContent, DialogContentText, IconButton, TextField, Typography } from '@material-ui/core'
-import CloseIcon from "@material-ui/icons/Close"
+import { Button, DialogActions, DialogContent, DialogContentText, IconButton, TextField, Typography } from '@mui/material'
+import CloseIcon from "@mui/icons-material/Close"
+import withStyles from "@mui/styles/withStyles"
 
 const defaultStyles: any = (theme: Theme) => {
     return  {
@@ -33,8 +34,6 @@ const defaultStyles: any = (theme: Theme) => {
 }
 
 interface Props {
-    id: string
-    theme: Theme
     publishToTopic: string
     [propName: string]: any
 }
@@ -88,7 +87,7 @@ class ImageIcon extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, classes, publishToTopic, ...other} = this.props
+        const {classes, publishToTopic, ...other} = this.props
 
         return (
             <div {...other}>
@@ -128,4 +127,4 @@ class ImageIcon extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "ImageIcon", withTheme: true})(ImageIcon)
+export default withStyles(defaultStyles, { name: "ImageIcon"})(ImageIcon)

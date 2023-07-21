@@ -1,7 +1,6 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component, ChangeEvent} from "react"
-import { TextField as MuiTextField, withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import { TextField as MuiTextField } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { Eval } from "lib/utils/Eval"
 import { ValidationRule } from "lib/PageService/Page"
@@ -28,7 +27,6 @@ const COMMON_PASSWORDS = ["12345", "abcdef", "qwerty", "password", "abc123", "il
 const MIN_PWD_LEN = 8                          
 interface Props {
     id: string
-    theme: Theme
     publishToTopic: string
     validationRules: ValidationRule[]
     [propName: string]: any
@@ -40,7 +38,7 @@ interface State {
     helperText: string   
 }
 
-class PasswordField extends Component<Props, State> {
+export default class PasswordField extends Component<Props, State> {
     token: Token
 
     constructor(props: Props) {
@@ -117,7 +115,7 @@ class PasswordField extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, publishToTopic, validationRules, ...other} = this.props
+        const {id, publishToTopic, validationRules, ...other} = this.props
         if (publishToTopic === undefined || publishToTopic.length === 0) {
             throw new Error(`Password field ${id} must have a prop of publishToTopic`)
         }
@@ -138,5 +136,3 @@ class PasswordField extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(PasswordField)

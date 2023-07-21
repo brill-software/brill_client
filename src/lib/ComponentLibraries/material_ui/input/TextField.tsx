@@ -1,8 +1,7 @@
 /* eslint no-eval: 0 */
 // © 2022 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component, ChangeEvent} from "react"
-import { TextField as MuiTextField, withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import { TextField as MuiTextField } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { Eval } from "lib/utils/Eval"
 import { ValidationRule } from "lib/PageService/Page"
@@ -16,7 +15,6 @@ import { ErrorUtils } from "lib/utils/ErrorUtils"
 
 interface Props {
     id: string
-    theme: Theme
     name: string
     subscribeToTopic: string
     publishToTopic: string
@@ -30,7 +28,7 @@ interface State {
     helperText: string
 }
 
-class TextField extends Component<Props, State> {
+export default class TextField extends Component<Props, State> {
     token: Token
     token2: Token
 
@@ -104,7 +102,7 @@ class TextField extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, name, subscribeToTopic, publishToTopic, validationRules, ...other} = this.props
+        const {id, name, subscribeToTopic, publishToTopic, validationRules, ...other} = this.props
         if (publishToTopic === undefined || publishToTopic.length === 0) {
             MB.publish("app:errors:", new ErrorMsg("Component Error", "TextField must have a prop of publishToTopic"))
             return null
@@ -119,5 +117,3 @@ class TextField extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(TextField)

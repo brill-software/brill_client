@@ -1,7 +1,5 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token  } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 
@@ -13,7 +11,6 @@ import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 
 interface Props {
     id: string
-    theme: Theme
     subscribeToTopic: string
     [propName: string]: any
 }
@@ -22,7 +19,7 @@ interface State {
     svgHtml: string
 }
 
-class CustomIcon extends Component<Props, State> { 
+export default class CustomIcon extends Component<Props, State> { 
     token: Token
 
     constructor(props: Props) {
@@ -50,7 +47,7 @@ class CustomIcon extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, subscribeToTopic, ...other} = this.props
+        const {id, subscribeToTopic, ...other} = this.props
             
         if (this.state.svgHtml.length > 0) {
             return (<span {...other} dangerouslySetInnerHTML={{__html: this.state.svgHtml}}/>)
@@ -58,5 +55,3 @@ class CustomIcon extends Component<Props, State> {
         return null
     }
 }
-
-export default withTheme(CustomIcon)

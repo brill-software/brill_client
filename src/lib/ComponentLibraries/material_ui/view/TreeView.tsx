@@ -1,9 +1,9 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { Tooltip, Typography, withTheme } from "@material-ui/core"
-import { TreeView as MuiTreeView, TreeItem as MuiTreeItem } from "@material-ui/lab"
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore"
-import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import { Tooltip, Typography } from "@mui/material"
+import { TreeView as MuiTreeView, TreeItem as MuiTreeItem } from "@mui/lab"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import FixedSizeIcon from "lib/ComponentLibraries/material_ui/icon/FixedSizeIcon"
@@ -11,6 +11,7 @@ import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import IconButton from "../button/IconButton"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { IdGen } from "lib/utils/IdGen"
+import withTheme from "@mui/styles/withTheme"
 
 /**
  * TreeView - based on MUI TreeView.
@@ -200,8 +201,7 @@ class TreeView extends Component<Props, State> {
 
         return (
             <MuiTreeItem key={node.id} nodeId={node.id}
-            onIconClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
-            onLabelClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
+            onClick={(event: any) => { this.onClickHandler(event, node.id, node.type)}}
             label={
                     <div style={{display: 'flex',
                     alignItems: 'center'
@@ -234,4 +234,4 @@ class TreeView extends Component<Props, State> {
     }
 }
 
-export default withTheme(TreeView)
+export default withTheme(TreeView as any)

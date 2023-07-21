@@ -1,21 +1,22 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, { Component } from "react"
-import { Button, DialogActions, DialogContent, IconButton as MuiIconButton, Popover, TextField, Typography, withStyles } from '@material-ui/core'
+import { Button, DialogActions, DialogContent, IconButton as MuiIconButton, Popover, TextField, Typography } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
-import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@mui/icons-material/Close"
 import { IdGen } from "lib/utils/IdGen"
 import { ErrorUtils } from "lib/utils/ErrorUtils"
 import { JsonParser } from "lib/utils/JsonParser"
 import { Attributes, PageComponent } from "lib/PageService/Page"
-import ToolTip from "@material-ui/core/Tooltip"
-import AddBoxTwoTone from "@material-ui/icons/AddBoxTwoTone"
-import DeleteTwoTone from "@material-ui/icons/DeleteTwoTone"
+import ToolTip from "@mui/material/Tooltip"
+import AddBoxTwoTone from "@mui/icons-material/AddBoxTwoTone"
+import DeleteTwoTone from "@mui/icons-material/DeleteTwoTone"
 import { FieldUtils } from "lib/utils/FieldUtils"
 import { ComponentManager } from "lib/ComponentManager/ComponentManager"
 import Draggable from "react-draggable"
 import ThemeProvider from "../material_ui/theme/ThemeProvider"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Displays a non-modal Popover that allows editing of a components id, module and attributes.
@@ -356,4 +357,4 @@ class EditPopover extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "EditPopover", withTheme: true })(EditPopover)
+export default withStyles(defaultStyles, {name: "EditPopover"})(EditPopover)

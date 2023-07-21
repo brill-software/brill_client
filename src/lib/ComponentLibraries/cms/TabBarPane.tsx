@@ -1,6 +1,5 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
@@ -29,6 +28,7 @@ import ImagePreview from "../material_ui/editor/ImagePreview"
 import ImagePreviewActionIcons from "./editorIcons/ImagePreviewActionIcons"
 import PageViewActionIcons from "./editorIcons/PageViewActionIcons"
 import PageView from "../material_ui/editor/PageView"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Brill CMS Edit Pane - this is the main control class that determines which editor is displayed.
@@ -164,7 +164,7 @@ class SavedState {
 
 interface Props {
     id: string // Must be unique. Used to delete component when last edit window is closed.
-    theme: Theme
+    theme: any // TODO
     classes: any
     subscribeToTopic: string
     [propName: string]: any

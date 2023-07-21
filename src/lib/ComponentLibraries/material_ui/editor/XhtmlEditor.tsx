@@ -5,7 +5,6 @@ import {AtomicBlockUtils, ContentBlock, ContentState, convertFromHTML, Editor as
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import {stateToHTML} from "draft-js-export-html"
-import { withStyles } from "@material-ui/core"
 import { HtmlEntities } from "lib/utils/HtmlEntities"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { EdType, UnsavedChanges } from "./UnsavedChanges"
@@ -13,6 +12,7 @@ import { CursorHandler } from "lib/utils/HtmlUtils"
 import ConfirmDialog from "lib/ComponentLibraries/material_ui/dialog/ConfirmDialog"
 import AlertDialog from "lib/ComponentLibraries/material_ui/dialog/AlertDialog"
 import { CurrentEditor } from "./CurrentEditor"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * XHTML WYSIWYG Editor - based on the Facebook daft-js Rich Text Editor.
@@ -34,7 +34,7 @@ import { CurrentEditor } from "./CurrentEditor"
  * 
  * 2) Images are displayed just as an icon, rather than actually displaying the image. The image can be checked in Preview mode.
  * 
- * 3) Cursor positioning is sometimes out when switching to the Text Editor for nested ordered and unordered lists.
+ * 3) Cursor positioning is sometimes out when switching to the Text Editor for nested ordered and unordered lists. 
  * 
  * 4) The TextEditor can be used to add unsupported tags such as for tables but any unsupported tags get stripped when using the XhtmlEditor.
  * 
@@ -75,6 +75,7 @@ interface Props {
     publishToTopic: string
     publishCurrentStyleTo?: string
     publishTextChangedTopic?: string
+    [propName: string]: any
  }
 
  interface State {
@@ -112,6 +113,7 @@ class XhtmlEditor extends Component<Props, State> {
     }
 
     componentWillUnmount() {
+        console.log("XhtmlEditor will unmount.")
         const xhtml = this.convertStateToHtml(this.state.editorState.getCurrentContent())
         const currentBlockKey = this.state.editorState.getSelection().getStartKey()
         const startOffset = this.state.editorState.getSelection().getStartOffset()
@@ -400,10 +402,10 @@ class XhtmlEditor extends Component<Props, State> {
                     key={key}
                     ref={this.editorRef}        
                     editorState={this.state.editorState}
-                    onChange={editorState => this.onChange(editorState)} 
-                    handleKeyCommand={(command, editorState, eventTimeStamp) => this.handleKeyCommand(command, editorState, eventTimeStamp)}
-                    keyBindingFn={event => this.keyBindingFn(event)} 
-                    blockStyleFn={block => this.blockStyleFn(block)}
+                    onChange={(editorState: any) => this.onChange(editorState)} 
+                    handleKeyCommand={(command: any, editorState: any, eventTimeStamp: any) => this.handleKeyCommand(command, editorState, eventTimeStamp)}
+                    keyBindingFn={(event: any) => this.keyBindingFn(event)} 
+                    blockStyleFn={(block: any) => this.blockStyleFn(block)}
                     spellCheck 
                     {...other} />
                 
@@ -419,4 +421,4 @@ class XhtmlEditor extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "XhtmlEditor", withTheme: true})(XhtmlEditor)
+export default withStyles(defaultStyles, { name: "XhtmlEditor"})(XhtmlEditor)

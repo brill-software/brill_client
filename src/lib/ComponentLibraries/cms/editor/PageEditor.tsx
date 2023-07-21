@@ -1,7 +1,6 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, { Component } from "react"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import { withStyles } from "@material-ui/core/styles"
 import { ComponentManager } from "lib/ComponentManager/ComponentManager"
 import { Attributes, Page, PageComponent } from "lib/PageService/Page"
 import { PageCloner } from "lib/ComponentLibraries/cms/editor/PageCloner"
@@ -20,6 +19,7 @@ import { Parser } from "lib/ComponentLibraries/cms/editor/Parser"
 import DraggableBox, { CurrentSelection, DraggableBoxData } from "./DraggableBox"
 import { CurrentEditor } from "lib/ComponentLibraries/material_ui/editor/CurrentEditor"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * The CMS Page Editor.
@@ -531,4 +531,4 @@ class PageEditor extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, {name: "PageEditor", withTheme: true})(PageEditor)
+export default withStyles(defaultStyles, {name: "PageEditor"})(PageEditor)

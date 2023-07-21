@@ -1,7 +1,6 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { Typography as MuiTypography, withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import { Typography as MuiTypography } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { Html } from "lib/utils/HtmlUtils"
@@ -16,7 +15,6 @@ import { Html } from "lib/utils/HtmlUtils"
 
 interface Props {
     id: string
-    theme: Theme
     text: string // Can include HTML tags.
     subscribeToTopic?: string
     [propName: string]: any
@@ -25,7 +23,7 @@ interface Props {
 interface State {
     text: string
 }
-class Typography extends Component<Props, State> {
+export default class Typography extends Component<Props, State> {
     unsubscribeToken: Token
 
     public static defaultProps = {
@@ -59,7 +57,7 @@ class Typography extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, subscribeToTopic, text, ...other} = this.props
+        const {id, subscribeToTopic, text, ...other} = this.props
 
         return (
             <MuiTypography
@@ -69,5 +67,3 @@ class Typography extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(Typography)

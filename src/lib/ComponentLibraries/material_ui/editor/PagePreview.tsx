@@ -1,7 +1,5 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, { Component } from "react"
-import { withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import ConfirmDialog from "lib/ComponentLibraries/material_ui/dialog/ConfirmDialog"
@@ -21,7 +19,6 @@ import TopicsPopover from "lib/ComponentLibraries/cms/TopicsPopover"
 
 interface Props {
     id: string
-    theme: Theme
     fileName: string
     subscribeToTopic: string
     publishToTopic: string
@@ -35,7 +32,7 @@ interface State {
     renderCount: number
 }
 
-class PagePreview extends Component<Props, State> {
+export default class PagePreview extends Component<Props, State> {
     unsubscribeToken: Token
     unsubscribeTokenCmd: Token
     unsubscribeTokenDisc: Token
@@ -136,7 +133,7 @@ class PagePreview extends Component<Props, State> {
 
     render() {
 
-        const { id, theme, fileName, subscribeToTopic, publishToTopic, publishTextChangedTopic, ...other } = this.props
+        const { id, fileName, subscribeToTopic, publishToTopic, publishTextChangedTopic, ...other } = this.props
         
         if (this.state.page === undefined) {
             return <LoadingIndicator />
@@ -155,5 +152,3 @@ class PagePreview extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(PagePreview)

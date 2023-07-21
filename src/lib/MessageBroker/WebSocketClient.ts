@@ -37,12 +37,19 @@ export class WebSocketClient {
 
     private static connectionLost: boolean = false
 
+    private static openInProgress: boolean = false
+
     /**
      * Opens a connection using WebSockets. The Brill Server makes available the endpoint /brill_ws.
      *  
      */
     private static openConnection() {
+        if (WebSocketClient.openInProgress) {
+            return
+        }
+
         console.log("Opening WebSocket connection. Environment = " + process.env.NODE_ENV)
+        WebSocketClient.openInProgress = true
         
         const wsUrl = (window.location.protocol === "https:" ? "wss://" : "ws://") +
             (process.env.NODE_ENV === "production" ? window.location.host + WebSocketClient.WS_SERVER_URL : WebSocketClient.WS_DEV_SERVER_URL)
@@ -55,6 +62,7 @@ export class WebSocketClient {
 
     private static async connectionOpened(event: any) {
         console.log("WebSocket open")
+        WebSocketClient.openInProgress = false
         WebSocketClient.connected = true;
         WebSocketClient.retryCount = 0;
         while (WebSocketClient.msgQueue.length > 0) {
@@ -108,6 +116,7 @@ export class WebSocketClient {
     }
 
     private static messageReceived(event: any) {
+        WebSocketClient.openInProgress = false
         if (process.env.NODE_ENV !== "production") {
             console.log("Received: " + WebSocketClient.truncate(event.data))
         }
@@ -135,6 +144,7 @@ export class WebSocketClient {
     }
 
     private static socketError(event: Event) {
+        WebSocketClient.openInProgress = false
         console.log("Socket error")
     }
 
@@ -148,6 +158,7 @@ export class WebSocketClient {
      */
     private static connectionClosed(event: Event) {
         console.log("Connection closed")
+        WebSocketClient.openInProgress = false
         WebSocketClient.connected = false
         WebSocketClient.retryCount++
         let retryTimeout = Math.floor(Math.random() * WebSocketClient.retryCount * 1000) + WebSocketClient.MIN_RETRY_INTERVAL

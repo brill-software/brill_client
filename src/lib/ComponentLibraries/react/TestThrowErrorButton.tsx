@@ -1,9 +1,11 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from 'react'
-import { Button as MuiButton, withStyles } from '@material-ui/core'
+import { Button as MuiButton } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { IconUtils } from 'lib/utils/IconUtils'
+import withStyles from "@mui/styles/withStyles"
+
 
 /**
  * Test button for testing the Error Boundary component.

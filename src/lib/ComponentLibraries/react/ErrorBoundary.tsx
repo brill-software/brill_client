@@ -2,6 +2,7 @@
 import React, {Component, ErrorInfo} from "react"
 
 type Props = {
+    children?: any
 }
 
 type State = Readonly<{

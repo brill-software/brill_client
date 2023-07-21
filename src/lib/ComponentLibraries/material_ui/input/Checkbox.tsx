@@ -1,7 +1,6 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, { Component } from "react"
-import { FormControl as MuiFormControl, Checkbox as MuiCheckbox, withTheme, FormControlLabel as MuiFormControlLabel} from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import { FormControl as MuiFormControl, Checkbox as MuiCheckbox, FormControlLabel as MuiFormControlLabel} from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { Eval } from "lib/utils/Eval"
 import { ValidationRule } from "lib/PageService/Page"
@@ -14,7 +13,6 @@ import { ErrorUtils } from "lib/utils/ErrorUtils"
  */
 
 interface Props {
-    theme: Theme
     name: string
     label: string
     checked?: boolean // Inital state
@@ -31,7 +29,7 @@ interface State {
     helperText: string
 }
 
-class Checkbox extends Component<Props, State> {
+export default class Checkbox extends Component<Props, State> {
     token: Token
     token2: Token
 
@@ -120,5 +118,3 @@ class Checkbox extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(Checkbox)

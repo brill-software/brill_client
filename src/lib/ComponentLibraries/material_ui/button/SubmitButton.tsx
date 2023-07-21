@@ -1,10 +1,11 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from 'react'
-import { Button as MuiButton, CircularProgress, withStyles } from '@material-ui/core'
+import { Button as MuiButton, CircularProgress } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import Router from "lib/Router/Router"
 import { IconUtils } from 'lib/utils/IconUtils'
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Submit Button. Sneds field data to the server using request/response messaging.
@@ -104,5 +105,4 @@ class SubmitButton extends Component<Props, State> {
         )
     }
 }
-
 export default withStyles(SubmitButton.defaultStyles, {withTheme: true})(SubmitButton)

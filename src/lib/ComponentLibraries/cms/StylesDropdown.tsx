@@ -1,9 +1,9 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Brill CMS Styles Dropdown for use by the XHTML WYSIWYG Editor.
@@ -97,4 +97,4 @@ class StylesDropdown extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "StylesDropdown", withTheme: true})(StylesDropdown)
+export default withStyles(defaultStyles, { name: "StylesDropdown"})(StylesDropdown)

@@ -1,8 +1,8 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
 import ReactDOM from "react-dom"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Provides four panels with a vertical and horizontal resize bar or three panels,
@@ -222,4 +222,4 @@ class ResizablePanels extends Component<Props, State> {
 
 }
 
-export default withStyles(defaultStyles, { name: "ResizablePanels", withTheme: true})(ResizablePanels)
+export default withStyles(defaultStyles, { name: "ResizablePanels"})(ResizablePanels)

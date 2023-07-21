@@ -1,16 +1,17 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, { Component } from "react"
-import { Button, DialogActions, DialogContent, DialogContentText, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography, withStyles } from '@material-ui/core'
+import { Button, DialogActions, DialogContent, DialogContentText, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import { Dialog } from "@material-ui/core"
+import { Dialog } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
-import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@mui/icons-material/Close"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { IdGen } from "lib/utils/IdGen"
-import Alert from "@material-ui/lab/Alert"
+import Alert from "@mui/lab/Alert"
 import { ConversionUtils } from "lib/utils/ConversionUtils"
 import { IconUtils } from "lib/utils/IconUtils"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Displays a modal dialog for uploading files. Supports both drag and drop and selection of files.
@@ -279,4 +280,4 @@ class UploadFileDialog extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, {withTheme: true})(UploadFileDialog)
+export default withStyles(defaultStyles)(UploadFileDialog)

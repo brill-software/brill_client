@@ -1,7 +1,6 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { Container as MuiContainer, withTheme} from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import { Container as MuiContainer } from "@mui/material"
 
 /**
  * Container compnent - based on the MUI Container component.
@@ -9,8 +8,7 @@ import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
  */
 
 interface Props {
-    id: string
-    theme: Theme   
+    id: string 
     children: any
     [propName: string]: any
 }
@@ -18,10 +16,10 @@ interface Props {
 interface State {
 }
 
-class Container extends Component<Props, State> {
+export default class Container extends Component<Props, State> {
 
     render() {
-        const {id, theme, children, ...other} = this.props
+        const {id, children, ...other} = this.props
         return (
             <MuiContainer {...other}>
                 {children}
@@ -29,5 +27,3 @@ class Container extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(Container)

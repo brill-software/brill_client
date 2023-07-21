@@ -1,7 +1,6 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
-import React, { Component, DOMElement } from "react"
-import { FormControl as MuiFormControl, FormLabel as MuiFormLabel, RadioGroup as MuiRadioGroup, FormControlLabel as MuiFormControlLabel, Radio as MuiRadio, withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import React, { Component } from "react"
+import { FormControl as MuiFormControl, FormLabel as MuiFormLabel, RadioGroup as MuiRadioGroup, FormControlLabel as MuiFormControlLabel, Radio as MuiRadio } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { Eval } from "lib/utils/Eval"
 import { ValidationRule } from "lib/PageService/Page"
@@ -19,7 +18,6 @@ class Button {
 }
 
 interface Props {
-    theme: Theme
     name: string
     label: string
     color?: "primary" | "secondary" | undefined
@@ -38,7 +36,7 @@ interface State {
     helperText: string
 }
 
-class RadioGroup extends Component<Props, State> {
+export default class RadioGroup extends Component<Props, State> {
     token: Token
     token2: Token
     token3: Token
@@ -162,5 +160,3 @@ class RadioGroup extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(RadioGroup)

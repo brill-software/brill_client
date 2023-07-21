@@ -2,18 +2,18 @@
 import React, {Component} from "react"
 import ReactDOM from "react-dom"
 import ReactResizeDetector from "react-resize-detector"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import TabBarPane from "lib/ComponentLibraries/cms/TabBarPane"
-import ToolTip from "@material-ui/core/Tooltip"
-import HorizontalSplitTwoTone from "@material-ui/icons/HorizontalSplitTwoTone"
-import VerticalSplitTwoTone from "@material-ui/icons/VerticalSplitTwoTone"
+import ToolTip from "@mui/material/Tooltip"
+import HorizontalSplitTwoTone from "@mui/icons-material/HorizontalSplitTwoTone"
+import VerticalSplitTwoTone from "@mui/icons-material/VerticalSplitTwoTone"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { IdGen } from "lib/utils/IdGen"
-import { Alert, AlertTitle, Color } from "@material-ui/lab"
+import { Alert, AlertTitle, AlertColor } from "@mui/lab"
 import Draggable from "react-draggable"
 import { Html } from "lib/utils/HtmlUtils"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Brill CMS Resizable Panels
@@ -442,7 +442,7 @@ class ResizablePanels extends Component<Props, State> {
                                 top: `calc(${this.state.topPanelHeight}px + 3px`,
                                 cursor: "move",
                                 zIndex: 100 
-                            }} severity={this.state.error.severity as Color} onClose={() => this.closeAlert()}>
+                            }} severity={this.state.error.severity as AlertColor} onClose={() => this.closeAlert()}>
                             <AlertTitle>{this.state.error.title}</AlertTitle>
                             <div dangerouslySetInnerHTML={{__html: Html.sanitize(this.state.error.detail)}} />
                         </Alert>
@@ -495,4 +495,4 @@ class ResizablePanels extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "ResizablePanels", withTheme: true})(ResizablePanels)
+export default withStyles(defaultStyles, { name: "ResizablePanels"})(ResizablePanels)

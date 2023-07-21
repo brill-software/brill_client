@@ -1,7 +1,6 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
-import React, { Component, DOMElement } from "react"
-import { TableContainer as MuiTableContainer, Paper as MuiPaper, Table as MuiTable, TableBody as MuiTableBody, TableHead as MuiTableHead, TableRow as MuiTableRow, TableCell as MuiTableCell, withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import React, { Component } from "react"
+import { TableContainer as MuiTableContainer, Paper as MuiPaper, Table as MuiTable, TableBody as MuiTableBody, TableHead as MuiTableHead, TableRow as MuiTableRow, TableCell as MuiTableCell } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 
@@ -24,7 +23,6 @@ class Column {
 }
 
 interface Props {
-    theme: Theme
     size? : "small" | "medium" | undefined
     columns: Column[]
     maxRows?: number
@@ -36,7 +34,7 @@ interface State {
     data: Object[]
 }
 
-class Table extends Component<Props, State> {
+export default class Table extends Component<Props, State> {
     token: Token
 
     constructor(props: Props) {
@@ -127,5 +125,3 @@ class Table extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(Table)

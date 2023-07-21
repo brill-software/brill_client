@@ -1,7 +1,6 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { Box as MuiBox, withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import { Box as MuiBox } from "@mui/material"
 import { Eval } from "lib/utils/Eval"
 
 /**
@@ -11,7 +10,6 @@ import { Eval } from "lib/utils/Eval"
 
 interface Props {
     id: string
-    theme: Theme
     condition: string
     children: any
     [propName: string]: any
@@ -20,10 +18,10 @@ interface Props {
 interface State {
 }
 
-class Box extends Component<Props, State> {
+export default class Box extends Component<Props, State> {
  
     render() {
-        const {id, theme, children, condition, ...other} = this.props
+        const {id, children, condition, ...other} = this.props
         
         if (condition && !Eval.isConditionTrue(this.props.id, condition)) {
             return (<div/>)
@@ -35,5 +33,3 @@ class Box extends Component<Props, State> {
 
     }
 }
-
-export default withTheme(Box)

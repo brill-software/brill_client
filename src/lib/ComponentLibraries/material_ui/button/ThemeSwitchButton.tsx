@@ -1,13 +1,14 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import Tooltip from "@material-ui/core/Tooltip"
-import { IconButton as MuiIconButton, withStyles } from '@material-ui/core'
+import Tooltip from "@mui/material/Tooltip"
+import { IconButton as MuiIconButton } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import Brightness7 from "@material-ui/icons/Brightness7"
-import Brightness4 from "@material-ui/icons/Brightness4"
+import Brightness7 from "@mui/icons-material/Brightness7"
+import Brightness4 from "@mui/icons-material/Brightness4"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { THEME_PROVIDER_DARK_TOPIC, THEME_PROVIDER_SWITCH_TOPIC } from "lib/ComponentLibraries/material_ui/theme/ThemeProvider"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Button for switching between the light and dark themes.

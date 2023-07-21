@@ -1,9 +1,9 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { Theme } from "../material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Brill CMS Status Bar. Displays a small pannel in the bottom right corner with a summary of the last
@@ -83,4 +83,4 @@ class StatusBar extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "StatusBar", withTheme: true})(StatusBar)
+export default withStyles(defaultStyles, { name: "StatusBar"})(StatusBar)

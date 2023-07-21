@@ -1,13 +1,13 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import Tooltip from "@material-ui/core/Tooltip"
-import { withStyles } from '@material-ui/core'
+import Tooltip from "@mui/material/Tooltip"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import Router from "lib/Router/Router"
 import { IconUtils } from "lib/utils/IconUtils"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { Html } from "lib/utils/HtmlUtils"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Icon Button component.

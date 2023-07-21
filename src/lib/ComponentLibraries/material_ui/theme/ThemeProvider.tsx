@@ -1,10 +1,10 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { ThemeProvider as MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles"
+import { ThemeProvider as MuiThemeProvider, createTheme } from "@mui/material/styles"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
-import { Paper } from "@material-ui/core"
+import { Paper } from "@mui/material"
 import { LocalStorage } from "lib/utils/LocalStorage"
 
 /**
@@ -73,7 +73,7 @@ export default class ThemeProvider extends Component<Props, State> {
         // Stop any edits of the theme from causing a re-render.
         MB.unsubscribe(this.unsubscribeTokenLight)
         
-        this.themeLight = createMuiTheme(data)
+        this.themeLight = createTheme(data)
         if (!this.dark || this.props.themeTopicDark === undefined) {
             this.setBodyAndHtmlTagStyles(this.themeLight)
             MB.publish(THEME_PROVIDER_DARK_TOPIC, "N")
@@ -85,7 +85,7 @@ export default class ThemeProvider extends Component<Props, State> {
         // Stop any edits of the theme from causing a re-render.
         MB.unsubscribe(this.unsubscribeTokenDark)
         
-        this.themeDark = createMuiTheme(data)
+        this.themeDark = createTheme(data)
         if (this.dark) {
             this.setBodyAndHtmlTagStyles(this.themeDark)
             MB.publish(THEME_PROVIDER_DARK_TOPIC, "Y")

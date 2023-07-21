@@ -1,11 +1,11 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { CurrentEditor } from "./CurrentEditor"
 import { TopicUtils } from "lib/utils/TopicUtils"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Image Preview component.

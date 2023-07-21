@@ -3,7 +3,7 @@ import React, {Component} from "react"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { Theme } from "../theme/Theme"
-import { withStyles } from "@material-ui/core"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Text component.

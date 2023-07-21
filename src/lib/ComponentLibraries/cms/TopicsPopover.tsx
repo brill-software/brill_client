@@ -1,12 +1,13 @@
 // © 2023 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, { Component } from "react"
-import { Button, DialogActions, DialogContent, IconButton as MuiIconButton, Popover, Typography, withStyles } from '@material-ui/core'
+import { Button, DialogActions, DialogContent, IconButton as MuiIconButton, Popover, Typography } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
-import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@mui/icons-material/Close"
 import Draggable from "react-draggable"
 import MUIDataTable from "mui-datatables"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Displays a table of topics and topic values. Used by Page Preview.
@@ -131,4 +132,4 @@ class TopicsPopover extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "TopicsPopover", withTheme: true })(TopicsPopover)
+export default withStyles(defaultStyles, { name: "TopicsPopover"})(TopicsPopover)

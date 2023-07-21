@@ -1,7 +1,7 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import { withStyles } from "@material-ui/core"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Flippable Card component.
@@ -9,6 +9,7 @@ import { withStyles } from "@material-ui/core"
  */
 
 interface Props {
+    theme: Theme
     children?: any // First child is the front, second child is when flipped.
     [propName: string]: any
 }
@@ -83,7 +84,7 @@ class FlippableCard extends Component<Props, State> {
     }
 
     render() {
-        const {them, classes, subscribeToTopic, text, children, bgImageTopic, ...other} = this.props
+        const {theme, classes, subscribeToTopic, text, children, bgImageTopic, ...other} = this.props
 
         if (!children || children.length !== 2) {
             return <div>FlippableCard expects two child components.</div>
@@ -99,5 +100,4 @@ class FlippableCard extends Component<Props, State> {
         )
     }
 }
-
 export default withStyles(FlippableCard.defaultStyles, { withTheme: true })(FlippableCard)

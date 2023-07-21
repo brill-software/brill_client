@@ -1,11 +1,11 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import ToolTip from "@material-ui/core/Tooltip"
+import ToolTip from "@mui/material/Tooltip"
 import { MB } from "lib/MessageBroker/MB"
-import GridOffTwoTone from "@material-ui/icons/GridOffTwoTone"
-import GridOnTwoTone from "@material-ui/icons/GridOnTwoTone"
+import GridOffTwoTone from "@mui/icons-material/GridOffTwoTone"
+import GridOnTwoTone from "@mui/icons-material/GridOnTwoTone"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Brill CMS Page Editor Hide/Show ids and outline boxes icon.
@@ -24,7 +24,6 @@ import GridOnTwoTone from "@material-ui/icons/GridOnTwoTone"
 }
 
 interface Props {
-    theme: Theme
     classes: any
     publishToTopic: string
     onAction: string
@@ -54,7 +53,7 @@ class IdsOnOffIcon extends Component<Props, State> {
     }
 
     render() {
-        const {theme, classes, publishToTopic, onAction, offAction, ...other} = this.props
+        const {classes, publishToTopic, onAction, offAction, ...other} = this.props
         const {on} = this.state
         const tooltip = on ? "Hide component boxes - Cmd B" : "Show component boxes - Cmd B"
         const icon = on ? <GridOffTwoTone /> : <GridOnTwoTone />
@@ -70,4 +69,4 @@ class IdsOnOffIcon extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "IdsOnOffIcon", withTheme: true})(IdsOnOffIcon)
+export default withStyles(defaultStyles, { name: "IdsOnOffIcon"})(IdsOnOffIcon)

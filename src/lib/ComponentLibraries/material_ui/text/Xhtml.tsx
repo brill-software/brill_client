@@ -1,6 +1,5 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
@@ -8,6 +7,7 @@ import { HtmlEntities } from "lib/utils/HtmlEntities"
 import { IdGen } from "lib/utils/IdGen"
 import parse from "style-to-object"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Xhtml - Displays a XHTML document.
@@ -327,4 +327,4 @@ class Xhtml extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, {withTheme: true})(Xhtml)
+export default withStyles(defaultStyles)(Xhtml)

@@ -1,6 +1,6 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from 'react'
-import { Button as MuiButton, withStyles } from '@material-ui/core'
+import { Button as MuiButton } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import Router from "lib/Router/Router"
@@ -8,6 +8,7 @@ import { WebSocketClient } from 'lib/MessageBroker/WebSocketClient'
 import { ErrorMsg } from 'lib/MessageBroker/ErrorMsg'
 import ConfirmDialog from '../dialog/ConfirmDialog'
 import { IconUtils } from 'lib/utils/IconUtils'
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Logout button.
@@ -87,5 +88,4 @@ class LogoutButton extends Component<Props, State> {
         )
     }
 }
-
 export default withStyles(LogoutButton.defaultStyles, {withTheme: true})(LogoutButton)

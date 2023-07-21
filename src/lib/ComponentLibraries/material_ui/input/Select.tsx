@@ -1,7 +1,6 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
-import React, { Component, DOMElement } from "react"
-import { FormControl as MuiFormControl, InputLabel as MuiInputLabel, Select as MuiSelect, MenuItem as MuiMenuItem, withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import React, { Component } from "react"
+import { FormControl as MuiFormControl, InputLabel as MuiInputLabel, Select as MuiSelect, MenuItem as MuiMenuItem } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { Eval } from "lib/utils/Eval"
 import { ValidationRule } from "lib/PageService/Page"
@@ -23,7 +22,6 @@ class MenuItem {
 }
 
 interface Props {
-    theme: Theme
     name: string
     multiple: boolean
     label: string
@@ -42,7 +40,7 @@ interface State {
     helperText: string
 }
 
-class Select extends Component<Props, State> {
+export default class Select extends Component<Props, State> {
     token: Token
     token2: Token
     token3: Token
@@ -165,5 +163,3 @@ class Select extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(Select)

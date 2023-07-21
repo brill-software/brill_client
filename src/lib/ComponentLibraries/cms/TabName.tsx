@@ -1,11 +1,11 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import ConfirmDialog from "../material_ui/dialog/ConfirmDialog"
 import { TabBarDropZone } from "./TabBarPane"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Brill CMS Tab
@@ -208,4 +208,4 @@ class TabName extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "TabName", withTheme: true})(TabName)
+export default withStyles(defaultStyles, { name: "TabName"})(TabName)

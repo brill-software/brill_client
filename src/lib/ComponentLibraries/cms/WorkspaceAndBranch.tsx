@@ -1,10 +1,9 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, { Component } from "react"
-import { Menu, MenuItem, PopoverPosition, Typography as MuiTypography, withTheme } from "@material-ui/core"
+import { Menu, MenuItem, PopoverPosition, Typography as MuiTypography } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import FixedSizeIcon from "lib/ComponentLibraries/material_ui/icon/FixedSizeIcon"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 
 /**
  * Workspace and Branch display. 
@@ -13,7 +12,6 @@ import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 
 interface Props {
     id: string
-    theme: Theme
     title: string
     subscribeToTopic: string
     publishToTopic: string
@@ -26,7 +24,7 @@ interface State {
     contextMenuMouseY: number | null
 }
 
-class WorkspaceAndBranch extends Component<Props, State> {
+export default class WorkspaceAndBranch extends Component<Props, State> {
     token: Token
 
     constructor(props: Props) {
@@ -105,7 +103,6 @@ class WorkspaceAndBranch extends Component<Props, State> {
     }
 
     render() {
-        // const {id, theme, subscribeToTopic, publishToTopic, selectedNodeId, subscribeToSelectFileTopic, defaultExpanded, ...other} = this.props       
         return (
             <div  style={{display: "flex", flexDirection: "row"}} onClick={() => this.onClick()}>
                 <FixedSizeIcon
@@ -142,5 +139,3 @@ class WorkspaceAndBranch extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(WorkspaceAndBranch)

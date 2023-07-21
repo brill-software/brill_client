@@ -1,7 +1,6 @@
 // © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
-import { DialogTitle as MuiDialogTitle, withTheme } from "@material-ui/core"
 import React, {Component} from "react"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import { DialogTitle as MuiDialogTitle } from "@mui/material"
 import { Html } from "lib/utils/HtmlUtils"
 
 /**
@@ -10,7 +9,6 @@ import { Html } from "lib/utils/HtmlUtils"
  */
 
 interface Props {
-    theme: Theme
     text: string // Can include HTML tags.
     [propName: string]: any
 }
@@ -18,7 +16,7 @@ interface Props {
 interface State {
 }
 
-class DialogTitle extends Component<Props, State> {
+export default class DialogTitle extends Component<Props, State> {
   
     render() {
         const {theme, text, ...other} = this.props
@@ -27,5 +25,3 @@ class DialogTitle extends Component<Props, State> {
                </MuiDialogTitle>
     }
 }
-
-export default withTheme(DialogTitle)

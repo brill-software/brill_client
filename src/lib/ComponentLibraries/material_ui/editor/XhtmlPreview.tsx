@@ -1,7 +1,5 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withTheme } from "@material-ui/core"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import Xhtml from "lib/ComponentLibraries/material_ui/text/Xhtml"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
@@ -17,7 +15,6 @@ import { TopicUtils } from "lib/utils/TopicUtils"
 
 interface Props {
     id: string
-    theme: Theme
     fileName: string
     subscribeToTopic: string
     publishToTopic: string
@@ -29,7 +26,7 @@ interface State {
     text: string
 }
 
-class XhtmlPreview extends Component<Props, State> {
+export default class XhtmlPreview extends Component<Props, State> {
     unsubscribeToken: Token
     unsubscribeTokenCmd: Token
     unsubscribeTokenDisc: Token
@@ -113,5 +110,3 @@ class XhtmlPreview extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(XhtmlPreview)

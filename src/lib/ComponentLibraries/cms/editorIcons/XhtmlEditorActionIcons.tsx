@@ -1,16 +1,11 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, {Component} from "react"
-import { withTheme } from '@material-ui/core'
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import IconButton from "lib/ComponentLibraries/material_ui/button/IconButton"
 import { IdGen } from "lib/utils/IdGen"
 import StylesDropdown from "../StylesDropdown"
 import ImageIcon from "./ImageIcon"
 
 interface Props {
-    id: string
-    theme: Theme
-    fileName: string
     subscribeToTopic: string  // Current style
     publishToTopic: string    // Command for the editor
     [propName: string]: any
@@ -19,10 +14,10 @@ interface Props {
 interface State {
 }
 
-class XhtmlEditorActionsIcons extends Component<Props, State> {
+export default class XhtmlEditorActionsIcons extends Component<Props, State> {
 
     render() {
-        const {id, theme, subscribeToTopic, publishToTopic, ...other} = this.props
+        const {subscribeToTopic, publishToTopic, ...other} = this.props
         return (
             <div style={{display: "flex",flexDirection: "row"}} {...other}>
                 <IconButton key={IdGen.next()} iconName="Undo" tooltip="Undo - Cmd Z ***" 
@@ -54,5 +49,3 @@ class XhtmlEditorActionsIcons extends Component<Props, State> {
         )
     }
 }
-
-export default withTheme(XhtmlEditorActionsIcons)

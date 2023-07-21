@@ -1,7 +1,7 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Card compnent - based on the MUI Card component.
@@ -47,7 +47,7 @@ interface State {
  class Card extends Component<Props, State> {
 
     render() {
-        const {id, title, theme, classes, children, ...other} = this.props
+        const {id, theme, classes, title, children, ...other} = this.props
         
         return (
             <div className={classes.root} {...other}>
@@ -60,4 +60,4 @@ interface State {
     }
 }
 
-export default withStyles(defaultCardStyles, { name: "Card", withTheme: true})(Card)
+export default withStyles(defaultCardStyles, { name: "Card"})(Card)

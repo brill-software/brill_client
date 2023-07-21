@@ -1,12 +1,13 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, { Component } from "react"
-import { Button, DialogActions, DialogContent, DialogContentText, IconButton, TextField, Typography, withStyles } from '@material-ui/core'
+import { Button, DialogActions, DialogContent, DialogContentText, IconButton, TextField, Typography } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import { Dialog } from "@material-ui/core"
+import { Dialog } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
-import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@mui/icons-material/Close"
 import { TopicUtils } from "lib/utils/TopicUtils"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Displays the New Folder dialog. Based on the SingleFieldDialog.
@@ -128,4 +129,4 @@ class NewFolderDialog extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "NewFolderDialog", withTheme: true})(NewFolderDialog)
+export default withStyles(defaultStyles, { name: "NewFolderDialog"})(NewFolderDialog)

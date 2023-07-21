@@ -1,7 +1,7 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Form component.
@@ -44,4 +44,4 @@ class Form extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "Form", withTheme: true})(Form)
+export default withStyles(defaultStyles, { name: "Form"})(Form)

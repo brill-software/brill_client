@@ -2,11 +2,9 @@
 import React, {Component} from "react"
 import ReactResizeDetector from "react-resize-detector"
 import { MB, Token } from "lib/MessageBroker/MB"
-import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { MonacoDiffEditor } from "react-monaco-editor"
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api"
-import { withTheme } from "@material-ui/core"
 import ConfirmDialog from "lib/ComponentLibraries/material_ui/dialog/ConfirmDialog"
 import { EdType, UnsavedChanges } from "./UnsavedChanges"
 import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api"
@@ -14,6 +12,7 @@ import { CurrentEditor } from "./CurrentEditor"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { JsonParser } from "lib/utils/JsonParser"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
+import withTheme from "@mui/styles/withTheme"
 
 /**
  * Text Diff Editor - based on the Microsoft Visual Studio Code Monaco Diff Editor.
@@ -23,7 +22,6 @@ import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 interface Props {
     id: string
     key: string
-    theme: Theme
     fileName: string
     subscribeToTopic: string
     subscribeToActionTopic?: string
@@ -37,6 +35,7 @@ interface State {
     originalText: string | null
     modifiedText: string | null
 }
+
 class DiffEditor extends Component<Props, State> {
     tokens: Token[] = []
     unsubscribeSecondToken: Token
@@ -88,9 +87,11 @@ class DiffEditor extends Component<Props, State> {
     editorDidMount(editor: monacoEditor.editor.IStandaloneDiffEditor, monaco: typeof monacoEditor) {
         this.editor = editor
         this.navi = monaco.editor.createDiffNavigator(editor)
+        // editor.getModifiedEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, this.save.bind(this))
         editor.getModifiedEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, this.save.bind(this))
         editor.getModifiedEditor().addCommand(monaco.KeyMod.Shift  | monaco.KeyCode.F7, this.previous.bind(this))
         editor.getModifiedEditor().addCommand(monaco.KeyCode.F7, this.next.bind(this))
+        // editor.getOriginalEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, this.save.bind(this))
         editor.getOriginalEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, this.save.bind(this))
         editor.getOriginalEditor().addCommand(monaco.KeyMod.Shift  | monaco.KeyCode.F7, this.previous.bind(this))
         editor.getOriginalEditor().addCommand(monaco.KeyCode.F7, this.next.bind(this))
@@ -279,7 +280,14 @@ class DiffEditor extends Component<Props, State> {
 
     render() {
         const {id, key, theme, name, subscribeToTopic, publishToTopic, schemasTopic, ...other} = this.props
-        const editorTheme: string =  theme.palette.type === "dark" ? "vs-dark" : "vs-light"
+      
+        // Handles both MUI v4 and MUI v5 themes.
+        let editorTheme: string =  "vs-light"
+        if ((theme.palette?.type && theme.palette.type === "dark") || 
+            (theme.palette?.mode && theme.palette.mode === "dark")) {
+            editorTheme = "vs-dark"
+        }
+
         if (this.state.originalText !== null && this.state.modifiedText !== null) {
             return (
                 <div style={{height: "100%"}}>
@@ -310,4 +318,4 @@ class DiffEditor extends Component<Props, State> {
     }
 }
 
-export default withTheme(DiffEditor)
+export default withTheme(DiffEditor as any)

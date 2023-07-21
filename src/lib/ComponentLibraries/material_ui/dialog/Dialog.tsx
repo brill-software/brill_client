@@ -1,11 +1,12 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, { Component } from "react"
-import { IconButton, withStyles } from '@material-ui/core'
+import { IconButton } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import { Dialog as MuiDialog} from "@material-ui/core"
+import { Dialog as MuiDialog} from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
-import CloseIcon from "@material-ui/icons/Close"
+import CloseIcon from "@mui/icons-material/Close"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Dialog component - based on the MUI Dialog component.
@@ -107,5 +108,4 @@ class Dialog extends Component<Props, State> {
         )
     }
 }
-
-export default withStyles(defaultStyles, { name: "Dialog", withTheme: true})(Dialog)
+export default withStyles(defaultStyles, { name: "Dialog"})(Dialog)

@@ -1,11 +1,11 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { withStyles } from "@material-ui/core"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { IconUtils } from "lib/utils/IconUtils"
 import { Html } from "lib/utils/HtmlUtils"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Supports Icons that are 24x24 and have a single colour. Supports Material UI Icons from

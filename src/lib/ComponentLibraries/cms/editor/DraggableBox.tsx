@@ -1,14 +1,14 @@
 // © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
 import React, { Component } from "react"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
-import { withStyles } from "@material-ui/core/styles"
-import { Menu, MenuItem, PopoverPosition } from "@material-ui/core"
+import { Menu, MenuItem, PopoverPosition } from "@mui/material"
 import { ClipboardText } from "lib/utils/ClipboardText"
 import { EditType } from "lib/ComponentLibraries/cms/editor/PageEdit"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { CurrentEditor } from "lib/ComponentLibraries/material_ui/editor/CurrentEditor"
 import EditPopover from "../EditPopover"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Used by the Page Editor to place a draggable box around each component on a page.
@@ -423,4 +423,4 @@ class DraggableBox extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "DraggableBox", withTheme: true })(DraggableBox)
+export default withStyles(defaultStyles, { name: "DraggableBox"})(DraggableBox)

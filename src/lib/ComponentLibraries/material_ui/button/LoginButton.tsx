@@ -1,6 +1,6 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 import React, {Component} from "react"
-import { Button as MuiButton, withStyles } from "@material-ui/core"
+import { Button as MuiButton } from "@mui/material"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { MB, Token } from "lib/MessageBroker/MB"
 import Router from "lib/Router/Router"
@@ -8,6 +8,7 @@ import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { WebSocketClient } from "lib/MessageBroker/WebSocketClient"
 import { CryptoService } from "lib/MessageBroker/CryptoService"
 import { IconUtils } from "lib/utils/IconUtils"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Login button.
@@ -56,7 +57,7 @@ class LoginButton extends Component<Props, State> {
     componentDidMount() {  
         if (!CryptoService.isSharedSecretAvailable()) {
             const clientPublicKey = CryptoService.generateClientKeys()
-            /*eslint no-template-curly-in-string: "ignore"*/
+            // eslint-disable-next-line no-template-curly-in-string
             this.token2 = MB.sendRequest("auth:/${appName}/server_public_key", 
                 (topic, serverPublicKey) => this.publicKeyCallback(topic, serverPublicKey), 
                 (topic, error) => this.errorCallback(topic, error), 

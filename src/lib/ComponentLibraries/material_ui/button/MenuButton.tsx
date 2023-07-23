@@ -7,26 +7,11 @@ import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import Router, { ROUTER_CURRENT_ROUTE } from "lib/Router/Router"
 import withStyles from "@mui/styles/withStyles"
 
+
 /**
  * Displays a button that acts as a menu bar link. If the current page matchs the link, a bar is displayed under the
  * button to indicate which page the user is currently on.
  */
-
-const defaultStyles: any = (theme: Theme) => {
-    const root = (theme.overrides?.MenuButton?.root) ? theme.overrides.MenuButton.root : {color: "white"}
-    const button = (theme.overrides?.MenuButton?.button) ? theme.overrides.MenuButton.button : {padding: "10px 8px 2px 8px"}
-    const bar = (theme.overrides?.MenuButton?.bar) ? theme.overrides.MenuButton.bar : {width: "100%", height: "5px", background: "red"}
-    return  { 
-        root: {
-            ...root
-        },
-        button: {
-            ...button
-        },
-        bar: {
-            ...bar
-        }
-  }}
 
 interface Props {
     id: string
@@ -48,6 +33,26 @@ class MenuButton extends Component<Props, State> {
         super(props)
         this.state = {onPage: false}
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  { 
+            root: {
+                color: "white",
+                ...theme.overrides?.MenuButton?.root
+            },
+            button: {
+                "&:hover": {background: theme.palette.primary.light},
+                padding: "10px 8px 2px 8px",
+                ...theme.overrides?.MenuButton?.button
+            },
+            bar: {
+                width: "100%", 
+                height: "5px", 
+                background: "red",
+                ...theme.overrides?.MenuButton?.bar
+            }
+        }
+    } 
 
     componentDidMount() {
         this.token = MB.subscribe(ROUTER_CURRENT_ROUTE, (topic, text) => this.dataLoadedCallback(topic, text), (topic, error) => this.errorCallback(topic, error))
@@ -80,4 +85,4 @@ class MenuButton extends Component<Props, State> {
     }
 }
 
-export default withStyles(defaultStyles, { name: "MenuButton"})(MenuButton)
+export default withStyles(MenuButton.defaultStyles, {withTheme: true})(MenuButton)

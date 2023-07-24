@@ -10,8 +10,8 @@ import FixedSizeIcon from "lib/ComponentLibraries/material_ui/icon/FixedSizeIcon
 import IconButton from "lib/ComponentLibraries/material_ui/button/IconButton"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { IdGen } from "lib/utils/IdGen"
-import { withTheme } from "@mui/styles"
-import { Theme } from "../material_ui/theme/Theme"
+import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * TreeViewChanges - Displays the changes that have yet to be committed to the repository.
@@ -53,6 +53,7 @@ class SavedState {
 interface Props {
     id: string
     theme: Theme
+    classes: any
     title: string
     subscribeToTopic: string
     publishToTopic: string
@@ -87,7 +88,7 @@ class MatchingIcon {
     }
 }
 
-class TreeView extends Component<Props, State> {
+class TreeViewChanges extends Component<Props, State> {
     private static savedStateMap: Map<string, SavedState> = new Map<string, SavedState>()
     expandedNodeIds: string[]
     token: Token
@@ -102,10 +103,10 @@ class TreeView extends Component<Props, State> {
                         contextMenuMouseX: null, contextMenuMouseY: null, openCommitDialog: false}
         // The Material UI TreeView component only takes notice of the 'defaultExpanded' attribute on first render. So the saved state has
         // to be restored here in the constructor, rather than the componentDidMount() method.
-        const savedState = TreeView.savedStateMap.get(this.props.id)
+        const savedState = TreeViewChanges.savedStateMap.get(this.props.id)
         if (savedState) {
             this.expandedNodeIds = savedState.expandedNodeIds
-            TreeView.savedStateMap.delete(this.props.id)
+            TreeViewChanges.savedStateMap.delete(this.props.id)
         } else {
             this.expandedNodeIds = this.props.defaultExpanded
         }
@@ -138,7 +139,7 @@ class TreeView extends Component<Props, State> {
     }
 
     componentWillUnmount() {
-        TreeView.savedStateMap.set(this.props.id, new SavedState(this.expandedNodeIds))
+        TreeViewChanges.savedStateMap.set(this.props.id, new SavedState(this.expandedNodeIds))
         MB.unsubscribe(this.token)
         MB.unsubscribe(this.tocken2)
     }
@@ -261,8 +262,6 @@ class TreeView extends Component<Props, State> {
         return (
             <MuiTreeItem key={node.id} nodeId={node.id}
             onContextMenu={(event) => {this.onContextMenu(event, node.id, node.type)}}
-            // TODO onIconClick={(event) => { this.onClickHandler(event, node.id, node.type)}}
-            // TODO onLabelClick={(event: any) => { this.onClickHandler(event, node.id, node.type)}}
             onClick = {(event: any) => { this.onClickHandler(event, node.id, node.type)}}
             label={
                     <div style={{display: 'flex',
@@ -281,7 +280,7 @@ class TreeView extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, subscribeToTopic, publishToTopic, selectedNodeId, subscribeToSelectFileTopic, defaultExpanded, ...other} = this.props       
+        const {id, classes, theme, subscribeToTopic, publishToTopic, selectedNodeId, subscribeToSelectFileTopic, defaultExpanded, ...other} = this.props       
         return (
             <div>
                 <MuiTreeView
@@ -308,5 +307,11 @@ class TreeView extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return {
+        }
+    }
 }
-export default withTheme(TreeView as any)
+
+export default withStyles(TreeViewChanges.defaultStyles, {withTheme: true})(TreeViewChanges)

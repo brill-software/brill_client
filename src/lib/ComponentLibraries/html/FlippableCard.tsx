@@ -10,6 +10,7 @@ import withStyles from "@mui/styles/withStyles"
 
 interface Props {
     theme: Theme
+    classes: any
     children?: any // First child is the front, second child is when flipped.
     [propName: string]: any
 }
@@ -19,6 +20,33 @@ interface State {
 
 class FlippableCard extends Component<Props, State> {
     cardInnerRef: React.RefObject<any>
+
+    constructor(props: Props) {
+        super(props)
+        this.state = {}
+        this.cardInnerRef = React.createRef()
+    }
+
+    onClickHandler(event: any) {
+        this.cardInnerRef.current.classList.toggle(this.props.classes.isFlipped)
+    }
+
+    render() {
+        const {theme, classes, subscribeToTopic, text, children, bgImageTopic, ...other} = this.props
+
+        if (!children || children.length !== 2) {
+            return <div>FlippableCard expects two child components.</div>
+        }
+
+        return (
+            <div className={classes.card} onClick={event => this.onClickHandler(event)}  {...other}>
+                <div className={classes.cardInner} ref={this.cardInnerRef}>
+                    <div className={classes.cardFront}>{this.props.children[0]}</div>
+                    <div className={classes.cardBack}>{this.props.children[1]}</div>
+                </div> 
+            </div>
+        )
+    }
 
     static defaultStyles(theme: Theme): any {
 
@@ -72,32 +100,6 @@ class FlippableCard extends Component<Props, State> {
             }
         }
     }
-
-    constructor(props: Props) {
-        super(props)
-        this.state = {}
-        this.cardInnerRef = React.createRef()
-    }
-
-    onClickHandler(event: any) {
-        this.cardInnerRef.current.classList.toggle(this.props.classes.isFlipped)
-    }
-
-    render() {
-        const {theme, classes, subscribeToTopic, text, children, bgImageTopic, ...other} = this.props
-
-        if (!children || children.length !== 2) {
-            return <div>FlippableCard expects two child components.</div>
-        }
-
-        return (
-            <div className={classes.card} onClick={event => this.onClickHandler(event)}  {...other}>
-                <div className={classes.cardInner} ref={this.cardInnerRef}>
-                    <div className={classes.cardFront}>{this.props.children[0]}</div>
-                    <div className={classes.cardBack}>{this.props.children[1]}</div>
-                </div> 
-            </div>
-        )
-    }
 }
+
 export default withStyles(FlippableCard.defaultStyles, { withTheme: true })(FlippableCard)

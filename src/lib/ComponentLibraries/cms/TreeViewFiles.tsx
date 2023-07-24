@@ -11,8 +11,8 @@ import IconButton from "lib/ComponentLibraries/material_ui/button/IconButton"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import { IdGen } from "lib/utils/IdGen"
 import { FileClipboard } from "./FileClipboard"
-import { withTheme } from "@mui/styles"
-import { Theme } from "../material_ui/theme/Theme"
+import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * CMS Files / Folders TreeView - based on TreeView.
@@ -52,6 +52,7 @@ class SavedState {
 interface Props {
     id: string
     theme: Theme
+    classes: any
     title: string
     subscribeToTopic: string
     publishToTopic: string
@@ -87,7 +88,7 @@ class MatchingIcon {
     }
 }
 
-class TreeView extends Component<Props, State> {
+class TreeViewFiles extends Component<Props, State> {
     private static savedStateMap: Map<string, SavedState> = new Map<string, SavedState>()
     expandedNodeIds: string[]
     token: Token
@@ -103,10 +104,10 @@ class TreeView extends Component<Props, State> {
                         contextMenuMouseX: null, contextMenuMouseY: null, openCommitDialog: false}
         // The Material UI TreeView component only takes notice of the 'defaultExpanded' attribute on first render. So the saved state has
         // to be restored here in the constructor, rather than the componentDidMount() method.
-        const savedState = TreeView.savedStateMap.get(this.props.id)
+        const savedState = TreeViewFiles.savedStateMap.get(this.props.id)
         if (savedState) {
             this.expandedNodeIds = savedState.expandedNodeIds
-            TreeView.savedStateMap.delete(this.props.id)
+            TreeViewFiles.savedStateMap.delete(this.props.id)
         } else {
             this.expandedNodeIds = this.props.defaultExpanded
         }
@@ -144,7 +145,7 @@ class TreeView extends Component<Props, State> {
     }
 
     componentWillUnmount() {
-        TreeView.savedStateMap.set(this.props.id, new SavedState(this.expandedNodeIds))
+        TreeViewFiles.savedStateMap.set(this.props.id, new SavedState(this.expandedNodeIds))
         MB.unsubscribe(this.token)
         MB.unsubscribe(this.token2)
     }
@@ -355,7 +356,7 @@ class TreeView extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, subscribeToTopic, publishToTopic, selectedNodeId, subscribeToSelectFileTopic, defaultExpanded, ...other} = this.props       
+        const {id, theme, classes, subscribeToTopic, publishToTopic, selectedNodeId, subscribeToSelectFileTopic, defaultExpanded, ...other} = this.props       
         return (
             <div>
                 <MuiTreeView
@@ -393,5 +394,11 @@ class TreeView extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return {
+        }
+    }
 }
-export default withTheme(TreeView as any)
+
+export default withStyles(TreeViewFiles.defaultStyles, {withTheme: true})(TreeViewFiles)

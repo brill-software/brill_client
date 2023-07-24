@@ -25,9 +25,6 @@ interface State {
 class Img extends Component<Props, State> {
     token: Token
 
-    static defaultStyles(theme: Theme): any {
-        return  { root: {display: "block", ...theme.overrides?.Img?.root }}
-    }
     constructor(props: Props) {
         super(props)
         this.state = {image: ""}
@@ -70,6 +67,13 @@ class Img extends Component<Props, State> {
             <img className={classes.root} src={this.state.image} alt="" {...other} />
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  { 
+            root: {display: "block", 
+                ...theme.overrides?.Img?.root }
+            }
+    }
 }
 
-export default withStyles(Img.defaultStyles, {withTheme: true})(Img)
+export default withStyles(Img.defaultStyles, { withTheme: true })(Img)

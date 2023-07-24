@@ -52,12 +52,10 @@ export default class WorkspaceAndBranch extends Component<Props, State> {
     }
 
     onClick() {
-        console.log("Workspace onClick")
         MB.publish(this.props.publishToTopic, "view:/brill_cms/Pages/versionControl.json")
     }
 
     onContextMenu(event: React.MouseEvent) {
-        console.log("%%%%%% onContextMenu called")
         event.preventDefault()
         event.stopPropagation()
         this.setState({contextMenuMouseX: event.clientX - 2, contextMenuMouseY: event.clientY -4})

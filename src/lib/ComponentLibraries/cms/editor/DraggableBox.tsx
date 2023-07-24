@@ -415,7 +415,7 @@ class DraggableBox extends Component<Props, State> {
                 fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
                 fontSize: "13px",
                 fontWeight: 600,
-                cursor: "move",
+                cursor: "grab",
                 ...theme.overrides?.DraggableBoxData?.editBarText
             }            
         }

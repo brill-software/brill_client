@@ -1,7 +1,9 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+import React, {Component} from "react"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { MB, Token } from "lib/MessageBroker/MB"
-import React, {Component} from "react"
+import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * HTML Div component.
@@ -12,6 +14,7 @@ import React, {Component} from "react"
  */
 
 interface Props {
+    classes: any
     subscribeToTopic?: string
     text?: string,
     backgroundImage?: string, // Background image URL.
@@ -25,7 +28,7 @@ interface State {
     backgroundImage: string
 }
 
-export default class Div extends Component<Props, State> {
+class Div extends Component<Props, State> {
     tokens: Token[] = []
 
     constructor(props: Props) {
@@ -71,7 +74,7 @@ export default class Div extends Component<Props, State> {
     }
 
     render() {
-        const {subscribeToTopic, text, children, style, backgroundImage, bgImageTopic, ...other} = this.props
+        const {classes, subscribeToTopic, text, children, style, backgroundImage, bgImageTopic, ...other} = this.props
 
         let updatedStyle = style ? {...style} : []
 
@@ -84,6 +87,13 @@ export default class Div extends Component<Props, State> {
             }
         }
         
-        return <div style={updatedStyle} {...other}>{this.state.text}{children}</div>
+        return <div className={classes.root} style={updatedStyle} {...other}>{this.state.text}{children}</div>
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {root: { ...theme.overrides?.Div?.root }}
+    }
+
 }
+
+export default withStyles(Div.defaultStyles)(Div)

@@ -21,17 +21,18 @@ interface State {
 
 class A extends Component<Props, State> {
 
-    static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.overrides?.A?.root }}
-    }
-
     render() {
-        const {theme, classes, children, href, target, ...other} = this.props
+        const {id, theme, classes, children, href, target, ...other} = this.props
 
         return (
             <a className={classes.root} href={href} target={target} {...other}>{children}</a>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  { root: { ...theme.overrides?.A?.root }}
+    }
+
 }
 
 export default withStyles(A.defaultStyles, {withTheme: true})(A)

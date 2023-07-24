@@ -2,9 +2,11 @@
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { MB, Token } from "lib/MessageBroker/MB"
 import React, {Component} from "react"
-import { Alert, AlertTitle, AlertColor } from "@mui/lab"
+import { Alert as MuiAlert, AlertTitle as MuiAlertTitle, AlertColor } from "@mui/material"
 import Draggable from "react-draggable"
 import { Html } from "lib/utils/HtmlUtils"
+import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
+import withStyles from "@mui/styles/withStyles"
 
 /**
  * Alert component - based on Material UI Alert component.
@@ -12,6 +14,7 @@ import { Html } from "lib/utils/HtmlUtils"
  */
 
 interface Props {
+    classes: any
     subscribeToTopic: string
     clearOnChangeToTopic: string
     [propName: string]: any
@@ -21,7 +24,7 @@ interface State {
     error: ErrorMsg | null
 }
 
-export default class Div extends Component<Props, State> {
+class Alert extends Component<Props, State> {
     token: Token
     token2: Token
 
@@ -65,18 +68,19 @@ export default class Div extends Component<Props, State> {
     }
 
     render() {
-        const {subscribeToTopic, clearOnChangeToTopic, ...other} = this.props
+        const {classes, subscribeToTopic, clearOnChangeToTopic, ...other} = this.props
         
         if (this.state.error) {
             const {title, detail, severity} = this.state.error
+            const classNames = classes.root + " handle"
             return (
                 <div style={{position: "relative"}}>
                     <div style={{position: "absolute", zIndex: 15}}>
                         <Draggable handle=".handle">
-                            <Alert className="handle" severity={severity as AlertColor} onClose={() => {this.onClose()}} {...other}>
-                            <AlertTitle>{title}</AlertTitle>
+                            <MuiAlert className={classNames} severity={severity as AlertColor} onClose={() => {this.onClose()}} {...other}>
+                            <MuiAlertTitle className={classes.title}>{title}</MuiAlertTitle>
                                 <div dangerouslySetInnerHTML={{__html: Html.sanitize(detail)}} />
-                            </Alert>
+                            </MuiAlert>
                         </Draggable>
                     </div>
                 </div>
@@ -84,4 +88,15 @@ export default class Div extends Component<Props, State> {
         }
         return null
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                cursor: "move", 
+                ...theme.components?.Alert?.styleOverrides?.root },
+            title: { ...theme.components?.Alert?.styleOverrides?.title }
+        }
+    }
 }
+
+export default withStyles(Alert.defaultStyles)(Alert)

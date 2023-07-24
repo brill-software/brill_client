@@ -15,27 +15,6 @@ import withStyles from "@mui/styles/withStyles"
     select: object
 }
 
- const defaultStyles: any = (theme: Theme) => {
-    const root = (theme.overrides?.StylesDropdownOverrides?.root) ? theme.overrides.StylesDropdownOverrides.root : {}
-    const select = (theme.overrides?.StylesDropdownOverrides?.select) ? theme.overrides.StylesDropdownOverrides.select : {}
-    return  {
-        root: {
-            color: "#498ada",
-            marginLeft: "20px",
-            ...root
-        },
-        select: {
-            color: "#498ada",
-            background: "#c9c9c9",
-            borderWidth: "0px",
-            fontSize: "1.0rem",
-            paddingTop: "2px",
-            fontWeight: 600,
-            ...select
-        }
-    }
-}
-
 interface Props {
     id: string // Must be unique. Used to delete component when last edit window is closed.
     theme: Theme
@@ -95,6 +74,25 @@ class StylesDropdown extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                color: "#498ada",
+                marginLeft: "20px",
+                ...theme.overrides?.StylesDropdownOverrides?.root
+            },
+            select: {
+                color: "#498ada",
+                background: "#c9c9c9",
+                borderWidth: "0px",
+                fontSize: "1.0rem",
+                paddingTop: "2px",
+                fontWeight: 600,
+                ...theme.overrides?.StylesDropdownOverrides?.select
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "StylesDropdown"})(StylesDropdown)
+export default withStyles(StylesDropdown.defaultStyles, {withTheme: true})(StylesDropdown)

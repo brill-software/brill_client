@@ -10,29 +10,6 @@ import { Button, DialogActions, DialogContent, DialogContentText, IconButton, Te
 import CloseIcon from "@mui/icons-material/Close"
 import withStyles from "@mui/styles/withStyles"
 
-const defaultStyles: any = (theme: Theme) => {
-    return  {
-       root: {
-            color: "#498ada",
-            cursor: "pointer",
-            marginLeft: "20px",
-            ...theme.overrides?.ImageIcon?.root
-        },
-        dialogRoot: {
-            margin: 0,
-            padding: theme.spacing(2),
-            ...theme.overrides?.ImageIcon?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: theme.spacing(1),
-            color: theme.palette.grey[600],
-            ...theme.overrides?.ImageIcon?.closeButton
-        }
-    }
-}
-
 interface Props {
     publishToTopic: string
     [propName: string]: any
@@ -125,6 +102,29 @@ class ImageIcon extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                 color: "#498ada",
+                 cursor: "pointer",
+                 marginLeft: "20px",
+                 ...theme.overrides?.ImageIcon?.root
+             },
+             dialogRoot: {
+                 margin: 0,
+                 padding: theme.spacing(2),
+                 ...theme.overrides?.ImageIcon?.root
+             },
+             closeButton: {
+                 position: 'absolute',
+                 right: theme.spacing(1),
+                 top: theme.spacing(1),
+                 color: theme.palette.grey[600],
+                 ...theme.overrides?.ImageIcon?.closeButton
+             }  
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "ImageIcon"})(ImageIcon)
+export default withStyles(ImageIcon.defaultStyles)(ImageIcon)

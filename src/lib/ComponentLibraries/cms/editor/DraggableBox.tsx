@@ -21,52 +21,6 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-    return {
-        containerBox: {
-            border: "1px dashed #0000f0",
-            cursor: "context-menu",
-            userSelect: "none",
-            padding: "10px",
-            zIndex: 0
-        },
-        componentBox: {
-            border: "1px dotted #a00000",
-            cursor: "context-menu",
-            userSelect: "none",
-            zIndex: 5
-        },
-        selectedContainerBox: {
-            border: "1px solid #0000ff",
-            cursor: "context-menu",
-            userSelect: "none",
-            padding: "10px",
-            zIndex: 0
-        },
-        selectedComponentBox: {
-            border: "1px solid #0000ff",
-            cursor: "context-menu",
-            userSelect: "none",
-            zIndex: 5
-        },
-        noBox: {
-            cursor: "context-menu",
-            userSelect: "none",
-        },
-        editBarText: {
-            color: "#498ada",
-            background: "#c9c9c9",
-            paddingLeft: "5px",
-            paddingRight: "5px",
-            fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
-            fontSize: "13px",
-            fontWeight: 600,
-            cursor: "move",
-            ...theme.overrides?.DraggableBoxData?.editBarText
-        }
-    }
-}
-
 export class CurrentSelection {
     readonly id: string
     readonly scrollIntoView: boolean
@@ -115,7 +69,6 @@ class DndTransferData {
 interface Props {
     id: string
     componentId: string
-    theme: Theme
     classes: any
     editorId: string
     boxRef: React.RefObject<any>
@@ -421,6 +374,52 @@ class DraggableBox extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            containerBox: {
+                border: "1px dashed #0000f0",
+                cursor: "context-menu",
+                userSelect: "none",
+                padding: "10px",
+                zIndex: 0
+            },
+            componentBox: {
+                border: "1px dotted #a00000",
+                cursor: "context-menu",
+                userSelect: "none",
+                zIndex: 5
+            },
+            selectedContainerBox: {
+                border: "1px solid #0000ff",
+                cursor: "context-menu",
+                userSelect: "none",
+                padding: "10px",
+                zIndex: 0
+            },
+            selectedComponentBox: {
+                border: "1px solid #0000ff",
+                cursor: "context-menu",
+                userSelect: "none",
+                zIndex: 5
+            },
+            noBox: {
+                cursor: "context-menu",
+                userSelect: "none",
+            },
+            editBarText: {
+                color: "#498ada",
+                background: "#c9c9c9",
+                paddingLeft: "5px",
+                paddingRight: "5px",
+                fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+                fontSize: "13px",
+                fontWeight: 600,
+                cursor: "move",
+                ...theme.overrides?.DraggableBoxData?.editBarText
+            }            
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "DraggableBox"})(DraggableBox)
+export default withStyles(DraggableBox.defaultStyles)(DraggableBox)

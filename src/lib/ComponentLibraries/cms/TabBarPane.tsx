@@ -53,54 +53,6 @@ import withStyles from "@mui/styles/withStyles"
     commandIcon: object
 }
 
- const defaultStyles: any = (theme: Theme) => {
-    return  {
-        tabsRoot: {
-            height: "24px",
-            width: "100%",
-            background: "#e0e0e0",
-            display: "flex",
-            flexDirection: "row",
-            ...theme.overrides?.TabBarPane?.tabsRoot
-        },
-        modesRoot: {
-            height: "24px",
-            width: "100%",
-            background: "#c9c9c9",
-            display: "flex",
-            flexDirection: "row",
-            ...theme.overrides?.TabBarPane?.modesRoot
-        },
-        modeActive: {
-            color: "#498ada",
-            paddingTop: "2px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
-            fontSize: "0.9rem",
-            fontWeight: 800,
-            ...theme.overrides?.TabBarPane?.modeActive
-        },
-        modeInactive: {
-            color: "#498ada",
-            paddingTop: "2px",
-            cursor: "pointer",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-            fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
-            fontSize: "0.9rem",
-            fontWeight: 100,
-            ...theme.overrides?.TabBarPane?.modeInactive
-        },
-        commandIcon: {
-            color: "#498ada",
-            cursor: "pointer",
-            marginLeft: "20px",
-            ...theme.overrides?.TabBarPane?.commandIcon
-        }
-    }
-}
-
 const TREE_VIEW_SELECT_FILE = "treeView.selectFile"
 interface Mode {
     name: string
@@ -614,6 +566,54 @@ class TabBarPane extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            tabsRoot: {
+                height: "24px",
+                width: "100%",
+                background: "#e0e0e0",
+                display: "flex",
+                flexDirection: "row",
+                ...theme.overrides?.TabBarPane?.tabsRoot
+            },
+            modesRoot: {
+                height: "24px",
+                width: "100%",
+                background: "#c9c9c9",
+                display: "flex",
+                flexDirection: "row",
+                ...theme.overrides?.TabBarPane?.modesRoot
+            },
+            modeActive: {
+                color: "#498ada",
+                paddingTop: "2px",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: 800,
+                ...theme.overrides?.TabBarPane?.modeActive
+            },
+            modeInactive: {
+                color: "#498ada",
+                paddingTop: "2px",
+                cursor: "pointer",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+                fontSize: "0.9rem",
+                fontWeight: 100,
+                ...theme.overrides?.TabBarPane?.modeInactive
+            },
+            commandIcon: {
+                color: "#498ada",
+                cursor: "pointer",
+                marginLeft: "20px",
+                ...theme.overrides?.TabBarPane?.commandIcon
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "TabBarPane", withTheme: true})(TabBarPane)
+export default withStyles(TabBarPane.defaultStyles, {withTheme: true})(TabBarPane)

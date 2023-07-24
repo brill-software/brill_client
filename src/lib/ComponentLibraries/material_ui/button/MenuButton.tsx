@@ -34,26 +34,6 @@ class MenuButton extends Component<Props, State> {
         this.state = {onPage: false}
     }
 
-    static defaultStyles(theme: Theme): any {
-        return  { 
-            root: {
-                color: "white",
-                ...theme.overrides?.MenuButton?.root
-            },
-            button: {
-                "&:hover": {background: theme.palette.primary.light},
-                padding: "10px 8px 2px 8px",
-                ...theme.overrides?.MenuButton?.button
-            },
-            bar: {
-                width: "100%", 
-                height: "5px", 
-                background: "red",
-                ...theme.overrides?.MenuButton?.bar
-            }
-        }
-    } 
-
     componentDidMount() {
         this.token = MB.subscribe(ROUTER_CURRENT_ROUTE, (topic, text) => this.dataLoadedCallback(topic, text), (topic, error) => this.errorCallback(topic, error))
     }
@@ -82,6 +62,26 @@ class MenuButton extends Component<Props, State> {
                 <div className={barClass}> </div>
             </div>
         )
+    }
+
+    static defaultStyles(theme: Theme): any {
+        return  { 
+            root: {
+                color: "white",
+                ...theme.overrides?.MenuButton?.root
+            },
+            button: {
+                "&:hover": {background: theme.palette.primary.light},
+                padding: "10px 8px 2px 8px",
+                ...theme.overrides?.MenuButton?.button
+            },
+            bar: {
+                width: "100%", 
+                height: "5px", 
+                background: "red",
+                ...theme.overrides?.MenuButton?.bar
+            }
+        }
     }
 }
 

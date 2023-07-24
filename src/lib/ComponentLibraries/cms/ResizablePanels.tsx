@@ -41,60 +41,6 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-    return {
-        panelContainer: {
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          overflow: "hidden",
-          ...theme.overrides?.ResizablePanels?.panelContainer
-        },
-        panelRowContainer: {
-            display: "flex",
-            flexDirection: "row",
-            ...theme.overrides?.ResizablePanels?.panelRowContainer
-        },
-        panelColContainer: {
-            display: "flex",
-            flexDirection: "column",
-            ...theme.overrides?.ResizablePanels?.panelColContainer
-        },
-        panel: {
-        },
-        colResizer: { // For Vertical mode re-sizer bar
-            width: "3px",
-            background: "darkGray",
-            position: "relative",
-            cursor: "col-resize",
-            flexShrink: "0",
-            WebkitUserSelect: "none",
-            MozUserSelect: "none",
-            MsUserSelect: "none",
-            userSelect: "none",
-            ...theme.overrides?.ResizablePanels?.colResizer
-        },
-        rowResizer: { // For Horizontal mode re-sizer bar
-          height: "3px",
-          width: "100%",
-          background: "darkGray",
-          position: "relative",
-          cursor: "row-resize",
-          flexShrink: "0",
-          WebkitUserSelect: "none",
-          MozUserSelect: "none",
-          MsUserSelect: "none",
-          userSelect: "none",
-          ...theme.overrides?.ResizablePanels?.rowResizer
-        },
-        splitIconDiv: {
-          backgroundColor: "#e0e0e0",
-          zIndex: 1,
-          ...theme.overrides?.ResizablePanels?.splitIconDiv
-        }
-    }
-}
-
 export const CLOSE_PANEL_TOPIC = "resizablePanels.closePanel"
 const MAX_PANELS_TO_ALLOW = 8
 
@@ -493,6 +439,60 @@ class ResizablePanels extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return {
+            panelContainer: {
+              display: "flex",
+              flexDirection: "column",
+              height: "100vh",
+              overflow: "hidden",
+              ...theme.overrides?.ResizablePanels?.panelContainer
+            },
+            panelRowContainer: {
+                display: "flex",
+                flexDirection: "row",
+                ...theme.overrides?.ResizablePanels?.panelRowContainer
+            },
+            panelColContainer: {
+                display: "flex",
+                flexDirection: "column",
+                ...theme.overrides?.ResizablePanels?.panelColContainer
+            },
+            panel: {
+            },
+            colResizer: { // For Vertical mode re-sizer bar
+                width: "3px",
+                background: "darkGray",
+                position: "relative",
+                cursor: "col-resize",
+                flexShrink: "0",
+                WebkitUserSelect: "none",
+                MozUserSelect: "none",
+                MsUserSelect: "none",
+                userSelect: "none",
+                ...theme.overrides?.ResizablePanels?.colResizer
+            },
+            rowResizer: { // For Horizontal mode re-sizer bar
+              height: "3px",
+              width: "100%",
+              background: "darkGray",
+              position: "relative",
+              cursor: "row-resize",
+              flexShrink: "0",
+              WebkitUserSelect: "none",
+              MozUserSelect: "none",
+              MsUserSelect: "none",
+              userSelect: "none",
+              ...theme.overrides?.ResizablePanels?.rowResizer
+            },
+            splitIconDiv: {
+              backgroundColor: "#e0e0e0",
+              zIndex: 1,
+              ...theme.overrides?.ResizablePanels?.splitIconDiv
+            }
+        }    
+    }
 }
 
-export default withStyles(defaultStyles, { name: "ResizablePanels"})(ResizablePanels)
+export default withStyles(ResizablePanels.defaultStyles, {withTheme: true})(ResizablePanels)

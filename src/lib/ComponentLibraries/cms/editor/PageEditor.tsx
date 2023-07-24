@@ -25,27 +25,9 @@ import withStyles from "@mui/styles/withStyles"
  * The CMS Page Editor.
  * 
  */
-
-const defaultStyles: any  = (theme: Theme) => {
-    return {
-    dashedBox: {
-        border: "1px dashed #999",
-        borderRadius: "3px",
-        padding: "5px",
-        cursor: "move",
-        zIndex: "1"
-      },
-      solidBox: {
-        border: "1px solid #0000e0",
-        borderRadius: "3px",
-        padding: "10px",
-        cursor: "move"
-      }
-    }}
   
 interface Props {
     id: string
-    theme: Theme
     classes: any
     fileName: string // e.g. home.json
     subscribeToTopic: string // e.g. file:/my_app/home.json
@@ -529,6 +511,24 @@ class PageEditor extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return {
+            dashedBox: {
+                border: "1px dashed #999",
+                borderRadius: "3px",
+                padding: "5px",
+                cursor: "move",
+                zIndex: "1"
+              },
+              solidBox: {
+                border: "1px solid #0000e0",
+                borderRadius: "3px",
+                padding: "10px",
+                cursor: "move"
+              }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, {name: "PageEditor"})(PageEditor)
+export default withStyles(PageEditor.defaultStyles)(PageEditor)

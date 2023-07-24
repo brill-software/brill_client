@@ -12,17 +12,6 @@ import withStyles from "@mui/styles/withStyles"
  *
  */
 
- const defaultStyles: any = (theme: Theme) => {
-    return  {
-        root: {
-            color: "#498ada",
-            marginLeft: "20px",
-            cursor: "pointer",
-            ...theme.overrides?.IdsOnOffIcon?.root
-        }
-    }
-}
-
 interface Props {
     classes: any
     publishToTopic: string
@@ -67,6 +56,17 @@ class IdsOnOffIcon extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                color: "#498ada",
+                marginLeft: "20px",
+                cursor: "pointer",
+                ...theme.overrides?.IdsOnOffIcon?.root
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "IdsOnOffIcon"})(IdsOnOffIcon)
+export default withStyles(IdsOnOffIcon.defaultStyles)(IdsOnOffIcon)

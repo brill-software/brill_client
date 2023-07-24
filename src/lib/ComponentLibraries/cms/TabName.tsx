@@ -12,53 +12,6 @@ import withStyles from "@mui/styles/withStyles"
  *
  */
 
- const defaultStyles: any = (theme: Theme) => {
-    return  {
-        tabActive: {
-            cursor: "pointer",
-            height: "100%",
-            width: "180px",
-            background: "#c9c9c9",
-            paddingLeft: "10px",
-            fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
-            fontSize: "1.05rem",
-            fontWeight: 700,
-            ...theme.overrides?.TabName?.tabActive
-        },
-        tabActiveX: {
-            cursor: "pointer",
-            background: "#c9c9c9",
-            paddingRight: "10px",
-            marginRight: "2px",
-            fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
-            fontSize: "1.05rem",
-            fontWeight: 700,
-            ...theme.overrides?.TabName?.tabActiveX
-        },
-        tabInActive: {
-            cursor: "pointer",
-            height: "100%",
-            width: "200px",
-            background: "#dadada",
-            paddingLeft: "10px",
-            fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
-            fontSize: "1.05rem",
-            fontWeight: 300,
-            ...theme.overrides?.TabName?.tabInActive
-        },
-        tabInActiveX: {
-            cursor: "pointer",
-            background: "#dadada",
-            paddingRight: "10px",
-            marginRight: "2px",
-            fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
-            fontSize: "1.05rem",
-            fontWeight: 300,
-            ...theme.overrides?.TabName?.tabInActiveX
-        }
-    }
-}
-
 export class DndTabData {
     readonly tabNameId: string
     readonly fileTopic: string
@@ -206,6 +159,53 @@ class TabName extends Component<Props, State> {
             )
         }
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            tabActive: {
+                cursor: "pointer",
+                height: "100%",
+                width: "180px",
+                background: "#c9c9c9",
+                paddingLeft: "10px",
+                fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+                fontSize: "1.05rem",
+                fontWeight: 700,
+                ...theme.overrides?.TabName?.tabActive
+            },
+            tabActiveX: {
+                cursor: "pointer",
+                background: "#c9c9c9",
+                paddingRight: "10px",
+                marginRight: "2px",
+                fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+                fontSize: "1.05rem",
+                fontWeight: 700,
+                ...theme.overrides?.TabName?.tabActiveX
+            },
+            tabInActive: {
+                cursor: "pointer",
+                height: "100%",
+                width: "200px",
+                background: "#dadada",
+                paddingLeft: "10px",
+                fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+                fontSize: "1.05rem",
+                fontWeight: 300,
+                ...theme.overrides?.TabName?.tabInActive
+            },
+            tabInActiveX: {
+                cursor: "pointer",
+                background: "#dadada",
+                paddingRight: "10px",
+                marginRight: "2px",
+                fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+                fontSize: "1.05rem",
+                fontWeight: 300,
+                ...theme.overrides?.TabName?.tabInActiveX
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "TabName"})(TabName)
+export default withStyles(TabName.defaultStyles, {withTheme: true})(TabName)

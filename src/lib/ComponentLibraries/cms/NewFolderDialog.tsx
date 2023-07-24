@@ -12,29 +12,10 @@ import withStyles from "@mui/styles/withStyles"
 /**
  * Displays the New Folder dialog. Based on the SingleFieldDialog.
  * 
- * 
  */
-
-const defaultStyles: any = (theme: Theme) => {
-     return  {
-        root: {
-            margin: 0,
-            padding: theme.spacing(2),
-            ...theme.overrides?.SingleFieldDialog?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: theme.spacing(1),
-            color: theme.palette.grey[600],
-            ...theme.overrides?.SingleFieldDialog?.closeButton
-        }
-    }
-}
 
 interface Props {
     id: string
-    theme: Theme
     title: string
     prompt: string
     fieldLabel: string
@@ -103,7 +84,7 @@ class NewFolderDialog extends Component<Props, State> {
     }
 
     render() {
-        const {id, theme, classes, title, prompt, fieldLabel, buttonLabel, subscribeToTopic,publishToTopic, ...other} = this.props
+        const {id, classes, title, prompt, fieldLabel, buttonLabel, subscribeToTopic,publishToTopic, ...other} = this.props
         return (
             <Dialog className={classes.root} onClose={event => this.onCloseHandler(event)} open={this.state.open} {...other}>
                 <Typography variant="h3" style={{padding: "24px"}}>{title}</Typography>
@@ -127,6 +108,23 @@ class NewFolderDialog extends Component<Props, State> {
             </Dialog>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                margin: 0,
+                padding: theme.spacing(2),
+                ...theme.overrides?.SingleFieldDialog?.root
+            },
+            closeButton: {
+                position: 'absolute',
+                right: theme.spacing(1),
+                top: theme.spacing(1),
+                color: theme.palette.grey[600],
+                ...theme.overrides?.SingleFieldDialog?.closeButton
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "NewFolderDialog"})(NewFolderDialog)
+export default withStyles(NewFolderDialog.defaultStyles)(NewFolderDialog)

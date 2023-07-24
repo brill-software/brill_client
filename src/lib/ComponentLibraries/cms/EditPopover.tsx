@@ -23,43 +23,10 @@ import withStyles from "@mui/styles/withStyles"
  *
  */
 
-const defaultStyles: any = (theme: Theme) => {
-    return {
-        root: {
-            margin: 0,
-            padding: theme.spacing(2),
-            pointerEvents: "none",  // Required to make Popover non-modal.
-            ...theme.overrides?.EditPopover?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: "0px",
-            color: theme.palette.grey[600],
-            ...theme.overrides?.EditPopover?.closeButton
-        },
-        attributesLabel: {
-            fontFamily: "Helvetica",
-            marginTop: "7px",
-            marginBottom: "7px"
-        },
-        iconRoot: {
-            color: "#498ada",
-            cursor: "pointer",
-            marginTop: "18px",
-            marginLeft: "10px",
-            width: "24px",
-            height: "24px",
-            ...theme.overrides?.EditPopover?.iconRoot
-        }
-    }
-}
-
 export type EditSaveHandler = (json: string) => void
 
 interface Props {
     id: string
-    theme: Theme
     anchorEl: Element
     title: string
     prompt: string
@@ -355,6 +322,38 @@ class EditPopover extends Component<Props, State> {
             </ThemeProvider>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                margin: 0,
+                padding: theme.spacing(2),
+                pointerEvents: "none",  // Required to make Popover non-modal.
+                ...theme.overrides?.EditPopover?.root
+            },
+            closeButton: {
+                position: 'absolute',
+                right: theme.spacing(1),
+                top: "0px",
+                color: theme.palette.grey[600],
+                ...theme.overrides?.EditPopover?.closeButton
+            },
+            attributesLabel: {
+                fontFamily: "Helvetica",
+                marginTop: "7px",
+                marginBottom: "7px"
+            },
+            iconRoot: {
+                color: "#498ada",
+                cursor: "pointer",
+                marginTop: "18px",
+                marginLeft: "10px",
+                width: "24px",
+                height: "24px",
+                ...theme.overrides?.EditPopover?.iconRoot
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, {name: "EditPopover"})(EditPopover)
+export default withStyles(EditPopover.defaultStyles)(EditPopover)

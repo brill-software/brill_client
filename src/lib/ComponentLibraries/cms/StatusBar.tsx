@@ -11,23 +11,6 @@ import withStyles from "@mui/styles/withStyles"
  *
  */
 
- const defaultStyles: any = (theme: Theme) => {
-    return  {
-        root: {
-            color: "#498ada",
-            background: "#f0f0f0",
-            fontSize: "16px",
-            fontFamily: "Arial",
-            paddingLeft: "15px",
-            paddingRight: "15px",
-            height: "24px",
-            position: "absolute", 
-            bottom: 0,
-            ...theme.overrides?.StatusBar?.root
-        }
-    }
-}
-
 interface Props {
     classes: any
     subscribeToTopic: string
@@ -81,6 +64,23 @@ class StatusBar extends Component<Props, State> {
             return null
         }
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                color: "#498ada",
+                background: "#f0f0f0",
+                fontSize: "16px",
+                fontFamily: "Arial",
+                paddingLeft: "15px",
+                paddingRight: "15px",
+                height: "24px",
+                position: "absolute", 
+                bottom: 0,
+                ...theme.overrides?.StatusBar?.root
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "StatusBar"})(StatusBar)
+export default withStyles(StatusBar.defaultStyles, {withTheme: true})(StatusBar)

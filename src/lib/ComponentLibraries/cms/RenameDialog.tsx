@@ -15,23 +15,6 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-     return  {
-        root: {
-            margin: 0,
-            padding: theme.spacing(2),
-            ...theme.overrides?.SingleFieldDialog?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: theme.spacing(1),
-            color: theme.palette.grey[600],
-            ...theme.overrides?.SingleFieldDialog?.closeButton
-        }
-    }
-}
-
 interface Props {
     id: string
     theme: Theme
@@ -127,6 +110,23 @@ class RenameDialog extends Component<Props, State> {
             </Dialog>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                margin: 0,
+                padding: theme.spacing(2),
+                ...theme.overrides?.SingleFieldDialog?.root
+            },
+            closeButton: {
+                position: 'absolute',
+                right: theme.spacing(1),
+                top: theme.spacing(1),
+                color: theme.palette.grey[600],
+                ...theme.overrides?.SingleFieldDialog?.closeButton
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "RenameDialog"})(RenameDialog)
+export default withStyles(RenameDialog.defaultStyles, {withTheme: true})(RenameDialog)

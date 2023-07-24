@@ -14,24 +14,6 @@ import withStyles from "@mui/styles/withStyles"
  *
  */
 
-const defaultStyles: any = (theme: Theme) => {
-    return {
-        root: {
-            margin: 0,
-            padding: theme.spacing(2),
-            pointerEvents: "none",  // Make Popover non-modal.
-            ...theme.overrides?.TopicsPopover?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: "0px",
-            color: theme.palette.grey[600],
-            ...theme.overrides?.TopicsPopover?.closeButton
-        }
-    }
-}
-
 class TopicTableRow {
     topic: string
     value: string
@@ -39,7 +21,6 @@ class TopicTableRow {
 
 interface Props {
     id: string
-    theme: Theme
     subscribeToTopic: string
     [propName: string]: any
 }
@@ -130,6 +111,24 @@ class TopicsPopover extends Component<Props, State> {
             </Draggable>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return {
+            root: {
+                margin: 0,
+                padding: theme.spacing(2),
+                pointerEvents: "none",  // Make Popover non-modal.
+                ...theme.overrides?.TopicsPopover?.root
+            },
+            closeButton: {
+                position: "absolute",
+                right: theme.spacing(1),
+                top: "0px",
+                color: theme.palette.grey[600],
+                ...theme.overrides?.TopicsPopover?.closeButton
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "TopicsPopover"})(TopicsPopover)
+export default withStyles(TopicsPopover.defaultStyles)(TopicsPopover)

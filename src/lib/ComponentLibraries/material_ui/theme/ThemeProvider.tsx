@@ -193,8 +193,8 @@ export default class ThemeProvider extends Component<Props, State> {
         const {themeTopic, themeTopicDark, ...other} = this.props
 
         return (
-            <MuiThemeProvider theme={this.state.theme} {...other}>
-                <Paper>
+            <MuiThemeProvider theme={this.state.theme}>
+                <Paper {...other}>
                     {this.props.children}
                 </Paper>         
             </MuiThemeProvider>

@@ -34,7 +34,7 @@ class CancelButton extends Component<Props, State> {
             MB.publish(this.props.publishToTopic, this.props.action)
         }
         if (this.props.route) {
-            if (this.props.routetoLowerCase() === "back") {
+            if (this.props.route.toLowerCase() === "back") {
                 Router.goBackToPreviousPage()
             } else {
                 Router.goToPage(this.props.route)

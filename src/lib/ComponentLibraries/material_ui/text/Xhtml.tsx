@@ -38,10 +38,10 @@ const defaultStyles: any = (theme: Theme) => {
         figure: { ...theme.typography.body1 }
     },
     root: {
-        ...theme.overrides?.Xhtml?.root
+        ...theme.components?.Xhtml?.styleOverrides?.root
     },
     parserError: {
-        ...theme.overrides?.Xhtml?.parserError
+        ...theme.components?.Xhtml?.styleOverrides?.parserError
     }
   }}
 

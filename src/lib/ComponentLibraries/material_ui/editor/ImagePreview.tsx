@@ -31,7 +31,7 @@ class ImagePreview extends Component<Props, State> {
     originalXhtml: string
 
     static defaultStyles(theme: Theme): any {
-        return  { root: {display: "block", ...theme.overrides?.ImagePreview?.root }}
+        return  { root: {display: "block", ...theme.components?.ImagePreview?.styleOverrides?.root }}
     }
 
     constructor(props: Props) {

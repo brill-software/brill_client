@@ -40,7 +40,7 @@ class IconButton extends Component<Props, State> {
             color: "#498ada",
             cursor: "pointer",
             marginLeft: "20px",
-            ...theme.overrides?.IconButton?.root }}
+            ...theme.components?.IconButton?.styleOverrides?.root }}
     }   
 
     constructor(props: Props) {

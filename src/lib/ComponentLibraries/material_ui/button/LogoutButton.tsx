@@ -36,7 +36,7 @@ class LogoutButton extends Component<Props, State> {
    token: Token
 
    static defaultStyles(theme: Theme): any {
-    return  { root: { ...theme.overrides?.LogoutButton?.root }}
+    return  { root: { ...theme.components?.LogoutButton?.styleOverrides?.root }}
 }
 
     constructor(props: Props) {

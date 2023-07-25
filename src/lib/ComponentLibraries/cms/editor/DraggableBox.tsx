@@ -416,7 +416,7 @@ class DraggableBox extends Component<Props, State> {
                 fontSize: "13px",
                 fontWeight: 600,
                 cursor: "grab",
-                ...theme.overrides?.DraggableBoxData?.editBarText
+                ...theme.components?.DraggableBoxData?.styleOverrides?.editBarText
             }            
         }
     }

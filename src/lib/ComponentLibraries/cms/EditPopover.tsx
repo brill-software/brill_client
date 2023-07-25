@@ -329,14 +329,14 @@ class EditPopover extends Component<Props, State> {
                 margin: 0,
                 padding: theme.spacing(2),
                 pointerEvents: "none",  // Required to make Popover non-modal.
-                ...theme.overrides?.EditPopover?.root
+                ...theme.components?.EditPopover?.styleOverrides?.root
             },
             closeButton: {
                 position: 'absolute',
                 right: theme.spacing(1),
                 top: "0px",
                 color: theme.palette.grey[600],
-                ...theme.overrides?.EditPopover?.closeButton
+                ...theme.components?.EditPopover?.styleOverrides?.closeButton
             },
             attributesLabel: {
                 fontFamily: "Helvetica",
@@ -350,7 +350,7 @@ class EditPopover extends Component<Props, State> {
                 marginLeft: "10px",
                 width: "24px",
                 height: "24px",
-                ...theme.overrides?.EditPopover?.iconRoot
+                ...theme.components?.EditPopover?.styleOverrides?.iconRoot
             }
         }
     }

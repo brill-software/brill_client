@@ -24,14 +24,14 @@ const defaultStyles: any = (theme: Theme) => {
         root: {
             margin: 0,
             padding: theme.spacing(2),
-            ...theme.overrides?.ConfirmDialog?.root
+            ...theme.components?.ConfirmDialog?.styleOverrides?.root
         },
         closeButton: {
             position: 'absolute',
             right: theme.spacing(1),
             top: theme.spacing(1),
             color: theme.palette.grey[600],
-            ...theme.overrides?.ConfirmDialog?.closeButton
+            ...theme.components?.ConfirmDialog?.styleOverrides?.closeButton
         }
     }
 }

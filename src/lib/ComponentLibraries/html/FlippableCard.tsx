@@ -55,7 +55,7 @@ class FlippableCard extends Component<Props, State> {
                 width: "300px",
                 height: "436px",
                 perspective: "1000px",
-                ...theme.overrides?.FlippableCard?.card
+                ...theme.components?.styleOverrides?.FlippableCard?.card
             },
             cardInner: {
                 width: "100%",
@@ -64,7 +64,7 @@ class FlippableCard extends Component<Props, State> {
                 transformStyle: "preserve-3d",
                 cursor: "pointer",
                 position: "relative",
-                ...theme.overrides?.FlippableCard?.cardInner
+                ...theme.components?.FlippableCard?.styleOverrides?.cardInner
             },
             cardFront: {
                 position: "absolute",
@@ -80,7 +80,7 @@ class FlippableCard extends Component<Props, State> {
                 justifyContent: "center",
                 fontSize: "24px",
                 borderRadius: "14px",
-                ...theme.overrides?.FlippableCard?.cardFront
+                ...theme.components?.FlippableCard?.styleOverrides?.cardFront
             },
             cardBack: {
                 position: "absolute",
@@ -92,11 +92,11 @@ class FlippableCard extends Component<Props, State> {
                 transform: "rotateY(180deg)",
                 backgroundColor: "rgba(0,0,0,0.0)",
                 borderRadius: "14px",
-                ...theme.overrides?.FlippableCard?.cardBack
+                ...theme.components?.FlippableCard?.styleOverrides?.cardBack
             },
             isFlipped: {
                 transform: "rotateY(180deg)",
-                ...theme.overrides?.FlippableCard?.isFlipped
+                ...theme.components?.FlippableCard?.styleOverrides?.isFlipped
             }
         }
     }

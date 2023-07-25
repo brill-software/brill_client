@@ -41,7 +41,7 @@ class FixedSizeIcon extends Component<Props, State> {
         return  { svgRoot: {
             height: "24px",
             width: "24px",
-            ...theme.overrides?.FixedSizeIcon?.svgRoot }}
+            ...theme.components?.FixedSizeIcon?.styleOverrides?.svgRoot }}
     } 
 
     constructor(props: Props) {

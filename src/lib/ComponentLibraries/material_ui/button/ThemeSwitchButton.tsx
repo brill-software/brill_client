@@ -30,7 +30,7 @@ class ThemeSwitchButton extends Component<Props, State> {
     token: Token
 
     static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.overrides?.ThemeSwitchButton?.root }}
+        return  { root: { ...theme.components?.ThemeSwitchButton?.styleOverrides?.root }}
     }
 
     constructor(props: Props) {

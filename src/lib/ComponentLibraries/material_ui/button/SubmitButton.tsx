@@ -35,7 +35,7 @@ class SubmitButton extends Component<Props, State> {
     token: Token
 
     static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.overrides?.SubmitButton?.root }}
+        return  { root: { ...theme.components?.SubmitButton?.styleOverrides?.root }}
     }
 
     constructor(props: Props) {

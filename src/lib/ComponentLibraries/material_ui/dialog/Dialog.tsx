@@ -28,14 +28,14 @@ const defaultStyles: any = (theme: Theme) => {
         root: {
             margin: 0,
             padding: theme.spacing(2),
-            ...theme.overrides?.Dialog?.root
+            ...theme.components?.Dialog?.styleOverrides?.root
         },
         closeButton: {
             position: 'absolute',
             right: theme.spacing(1),
             top: theme.spacing(1),
             color: theme.palette.grey[600],
-            ...theme.overrides?.Dialog?.closeButton
+            ...theme.components?.Dialog?.styleOverrides?.closeButton
         }
     }
 }

@@ -71,7 +71,7 @@ class Img extends Component<Props, State> {
     static defaultStyles(theme: Theme): any {
         return  { 
             root: {display: "block", 
-                ...theme.overrides?.Img?.root }
+                ...theme.components?.Img?.styleOverrides?.root }
             }
     }
 }

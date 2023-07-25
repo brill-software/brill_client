@@ -91,7 +91,7 @@ class Div extends Component<Props, State> {
     }
 
     static defaultStyles(theme: Theme): any {
-        return  {root: { ...theme.overrides?.Div?.root }}
+        return  {root: { ...theme.components?.Div?.styleOverrides?.root }}
     }
 
 }

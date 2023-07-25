@@ -68,18 +68,18 @@ class MenuButton extends Component<Props, State> {
         return  { 
             root: {
                 color: "white",
-                ...theme.overrides?.MenuButton?.root
+                ...theme.components?.MenuButton?.styleOverrides?.root
             },
             button: {
                 "&:hover": {background: theme.palette.primary.light},
                 padding: "10px 8px 2px 8px",
-                ...theme.overrides?.MenuButton?.button
+                ...theme.components?.MenuButton?.styleOverrides?.button
             },
             bar: {
                 width: "100%", 
                 height: "5px", 
                 background: "red",
-                ...theme.overrides?.MenuButton?.bar
+                ...theme.components?.MenuButton?.styleOverrides?.bar
             }
         }
     }

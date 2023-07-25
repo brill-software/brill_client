@@ -63,7 +63,7 @@ class IdsOnOffIcon extends Component<Props, State> {
                 color: "#498ada",
                 marginLeft: "20px",
                 cursor: "pointer",
-                ...theme.overrides?.IdsOnOffIcon?.root
+                ...theme.components?.IdsOnOffIcon?.styleOverrides?.root
             }
         }
     }

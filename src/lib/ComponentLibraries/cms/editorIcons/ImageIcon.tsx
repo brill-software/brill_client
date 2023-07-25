@@ -109,19 +109,19 @@ class ImageIcon extends Component<Props, State> {
                  color: "#498ada",
                  cursor: "pointer",
                  marginLeft: "20px",
-                 ...theme.overrides?.ImageIcon?.root
+                 ...theme.components?.ImageIcon?.styleOverrides?.root
              },
              dialogRoot: {
                  margin: 0,
                  padding: theme.spacing(2),
-                 ...theme.overrides?.ImageIcon?.root
+                 ...theme.components?.ImageIcon?.styleOverrides?.root
              },
              closeButton: {
                  position: 'absolute',
                  right: theme.spacing(1),
                  top: theme.spacing(1),
                  color: theme.palette.grey[600],
-                 ...theme.overrides?.ImageIcon?.closeButton
+                 ...theme.components?.ImageIcon?.styleOverrides?.closeButton
              }  
         }
     }

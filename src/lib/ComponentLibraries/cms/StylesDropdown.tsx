@@ -80,7 +80,7 @@ class StylesDropdown extends Component<Props, State> {
             root: {
                 color: "#498ada",
                 marginLeft: "20px",
-                ...theme.overrides?.StylesDropdownOverrides?.root
+                ...theme.components?.StylesDropdownOverrides?.styleOverrides?.root
             },
             select: {
                 color: "#498ada",
@@ -89,7 +89,7 @@ class StylesDropdown extends Component<Props, State> {
                 fontSize: "1.0rem",
                 paddingTop: "2px",
                 fontWeight: 600,
-                ...theme.overrides?.StylesDropdownOverrides?.select
+                ...theme.components?.StylesDropdownOverrides?.styleOverrides?.select
             }
         }
     }

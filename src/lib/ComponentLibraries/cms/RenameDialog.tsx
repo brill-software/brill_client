@@ -116,14 +116,14 @@ class RenameDialog extends Component<Props, State> {
             root: {
                 margin: 0,
                 padding: theme.spacing(2),
-                ...theme.overrides?.SingleFieldDialog?.root
+                ...theme.components?.SingleFieldDialog?.styleOverrides?.root
             },
             closeButton: {
                 position: 'absolute',
                 right: theme.spacing(1),
                 top: theme.spacing(1),
                 color: theme.palette.grey[600],
-                ...theme.overrides?.SingleFieldDialog?.closeButton
+                ...theme.components?.SingleFieldDialog?.styleOverrides?.closeButton
             }
         }
     }

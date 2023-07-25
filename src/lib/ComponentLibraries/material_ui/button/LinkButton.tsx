@@ -27,7 +27,7 @@ interface State {
 class LinkButton extends Component<Props, State> {
 
     static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.overrides?.LinkButton?.root }}
+        return  { root: { ...theme.components?.LinkButton?.styleOverrides?.root }}
     }
 
     onClickHandler() {

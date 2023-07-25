@@ -575,7 +575,7 @@ class TabBarPane extends Component<Props, State> {
                 background: "#e0e0e0",
                 display: "flex",
                 flexDirection: "row",
-                ...theme.overrides?.TabBarPane?.tabsRoot
+                ...theme.components?.TabBarPane?.styleOverrides?.tabsRoot
             },
             modesRoot: {
                 height: "24px",
@@ -583,7 +583,7 @@ class TabBarPane extends Component<Props, State> {
                 background: "#c9c9c9",
                 display: "flex",
                 flexDirection: "row",
-                ...theme.overrides?.TabBarPane?.modesRoot
+                ...theme.components?.TabBarPane?.styleOverrides?.modesRoot
             },
             modeActive: {
                 color: "#498ada",
@@ -593,7 +593,7 @@ class TabBarPane extends Component<Props, State> {
                 fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
                 fontSize: "0.9rem",
                 fontWeight: 800,
-                ...theme.overrides?.TabBarPane?.modeActive
+                ...theme.components?.TabBarPane?.styleOverrides?.modeActive
             },
             modeInactive: {
                 color: "#498ada",
@@ -604,13 +604,13 @@ class TabBarPane extends Component<Props, State> {
                 fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
                 fontSize: "0.9rem",
                 fontWeight: 100,
-                ...theme.overrides?.TabBarPane?.modeInactive
+                ...theme.components?.TabBarPane?.styleOverrides?.modeInactive
             },
             commandIcon: {
                 color: "#498ada",
                 cursor: "pointer",
                 marginLeft: "20px",
-                ...theme.overrides?.TabBarPane?.commandIcon
+                ...theme.components?.TabBarPane?.styleOverrides?.commandIcon
             }
         }
     }

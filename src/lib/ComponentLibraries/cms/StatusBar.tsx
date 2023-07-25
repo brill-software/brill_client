@@ -77,7 +77,7 @@ class StatusBar extends Component<Props, State> {
                 height: "24px",
                 position: "absolute", 
                 bottom: 0,
-                ...theme.overrides?.StatusBar?.root
+                ...theme.components?.StatusBar?.styleOverrides?.root
             }
         }
     }

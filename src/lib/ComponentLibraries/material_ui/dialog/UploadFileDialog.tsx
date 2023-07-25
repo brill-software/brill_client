@@ -25,7 +25,7 @@ const defaultStyles: any = (theme: Theme) => {
             margin: 0,
             width: "1200px",
             padding: theme.spacing(2),
-            ...theme.overrides?.UploadFileDialog?.root
+            ...theme.components?.UploadFileDialog?.styleOverrides?.root
         },
         dropZone: {
             border: "5px dashed lightgrey",
@@ -33,7 +33,7 @@ const defaultStyles: any = (theme: Theme) => {
             padding: "10px",
             width: "350px",
             height: "260px",     
-            ...theme.overrides?.UploadFileDialog?.dropZone
+            ...theme.components?.UploadFileDialog?.styleOverrides?.dropZone
         },
         fileListBox: {
             border: "5px solid lightgrey",
@@ -43,31 +43,31 @@ const defaultStyles: any = (theme: Theme) => {
             width: "550px",
             height: "260px",
             overflowY: "scroll",
-            ...theme.overrides?.UploadFileDialog?.dropZone
+            ...theme.components?.UploadFileDialog?.styleOverrides?.dropZone
         },
         browseButton: {
             color: theme.palette.primary.main,
             textDecoration: "underline",
             textTransform: "capitalize",
-            ...theme.overrides?.UploadFileDialog?.browseButton
+            ...theme.components?.UploadFileDialog?.styleOverrides?.browseButton
         },
         prompt4: {
             fontSize: "1.0em", 
             marginTop: "10px",
-            ...theme.overrides?.UploadFileDialog?.prompt4
+            ...theme.components?.UploadFileDialog?.styleOverrides?.prompt4
         },
         submitButton: {
             marginLeft: "720px", 
             marginTop: "20px", 
             width: "200px",
-            ...theme.overrides?.UploadFileDialog?.submitButton
+            ...theme.components?.UploadFileDialog?.styleOverrides?.submitButton
         },
         closeButton: {
             position: 'absolute',
             right: theme.spacing(1),
             top: theme.spacing(1),
             color: theme.palette.grey[600],
-            ...theme.overrides?.UploadFileDialog?.closeButton
+            ...theme.components?.UploadFileDialog?.styleOverrides?.closeButton
         }
     }
 }

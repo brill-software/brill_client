@@ -21,7 +21,7 @@ import withStyles from "@mui/styles/withStyles"
 const defaultStyles: any = (theme: Theme) => {
      return  {
         root: {
-            ...theme.overrides?.XhtmlIndex?.root
+            ...theme.components?.XhtmlIndex?.styleOverrides?.root
         }
   }}
   

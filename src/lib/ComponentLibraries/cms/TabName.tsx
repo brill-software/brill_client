@@ -171,7 +171,7 @@ class TabName extends Component<Props, State> {
                 fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
                 fontSize: "1.05rem",
                 fontWeight: 700,
-                ...theme.overrides?.TabName?.tabActive
+                ...theme.components?.TabName?.styleOverrides?.tabActive
             },
             tabActiveX: {
                 cursor: "pointer",
@@ -181,7 +181,7 @@ class TabName extends Component<Props, State> {
                 fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
                 fontSize: "1.05rem",
                 fontWeight: 700,
-                ...theme.overrides?.TabName?.tabActiveX
+                ...theme.components?.TabName?.styleOverrides?.tabActiveX
             },
             tabInActive: {
                 cursor: "pointer",
@@ -192,7 +192,7 @@ class TabName extends Component<Props, State> {
                 fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
                 fontSize: "1.05rem",
                 fontWeight: 300,
-                ...theme.overrides?.TabName?.tabInActive
+                ...theme.components?.TabName?.styleOverrides?.tabInActive
             },
             tabInActiveX: {
                 cursor: "pointer",
@@ -202,7 +202,7 @@ class TabName extends Component<Props, State> {
                 fontFamily: "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Roboto\", \"Noto Sans\", \"Ubuntu\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
                 fontSize: "1.05rem",
                 fontWeight: 300,
-                ...theme.overrides?.TabName?.tabInActiveX
+                ...theme.components?.TabName?.styleOverrides?.tabInActiveX
             }
         }
     }

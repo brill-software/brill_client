@@ -24,7 +24,7 @@ class Text extends Component<Props, State> {
     token: Token
 
     static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.typography.body1, ...theme.overrides?.Text?.root }}
+        return  { root: { ...theme.typography.body1, ...theme.components?.Text?.styleOverrides?.root }}
     }
 
     constructor(props: Props) {

@@ -30,7 +30,7 @@ class A extends Component<Props, State> {
     }
 
     static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.overrides?.A?.root }}
+        return  { root: { ...theme.components?.A?.styleOverrides?.root }}
     }
 
 }

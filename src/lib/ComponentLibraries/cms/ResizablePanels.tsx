@@ -447,17 +447,17 @@ class ResizablePanels extends Component<Props, State> {
               flexDirection: "column",
               height: "100vh",
               overflow: "hidden",
-              ...theme.overrides?.ResizablePanels?.panelContainer
+              ...theme.components?.ResizablePanels?.styleOverrides?.panelContainer
             },
             panelRowContainer: {
                 display: "flex",
                 flexDirection: "row",
-                ...theme.overrides?.ResizablePanels?.panelRowContainer
+                ...theme.components?.ResizablePanels?.styleOverrides?.panelRowContainer
             },
             panelColContainer: {
                 display: "flex",
                 flexDirection: "column",
-                ...theme.overrides?.ResizablePanels?.panelColContainer
+                ...theme.components?.ResizablePanels?.styleOverrides?.panelColContainer
             },
             panel: {
             },
@@ -471,7 +471,7 @@ class ResizablePanels extends Component<Props, State> {
                 MozUserSelect: "none",
                 MsUserSelect: "none",
                 userSelect: "none",
-                ...theme.overrides?.ResizablePanels?.colResizer
+                ...theme.components?.ResizablePanels?.styleOverrides?.colResizer
             },
             rowResizer: { // For Horizontal mode re-sizer bar
               height: "3px",
@@ -484,12 +484,12 @@ class ResizablePanels extends Component<Props, State> {
               MozUserSelect: "none",
               MsUserSelect: "none",
               userSelect: "none",
-              ...theme.overrides?.ResizablePanels?.rowResizer
+              ...theme.components?.ResizablePanels?.styleOverrides?.rowResizer
             },
             splitIconDiv: {
               backgroundColor: "#e0e0e0",
               zIndex: 1,
-              ...theme.overrides?.ResizablePanels?.splitIconDiv
+              ...theme.components?.ResizablePanels?.styleOverrides?.splitIconDiv
             }
         }    
     }

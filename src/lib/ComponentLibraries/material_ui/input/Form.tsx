@@ -13,10 +13,9 @@ import withStyles from "@mui/styles/withStyles"
 }
 
 const defaultStyles: any = (theme: Theme) => {
-    const formRoot = (theme.overrides?.Form?.root) ? theme.overrides.Form.root : {}
     return  {
         root: {
-            ...formRoot
+            ...theme.components?.Form?.styleOverrides?.root
         }
   }}
 

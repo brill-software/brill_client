@@ -46,7 +46,7 @@ class LoginButton extends Component<Props, State> {
     token2: Token
 
     static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.overrides?.LoginButton?.root }}
+        return  { root: { ...theme.components?.LoginButton?.styleOverrides?.root }}
     }  
 
     constructor(props: Props) {

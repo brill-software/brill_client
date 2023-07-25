@@ -118,14 +118,14 @@ class TopicsPopover extends Component<Props, State> {
                 margin: 0,
                 padding: theme.spacing(2),
                 pointerEvents: "none",  // Make Popover non-modal.
-                ...theme.overrides?.TopicsPopover?.root
+                ...theme.components?.TopicsPopover?.styleOverrides?.root
             },
             closeButton: {
                 position: "absolute",
                 right: theme.spacing(1),
                 top: "0px",
                 color: theme.palette.grey[600],
-                ...theme.overrides?.TopicsPopover?.closeButton
+                ...theme.components?.TopicsPopover?.styleOverrides?.closeButton
             }
         }
     }

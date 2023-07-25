@@ -29,12 +29,6 @@ interface State {
 
 class CancelButton extends Component<Props, State> {
 
-    static defaultStyles(theme: Theme): any {
-        return  {
-            root: { ...theme.overrides?.CancelButton?.root }
-        }
-    }
-
     onClickHandler() {
         if (this.props.publishToTopic) {
             MB.publish(this.props.publishToTopic, this.props.action)
@@ -63,6 +57,12 @@ class CancelButton extends Component<Props, State> {
                 </MuiButton>
             </div>
         )
+    }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: { ...theme.components?.CancelButton?.styleOverrides?.root }
+        }
     }
 }
 

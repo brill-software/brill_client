@@ -19,23 +19,6 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-     return  {
-        root: {
-            margin: 0,
-            padding: theme.spacing(2),
-            ...theme.components?.ConfirmDialog?.styleOverrides?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: theme.spacing(1),
-            color: theme.palette.grey[600],
-            ...theme.components?.ConfirmDialog?.styleOverrides?.closeButton
-        }
-    }
-}
-
 interface Props {
     id: string
     theme: Theme
@@ -116,5 +99,22 @@ class AlertDialog extends Component<Props, State> {
             </Dialog>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                margin: 0,
+                padding: theme.spacing(2),
+                ...theme.components?.ConfirmDialog?.styleOverrides?.root
+            },
+            closeButton: {
+                position: 'absolute',
+                right: theme.spacing(1),
+                top: theme.spacing(1),
+                color: theme.palette.grey[600],
+                ...theme.components?.ConfirmDialog?.styleOverrides?.closeButton
+            }
+        }
+    }
 }
-export default withStyles(defaultStyles, { name: "AlertDialog"})(AlertDialog)
+export default withStyles(AlertDialog.defaultStyles, { withTheme: true })(AlertDialog)

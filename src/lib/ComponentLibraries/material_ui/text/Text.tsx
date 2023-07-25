@@ -23,10 +23,6 @@ interface State {
 class Text extends Component<Props, State> {
     token: Token
 
-    static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.typography.body1, ...theme.components?.Text?.styleOverrides?.root }}
-    }
-
     constructor(props: Props) {
         super(props)
         this.state = {text: this.props.text}  
@@ -65,6 +61,10 @@ class Text extends Component<Props, State> {
     render() {
         const {theme, classes, subscribeToTopic, filter, ...other} = this.props     
         return <p className={classes.root}{...other}>{this.state.text}</p>
+    }
+
+    static defaultStyles(theme: Theme): any {
+        return  { root: { ...theme.typography.body1, ...theme.components?.Text?.styleOverrides?.root }}
     }
 }
 

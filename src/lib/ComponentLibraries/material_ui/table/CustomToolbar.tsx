@@ -12,14 +12,6 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultToolbarStyles = (theme: Theme) => ({
-  iconButton: {
-    '&:hover': {
-      color: theme.palette.primary.main
-    }
-  }
-})
-
 interface Props {
     classes: any
     newRoute: string
@@ -31,25 +23,34 @@ interface State {
 
 class CustomToolbar extends Component<Props, State> {
   
-  onNewClickHandler() {
-    Router.goToPage(this.props.newRoute)
-  }
+    onNewClickHandler() {
+        Router.goToPage(this.props.newRoute)
+    }
 
-  render() {
-    const { classes, newRoute, ...other } = this.props;
+    render() {
+        const { classes, newRoute, ...other } = this.props;
 
-    return (
-      <React.Fragment>
-        <Tooltip title={"Create new entry"}>
-          <IconButton className={classes.iconButton} onClick={() => this.onNewClickHandler()} {...other}>
-            <AddIcon/>
-            New
-          </IconButton>
-        </Tooltip>
-      </React.Fragment>
-    );
-  }
+        return (
+            <React.Fragment>
+                <Tooltip title={"Create new entry"}>
+                    <IconButton className={classes.iconButton} onClick={() => this.onNewClickHandler()} {...other}>
+                        <AddIcon/>
+                        New
+                    </IconButton>
+                </Tooltip>
+            </React.Fragment>
+        )
+    }
 
+    static defaultStyles(theme: Theme): any {
+        return {
+            iconButton: {
+                '&:hover': {
+                    color: theme.palette.primary.main
+                }
+            }
+        }
+    }
 }
 
-export default withStyles(defaultToolbarStyles, { name: "CustomToolbar" })(CustomToolbar);
+export default withStyles(CustomToolbar.defaultStyles)(CustomToolbar)

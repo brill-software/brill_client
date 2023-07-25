@@ -23,26 +23,10 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-     return  {
-        root: {
-            margin: 0,
-            padding: theme.spacing(2),
-            ...theme.components?.Dialog?.styleOverrides?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: theme.spacing(1),
-            color: theme.palette.grey[600],
-            ...theme.components?.Dialog?.styleOverrides?.closeButton
-        }
-    }
-}
-
 interface Props {
     id: string
     theme: Theme
+    classes: any
     title: string
     subscribeToTopic: string
     children: string
@@ -107,5 +91,23 @@ class Dialog extends Component<Props, State> {
             </MuiDialog>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                margin: 0,
+                padding: theme.spacing(2),
+                ...theme.components?.Dialog?.styleOverrides?.root
+            },
+            closeButton: {
+                position: 'absolute',
+                right: theme.spacing(1),
+                top: theme.spacing(1),
+                color: theme.palette.grey[600],
+                ...theme.components?.Dialog?.styleOverrides?.closeButton
+            }
+        }
+    }
 }
-export default withStyles(defaultStyles, { name: "Dialog"})(Dialog)
+
+export default withStyles(Dialog.defaultStyles, { withTheme: true})(Dialog)

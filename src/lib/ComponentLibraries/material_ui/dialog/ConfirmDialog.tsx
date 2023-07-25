@@ -19,26 +19,10 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-     return  {
-        root: {
-            margin: 0,
-            padding: theme.spacing(2),
-            ...theme.components?.ConfirmDialog?.styleOverrides?.root
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: theme.spacing(1),
-            color: theme.palette.grey[600],
-            ...theme.components?.ConfirmDialog?.styleOverrides?.closeButton
-        }
-    }
-}
-
 interface Props {
     id: string
     theme: Theme
+    classes: any
     title: string
     prompt: string
     subscribeToTopic: string
@@ -126,6 +110,23 @@ class ConfirmDialog extends Component<Props, State> {
             </Dialog>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                margin: 0,
+                padding: theme.spacing(2),
+                ...theme.components?.ConfirmDialog?.styleOverrides?.root
+            },
+            closeButton: {
+                position: 'absolute',
+                right: theme.spacing(1),
+                top: theme.spacing(1),
+                color: theme.palette.grey[600],
+                ...theme.components?.ConfirmDialog?.styleOverrides?.closeButton
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "ConfirmDialog"})(ConfirmDialog)
+export default withStyles(ConfirmDialog.defaultStyles, { withTheme: true })(ConfirmDialog)

@@ -19,32 +19,6 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-    return  {
-    '@global': {
-        h1: { ...theme.typography.h1 },
-        h2: { ...theme.typography.h2 },
-        h3: { ...theme.typography.h3 },
-        h4: { ...theme.typography.h4 },
-        h5: { ...theme.typography.h5 },
-        h6: { ...theme.typography.h6 },
-        p:  { ...theme.typography.body1 },
-        blockquote: { ...theme.typography.blockquote },
-        pre: { ...theme.typography.pre },
-        code: { ...theme.typography.code },
-        ul: { ...theme.typography.ul},
-        ol: { ...theme.typography.ol},
-        img: { ...theme.typography.img },
-        figure: { ...theme.typography.body1 }
-    },
-    root: {
-        ...theme.components?.Xhtml?.styleOverrides?.root
-    },
-    parserError: {
-        ...theme.components?.Xhtml?.styleOverrides?.parserError
-    }
-  }}
-
 interface Props {
     theme: Theme
     classes: any
@@ -325,6 +299,33 @@ class Xhtml extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            '@global': {
+                h1: { ...theme.typography.h1 },
+                h2: { ...theme.typography.h2 },
+                h3: { ...theme.typography.h3 },
+                h4: { ...theme.typography.h4 },
+                h5: { ...theme.typography.h5 },
+                h6: { ...theme.typography.h6 },
+                p:  { ...theme.typography.body1 },
+                blockquote: { ...theme.typography.blockquote },
+                pre: { ...theme.typography.pre },
+                code: { ...theme.typography.code },
+                ul: { ...theme.typography.ul},
+                ol: { ...theme.typography.ol},
+                img: { ...theme.typography.img },
+                figure: { ...theme.typography.body1 }
+            },
+            root: {
+                ...theme.components?.Xhtml?.styleOverrides?.root
+            },
+            parserError: {
+                ...theme.components?.Xhtml?.styleOverrides?.parserError
+            }
+          }
+    }
 }
 
-export default withStyles(defaultStyles)(Xhtml)
+export default withStyles(Xhtml.defaultStyles, {withTheme: true})(Xhtml)

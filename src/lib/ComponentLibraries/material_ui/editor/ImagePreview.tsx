@@ -30,10 +30,6 @@ class ImagePreview extends Component<Props, State> {
     textChanged: boolean = false
     originalXhtml: string
 
-    static defaultStyles(theme: Theme): any {
-        return  { root: {display: "block", ...theme.components?.ImagePreview?.styleOverrides?.root }}
-    }
-
     constructor(props: Props) {
         super(props)
         this.state = {image: ""}
@@ -74,6 +70,10 @@ class ImagePreview extends Component<Props, State> {
         return (
             <img className={classes.root} src={this.state.image} alt="" {...other} />
         )
+    }
+
+    static defaultStyles(theme: Theme): any {
+        return  { root: {display: "block", ...theme.components?.ImagePreview?.styleOverrides?.root }}
     }
 }
 

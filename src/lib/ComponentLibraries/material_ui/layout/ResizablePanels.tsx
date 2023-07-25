@@ -29,57 +29,12 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-    return {
-        panelContainer: {
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          overflow: "hidden"
-        },
-        panelRowContainer: {
-            display: "flex",
-            flexDirection: "row",
-        },
-        panelColContainer: {
-            display: "flex",
-            flexDirection: "column",
-        },
-        panel: {
-            background: "white",
-        },
-        colResizer: {
-            width: "3px",
-            background: "darkGray",
-            position: "relative",
-            cursor: "col-resize",
-            flexShrink: "0",
-            WebkitUserSelect: "none",
-            MozUserSelect: "none",
-            MsUserSelect: "none",
-            userSelect: "none" 
-        },
-        rowResizer: {
-          height: "3px",
-          background: "darkGray",
-          position: "relative",
-          cursor: "row-resize",
-          flexShrink: "0",
-          WebkitUserSelect: "none",
-          MozUserSelect: "none",
-          MsUserSelect: "none",
-          userSelect: "none" 
-      }
-    }
-}
-
 const P1_HEIGHT_DEFAULT = 100
 const P2_WIDTH_DEFAULT = 300
 const P4_HEIGHT_DEFAULT = 300
 
 interface Props {
     id: string
-    theme: Theme
     classes: any
     p1Height?: number
     p2Width?: number
@@ -182,8 +137,6 @@ class ResizablePanels extends Component<Props, State> {
     render() {
         const {classes} = this.props
 
-        // this.props.children[3].props.height = this.state.p4Height;
-
         return (
             <div>
                 <div className={classes.panelContainer} onMouseUp={() => this.stopResize()}>
@@ -220,6 +173,49 @@ class ResizablePanels extends Component<Props, State> {
         )
     }
 
+    static defaultStyles(theme: Theme): any {
+        return {
+            panelContainer: {
+              display: "flex",
+              flexDirection: "column",
+              height: "100vh",
+              overflow: "hidden"
+            },
+            panelRowContainer: {
+                display: "flex",
+                flexDirection: "row",
+            },
+            panelColContainer: {
+                display: "flex",
+                flexDirection: "column",
+            },
+            panel: {
+                background: "white",
+            },
+            colResizer: {
+                width: "3px",
+                background: "darkGray",
+                position: "relative",
+                cursor: "col-resize",
+                flexShrink: "0",
+                WebkitUserSelect: "none",
+                MozUserSelect: "none",
+                MsUserSelect: "none",
+                userSelect: "none" 
+            },
+            rowResizer: {
+              height: "3px",
+              background: "darkGray",
+              position: "relative",
+              cursor: "row-resize",
+              flexShrink: "0",
+              WebkitUserSelect: "none",
+              MozUserSelect: "none",
+              MsUserSelect: "none",
+              userSelect: "none" 
+          }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "ResizablePanels"})(ResizablePanels)
+export default withStyles(ResizablePanels.defaultStyles)(ResizablePanels)

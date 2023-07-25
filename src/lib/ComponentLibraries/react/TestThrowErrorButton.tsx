@@ -30,10 +30,6 @@ interface State {
 class TestThrowErrorButton extends Component<Props, State> {
     token: Token
 
-    static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.components?.TestThrowErrorButton?.styleOverrides?.root }}
-    }
-
     constructor(props: Props) {
         super(props)
         this.state = {errorMsg: ""}
@@ -69,6 +65,10 @@ class TestThrowErrorButton extends Component<Props, State> {
                 </MuiButton>
             </div>
         )
+    }
+
+    static defaultStyles(theme: Theme): any {
+        return  { root: { ...theme.components?.TestThrowErrorButton?.styleOverrides?.root }}
     }
 }
 

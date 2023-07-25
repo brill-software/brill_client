@@ -56,8 +56,8 @@ import withStyles from "@mui/styles/withStyles"
 
 interface Props {
     id: string
-    classes: any
     title: string
+    classes: any
     columns: any[]
     subscribeToTopic: string
     publishToTopic: string // Used to publish the row object when an action button is clicked.
@@ -93,36 +93,7 @@ class DataTable extends Component<Props, State> {
     token1: Token
     token2: Token
 
-    static defaultStyles(theme: Theme): any {
-        return {
-            WhitetRow: {
-                '& td': {
-                    backgroundColor: "#FFFFFF",
-                    padding: "0px 16px 0px 16px"
-                }
-            },
-            GreyRow: {
-                '& td': {
-                    backgroundColor: theme.palette.grey[200],
-                    padding: "0px 16px 0px 16px"
-                }
-            },
-            NameCell: {
-                fontWeight: 900
-            },
-            ActionIcon: {
-                '&:hover': {
-                    color: theme.palette.primary.main
-                },
-                marginRight: "8px"
-            },
-            editRoot: {
-                margin: 0,
-                padding: theme.spacing(2),
-                pointerEvents: "none"  // Required to make Popover non-modal.
-            }
-        }
-    }
+    
 
     constructor(props: Props) {
         super(props)
@@ -364,6 +335,37 @@ class DataTable extends Component<Props, State> {
                 )}
             </div>
         )
+    }
+
+    static defaultStyles(theme: Theme): any {
+        return {
+            WhitetRow: {
+                '& td': {
+                    backgroundColor: "#FFFFFF",
+                    padding: "0px 16px 0px 16px"
+                }
+            },
+            GreyRow: {
+                '& td': {
+                    backgroundColor: theme.palette.grey[200],
+                    padding: "0px 16px 0px 16px"
+                }
+            },
+            NameCell: {
+                fontWeight: 900
+            },
+            ActionIcon: {
+                '&:hover': {
+                    color: theme.palette.primary.main
+                },
+                marginRight: "8px"
+            },
+            editRoot: {
+                margin: 0,
+                padding: theme.spacing(2),
+                pointerEvents: "none"  // Required to make Popover non-modal.
+            }
+        }
     }
 }
 

@@ -42,26 +42,8 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
- const defaultStyles: any = (theme: Theme) => {
-    return  {
-        root: {padding: "20px 35px 25px 30px"},
-        header1: { ...theme.typography.h1 },
-        header2: { ...theme.typography.h2 },
-        header3: { ...theme.typography.h3 },
-        header4: { ...theme.typography.h4 },
-        header5: { ...theme.typography.h5 },
-        header6: { ...theme.typography.h6 },
-        p:  { marginTop: "1.12rem", marginBottom: "1.0rem", ...theme.typography.body1 },
-        pre: { ...theme.typography.pre },
-        blockquote: {...theme.typography.blockquote },
-        code: { ...theme.typography.code },
-        ul: { ...theme.typography.ul},
-        ol: { ...theme.typography.ol},
-        img: { ...theme.typography.img }
-    }
-  }
-
-const blockStyles = ["header-one", "header-two", "header-three", "header-four", "header-five", "header-six", "unstyled", "pre", "code-block", "blockquote", "ordered-list-item", "unordered-list-item"]
+const blockStyles = ["header-one", "header-two", "header-three", "header-four", "header-five", "header-six", "unstyled", "pre", "code-block", "blockquote", 
+                    "ordered-list-item", "unordered-list-item"]
 const inlineStyles = ["BOLD", "ITALIC", "UNDERLINE", "STRIKETHROUGH", "CODE"]
 
 interface Props {
@@ -419,6 +401,25 @@ class XhtmlEditor extends Component<Props, State> {
             
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {padding: "20px 35px 25px 30px"},
+            header1: { ...theme.typography.h1 },
+            header2: { ...theme.typography.h2 },
+            header3: { ...theme.typography.h3 },
+            header4: { ...theme.typography.h4 },
+            header5: { ...theme.typography.h5 },
+            header6: { ...theme.typography.h6 },
+            p:  { marginTop: "1.12rem", marginBottom: "1.0rem", ...theme.typography.body1 },
+            pre: { ...theme.typography.pre },
+            blockquote: {...theme.typography.blockquote },
+            code: { ...theme.typography.code },
+            ul: { ...theme.typography.ul},
+            ol: { ...theme.typography.ol},
+            img: { ...theme.typography.img }
+        }
+    }
 }
 
-export default withStyles(defaultStyles, { name: "XhtmlEditor"})(XhtmlEditor)
+export default withStyles(XhtmlEditor.defaultStyles, { withTheme: true})(XhtmlEditor)

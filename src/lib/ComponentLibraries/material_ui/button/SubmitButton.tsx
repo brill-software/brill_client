@@ -34,10 +34,6 @@ interface State {
 class SubmitButton extends Component<Props, State> {
     token: Token
 
-    static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.components?.SubmitButton?.styleOverrides?.root }}
-    }
-
     constructor(props: Props) {
         super(props)
         this.state = {disabled: false, errorMsg: ""}
@@ -104,5 +100,10 @@ class SubmitButton extends Component<Props, State> {
             </div>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  { root: { ...theme.components?.SubmitButton?.styleOverrides?.root }}
+    }
+
 }
 export default withStyles(SubmitButton.defaultStyles, {withTheme: true})(SubmitButton)

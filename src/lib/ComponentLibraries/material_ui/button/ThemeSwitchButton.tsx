@@ -17,6 +17,7 @@ import withStyles from "@mui/styles/withStyles"
 
 interface Props {
     theme: Theme
+    classes: any
     setDarkToolTip: string
     setLightToolTip: string
     [propName: string]: any
@@ -29,9 +30,7 @@ interface State {
 class ThemeSwitchButton extends Component<Props, State> {
     token: Token
 
-    static defaultStyles(theme: Theme): any {
-        return  { root: { ...theme.components?.ThemeSwitchButton?.styleOverrides?.root }}
-    }
+
 
     constructor(props: Props) {
         super(props);
@@ -72,6 +71,10 @@ class ThemeSwitchButton extends Component<Props, State> {
                </MuiIconButton>
             </Tooltip>
         )
+    }
+
+    static defaultStyles(theme: Theme): any {
+        return  { root: { ...theme.components?.ThemeSwitchButton?.styleOverrides?.root }}
     }
 }
 

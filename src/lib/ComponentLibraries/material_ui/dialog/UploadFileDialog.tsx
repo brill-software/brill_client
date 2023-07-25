@@ -19,59 +19,6 @@ import withStyles from "@mui/styles/withStyles"
  * file name. e.g. demo(1).txt 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-     return  {
-        root: {
-            margin: 0,
-            width: "1200px",
-            padding: theme.spacing(2),
-            ...theme.components?.UploadFileDialog?.styleOverrides?.root
-        },
-        dropZone: {
-            border: "5px dashed lightgrey",
-            borderRadius: "10px",
-            padding: "10px",
-            width: "350px",
-            height: "260px",     
-            ...theme.components?.UploadFileDialog?.styleOverrides?.dropZone
-        },
-        fileListBox: {
-            border: "5px solid lightgrey",
-            marginLeft: "20px",
-            borderRadius: "10px",
-            padding: "10px",
-            width: "550px",
-            height: "260px",
-            overflowY: "scroll",
-            ...theme.components?.UploadFileDialog?.styleOverrides?.dropZone
-        },
-        browseButton: {
-            color: theme.palette.primary.main,
-            textDecoration: "underline",
-            textTransform: "capitalize",
-            ...theme.components?.UploadFileDialog?.styleOverrides?.browseButton
-        },
-        prompt4: {
-            fontSize: "1.0em", 
-            marginTop: "10px",
-            ...theme.components?.UploadFileDialog?.styleOverrides?.prompt4
-        },
-        submitButton: {
-            marginLeft: "720px", 
-            marginTop: "20px", 
-            width: "200px",
-            ...theme.components?.UploadFileDialog?.styleOverrides?.submitButton
-        },
-        closeButton: {
-            position: 'absolute',
-            right: theme.spacing(1),
-            top: theme.spacing(1),
-            color: theme.palette.grey[600],
-            ...theme.components?.UploadFileDialog?.styleOverrides?.closeButton
-        }
-    }
-}
-
 class FileEntry {
     file: File
     fileReader: FileReader
@@ -86,6 +33,7 @@ class FileEntry {
 interface Props {
     id: string
     theme: Theme
+    classes: any
     title: string
     prompt1?: string // Default: "Files will be uploaded to the folder "
     prompt2?: string // Default: "Drag one or more files to this Drop Zone or "
@@ -278,6 +226,59 @@ class UploadFileDialog extends Component<Props, State> {
             </Dialog>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {
+            root: {
+                margin: 0,
+                width: "1200px",
+                padding: theme.spacing(2),
+                ...theme.components?.UploadFileDialog?.styleOverrides?.root
+            },
+            dropZone: {
+                border: "5px dashed lightgrey",
+                borderRadius: "10px",
+                padding: "10px",
+                width: "350px",
+                height: "260px",     
+                ...theme.components?.UploadFileDialog?.styleOverrides?.dropZone
+            },
+            fileListBox: {
+                border: "5px solid lightgrey",
+                marginLeft: "20px",
+                borderRadius: "10px",
+                padding: "10px",
+                width: "550px",
+                height: "260px",
+                overflowY: "scroll",
+                ...theme.components?.UploadFileDialog?.styleOverrides?.dropZone
+            },
+            browseButton: {
+                color: theme.palette.primary.main,
+                textDecoration: "underline",
+                textTransform: "capitalize",
+                ...theme.components?.UploadFileDialog?.styleOverrides?.browseButton
+            },
+            prompt4: {
+                fontSize: "1.0em", 
+                marginTop: "10px",
+                ...theme.components?.UploadFileDialog?.styleOverrides?.prompt4
+            },
+            submitButton: {
+                marginLeft: "720px", 
+                marginTop: "20px", 
+                width: "200px",
+                ...theme.components?.UploadFileDialog?.styleOverrides?.submitButton
+            },
+            closeButton: {
+                position: 'absolute',
+                right: theme.spacing(1),
+                top: theme.spacing(1),
+                color: theme.palette.grey[600],
+                ...theme.components?.UploadFileDialog?.styleOverrides?.closeButton
+            }
+        }
+    }
 }
 
-export default withStyles(defaultStyles)(UploadFileDialog)
+export default withStyles(UploadFileDialog.defaultStyles, { withTheme: true })(UploadFileDialog)

@@ -37,13 +37,6 @@ interface State {
 class FixedSizeIcon extends Component<Props, State> { 
     token: Token
 
-    static defaultStyles(theme: Theme): any {
-        return  { svgRoot: {
-            height: "24px",
-            width: "24px",
-            ...theme.components?.FixedSizeIcon?.styleOverrides?.svgRoot }}
-    } 
-
     constructor(props: Props) {
         super(props)
         this.state = {muiIcon: false, svgHtml: ""}
@@ -99,6 +92,13 @@ class FixedSizeIcon extends Component<Props, State> {
         const attribs: any = other
         return IconUtils.resolveIcon(nameOrTopic, attribs)
     }
+    
+    static defaultStyles(theme: Theme): any {
+        return  { svgRoot: {
+            height: "24px",
+            width: "24px",
+            ...theme.components?.FixedSizeIcon?.styleOverrides?.svgRoot }}
+    } 
 }
 
 export default withStyles(FixedSizeIcon.defaultStyles, {withTheme: true})(FixedSizeIcon)

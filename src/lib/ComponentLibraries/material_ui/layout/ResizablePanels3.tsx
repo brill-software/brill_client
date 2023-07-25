@@ -27,45 +27,11 @@ import withStyles from "@mui/styles/withStyles"
  * 
  */
 
-const defaultStyles: any = (theme: Theme) => {
-    return {
-        panelContainer: {
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          overflow: "hidden"
-        },
-        panelRowContainer: {
-            display: "flex",
-            flexDirection: "row",
-        },
-        panelColContainer: {
-            display: "flex",
-            flexDirection: "column",
-        },
-        panel: {
-            overflow: "scroll"
-        },
-        colResizer: {
-            width: "3px",
-            background: "darkGray",
-            position: "relative",
-            cursor: "col-resize",
-            flexShrink: "0",
-            WebkitUserSelect: "none",
-            MozUserSelect: "none",
-            MsUserSelect: "none",
-            userSelect: "none" 
-        }
-    }
-}
-
 const P1_HEIGHT_DEFAULT = 100
 const P2_WIDTH_DEFAULT = 300
 
 interface Props {
     id: string
-    theme: Theme
     classes: any
     p1Height?: number
     p2Width?: number
@@ -164,6 +130,38 @@ class ResizablePanels3 extends Component<Props, State> {
         )
     }
 
+    static defaultStyles(theme: Theme): any {
+        return {
+            panelContainer: {
+              display: "flex",
+              flexDirection: "column",
+              height: "100vh",
+              overflow: "hidden"
+            },
+            panelRowContainer: {
+                display: "flex",
+                flexDirection: "row",
+            },
+            panelColContainer: {
+                display: "flex",
+                flexDirection: "column",
+            },
+            panel: {
+                overflow: "scroll"
+            },
+            colResizer: {
+                width: "3px",
+                background: "darkGray",
+                position: "relative",
+                cursor: "col-resize",
+                flexShrink: "0",
+                WebkitUserSelect: "none",
+                MozUserSelect: "none",
+                MsUserSelect: "none",
+                userSelect: "none" 
+            }
+        }        
+    }
 }
 
-export default withStyles(defaultStyles)(ResizablePanels3)
+export default withStyles(ResizablePanels3.defaultStyles)(ResizablePanels3)

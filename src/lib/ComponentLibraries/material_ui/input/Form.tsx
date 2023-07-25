@@ -12,16 +12,8 @@ import withStyles from "@mui/styles/withStyles"
     root: object
 }
 
-const defaultStyles: any = (theme: Theme) => {
-    return  {
-        root: {
-            ...theme.components?.Form?.styleOverrides?.root
-        }
-  }}
-
 interface Props {
     id: string
-    theme: Theme
     classes: any
     children: any
     [propName: string]: any
@@ -41,6 +33,10 @@ class Form extends Component<Props, State> {
             </form>
         )
     }
+
+    static defaultStyles(theme: Theme): any {
+        return  {root: {...theme.components?.Form?.styleOverrides?.root}}
+    } 
 }
 
-export default withStyles(defaultStyles, { name: "Form"})(Form)
+export default withStyles(Form.defaultStyles)(Form)

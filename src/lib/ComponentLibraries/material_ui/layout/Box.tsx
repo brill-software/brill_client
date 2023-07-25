@@ -30,6 +30,5 @@ export default class Box extends Component<Props, State> {
         return (
             <MuiBox {...other}>{children}</MuiBox>            
         )
-
     }
 }

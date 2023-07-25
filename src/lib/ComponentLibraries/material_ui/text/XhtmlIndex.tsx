@@ -17,13 +17,6 @@ import withStyles from "@mui/styles/withStyles"
  * picked up by the Xhtml component and the text scrolled to the corresponding section.
  * 
  */
-
-const defaultStyles: any = (theme: Theme) => {
-     return  {
-        root: {
-            ...theme.components?.XhtmlIndex?.styleOverrides?.root
-        }
-  }}
   
 class TreeNode {
     id: string
@@ -189,6 +182,14 @@ class XhtmlIndex extends Component<Props, State> {
             </div>            
         )
     }
+
+    static defaultStyles(theme: Theme): any {  
+        return  {
+            root: {
+                ...theme.components?.XhtmlIndex?.styleOverrides?.root
+            }
+        }  
+    }
 }
 
-export default withStyles(defaultStyles)(XhtmlIndex)
+export default withStyles(XhtmlIndex.defaultStyles)(XhtmlIndex)

@@ -58,7 +58,13 @@ class MenuButton extends Component<Props, State> {
         let barClass = (this.state.onPage) ? classes.bar : ""
         return (
             <div className={classes.root}>
-                <MuiButton className={classes.button} color="inherit" {...other} onClick={() => this.onClickHandler()}>{title}</MuiButton>  
+                <MuiButton 
+                    sx={{":hover": {bgcolor: theme.palette.primary.light}}} 
+                    className={classes.button} 
+                    color="inherit" {...other} 
+                    onClick={() => this.onClickHandler()}>
+                        {title}
+                </MuiButton>  
                 <div className={barClass}> </div>
             </div>
         )
@@ -67,18 +73,19 @@ class MenuButton extends Component<Props, State> {
     static defaultStyles(theme: Theme): any {
         return  { 
             root: {
-                color: "white",
+                color: "white", 
                 ...theme.components?.MenuButton?.styleOverrides?.root
             },
             button: {
-                "&:hover": {background: theme.palette.primary.light},
+                // Hover only appears works reliably when set using the sx attribute.
+                // "&:hover": {background: theme.palette.primary.light},
                 padding: "10px 8px 2px 8px",
                 ...theme.components?.MenuButton?.styleOverrides?.button
             },
             bar: {
                 width: "100%", 
                 height: "5px", 
-                background: "red",
+                background: "yellow",
                 ...theme.components?.MenuButton?.styleOverrides?.bar
             }
         }

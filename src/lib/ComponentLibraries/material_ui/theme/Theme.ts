@@ -13,11 +13,6 @@ interface Mixins extends MuiMixins {
     [propName: string]: any
 }
 
-// interface Overrides extends MuiOverrides {
-interface Overrides {
-    [propName: string]: any
-}
-
 // interface Components extends MuiComponents {
     interface Components {
         [propName: string]: any
@@ -37,6 +32,5 @@ interface Typography extends MuiTypography {
 export interface Theme extends MuiTheme {
     mixins: Mixins
     components?: Components   // v5 
-    overrides?: Overrides  // v4
     typography: Typography
 }

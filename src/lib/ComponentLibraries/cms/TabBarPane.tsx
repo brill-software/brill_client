@@ -29,6 +29,9 @@ import ImagePreviewActionIcons from "./editorIcons/ImagePreviewActionIcons"
 import PageViewActionIcons from "./editorIcons/PageViewActionIcons"
 import PageView from "../material_ui/editor/PageView"
 import withStyles from "@mui/styles/withStyles"
+import MarkdownViewerActionIcons from "./editorIcons/MarkdownViewerActionIcons"
+import MarkdownViewer from "../material_ui/editor/MarkdownViewer"
+import ThemeProvider from "../material_ui/theme/ThemeProvider"
 
 /**
  * Brill CMS Edit Pane - this is the main control class that determines which editor is displayed.
@@ -352,6 +355,8 @@ class TabBarPane extends Component<Props, State> {
         switch (currentEditor) {
             case "TextEditor":
                 return <TextEditorActionIcons key={IdGen.next()} fileName={fileName} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
+            case "MarkdownViewer":
+                return <MarkdownViewerActionIcons key={IdGen.next()} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
             case "DiffEditor":
                 return <DiffEditorActionIcons key={IdGen.next()} fileName={fileName} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
             case "XhtmlEditor":
@@ -404,6 +409,15 @@ class TabBarPane extends Component<Props, State> {
                         subscribeToActionTopic={`tabBarPane.editor.${this.activeTabEditorId}`}
                         schemasTopic={schemasTopic}
                         publishTextChangedTopic={`tabBarPane.textChanged.${this.activeDocumentId}`} />
+            case "MarkdownViewer":
+                return (
+                    <ThemeProvider themeTopic="json:/brill_cms/Themes/markdown_theme.json" id={this.activeTabEditorId} key={this.activeTabEditorId}>
+                        <MarkdownViewer id={this.activeTabEditorId} key={this.activeTabEditorId}
+                            fileName={fileName}
+                            subscribeToTopic={fileTopic} publishToTopic={fileTopic}
+                            subscribeToActionTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
+                    </ThemeProvider>
+                )
             case "DiffEditor":
                 return <DiffEditor id={this.activeTabEditorId} key={this.activeTabEditorId}
                         fileName={fileName}

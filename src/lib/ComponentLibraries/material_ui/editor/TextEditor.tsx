@@ -93,7 +93,7 @@ class TextEditor extends Component<Props, State> {
 
     editorDidMount(editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: typeof monacoEditor) {
         this.editor = editor
-        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, this.save.bind(this))
+        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, this.save.bind(this))
 
         if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
             this.applyUnsavedChanges()

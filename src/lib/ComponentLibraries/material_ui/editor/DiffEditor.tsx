@@ -88,11 +88,11 @@ class DiffEditor extends Component<Props, State> {
         this.editor = editor
         this.navi = monaco.editor.createDiffNavigator(editor)
         // editor.getModifiedEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, this.save.bind(this))
-        editor.getModifiedEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, this.save.bind(this))
+        editor.getModifiedEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, this.save.bind(this))
         editor.getModifiedEditor().addCommand(monaco.KeyMod.Shift  | monaco.KeyCode.F7, this.previous.bind(this))
         editor.getModifiedEditor().addCommand(monaco.KeyCode.F7, this.next.bind(this))
         // editor.getOriginalEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, this.save.bind(this))
-        editor.getOriginalEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, this.save.bind(this))
+        editor.getOriginalEditor().addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, this.save.bind(this))
         editor.getOriginalEditor().addCommand(monaco.KeyMod.Shift  | monaco.KeyCode.F7, this.previous.bind(this))
         editor.getOriginalEditor().addCommand(monaco.KeyCode.F7, this.next.bind(this))
     }

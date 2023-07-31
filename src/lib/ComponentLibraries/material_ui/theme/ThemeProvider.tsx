@@ -70,9 +70,6 @@ export default class ThemeProvider extends Component<Props, State> {
     }
 
     themeLightLoadedCallback(topic: string, data: Theme) {
-        // Stop any edits of the theme from causing a re-render.
-        MB.unsubscribe(this.unsubscribeTokenLight)
-        
         this.themeLight = createTheme(data)
         if (!this.dark || this.props.themeTopicDark === undefined) {
             this.setBodyAndHtmlTagStyles(this.themeLight)
@@ -82,9 +79,6 @@ export default class ThemeProvider extends Component<Props, State> {
     }
 
     themeDarkLoadedCallback(topic: string, data: Theme) {
-        // Stop any edits of the theme from causing a re-render.
-        MB.unsubscribe(this.unsubscribeTokenDark)
-        
         this.themeDark = createTheme(data)
         if (this.dark) {
             this.setBodyAndHtmlTagStyles(this.themeDark)

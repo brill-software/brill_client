@@ -6,6 +6,7 @@ import Markdown from "markdown-to-jsx"
 import { Theme } from "../theme/Theme"
 import withStyles from "@mui/styles/withStyles"
 import { Typography } from "@mui/material"
+import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 
 /**
  * Markdown Viewer - uses the markdown-to-jsx library.
@@ -14,8 +15,10 @@ import { Typography } from "@mui/material"
  * 
  */
 interface Props {
+    id: string
     theme: Theme
     classes: any
+    fileName: string
     text?: string
     subscribeToTopic?: string
     filter?: object
@@ -65,32 +68,35 @@ class MarkdownViewer extends Component<Props, State> {
     }
 
     render() {
-        const { theme, classes, subscribeToTopic, filter, ...other } = this.props
+        const { id, theme, classes, subscribeToTopic, filter, ...other } = this.props
 
         if (!this.state.text) {
-            return null
+            return <LoadingIndicator />
         }
 
         return (
-            <Markdown 
-                options={{
-                    overrides: {
-                        h1: {component: Typography, props: {variant: "h1"}},
-                        h2: {component: Typography, props: {variant: "h2"}},
-                        h3: {component: Typography, props: {variant: "h3"}},
-                        h4: {component: Typography, props: {variant: "h4"}},
-                        h5: {component: Typography, props: {variant: "h5"}},
-                        h6: {component: Typography, props: {variant: "h6"}},
-                        p: {component: Typography, props: {variant: "body1"}},
-                        pre: {component: Typography, props: {variant: "pre"}},
-                        code: {component: Typography, props: {variant: "code"}},
-                        blockquote: {component: Typography, props: {variant: "blockquote"}},
-                        ul: {component: Typography, props: {variant: "ul"}},
-                        ol: {component: Typography, props: {variant: "ol"}},
-                        img: {component: Typography, props: {variant: "img"}}
-                    }
-                }}
-                className={classes.root} {...other}>{this.state.text}</Markdown>
+            <div id={id}>
+                <Markdown 
+                    options={{
+                        overrides: {
+                            h1: {component: Typography, props: {variant: "h1"}},
+                            h2: {component: Typography, props: {variant: "h2"}},
+                            h3: {component: Typography, props: {variant: "h3"}},
+                            h4: {component: Typography, props: {variant: "h4"}},
+                            h5: {component: Typography, props: {variant: "h5"}},
+                            h6: {component: Typography, props: {variant: "h6"}},
+                            p: {component: Typography, props: {variant: "body1"}},
+                            pre: {component: Typography, props: {variant: "pre"}},
+                            code: {component: Typography, props: {variant: "code"}},
+                            blockquote: {component: Typography, props: {variant: "blockquote"}},
+                            ul: {component: Typography, props: {variant: "ul"}},
+                            ol: {component: Typography, props: {variant: "ol"}},
+                            img: {component: Typography, props: {variant: "img"}}
+                        }
+                    }}
+                    className={classes.root} {...other}>{this.state.text}
+                </Markdown>
+            </div>
         )
     }
 

@@ -356,7 +356,7 @@ class TabBarPane extends Component<Props, State> {
             case "TextEditor":
                 return <TextEditorActionIcons key={IdGen.next()} fileName={fileName} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
             case "MarkdownViewer":
-                return <MarkdownViewerActionIcons key={IdGen.next()} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
+                return <MarkdownViewerActionIcons key={IdGen.next()} fileName={fileName} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
             case "DiffEditor":
                 return <DiffEditorActionIcons key={IdGen.next()} fileName={fileName} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
             case "XhtmlEditor":
@@ -416,7 +416,7 @@ class TabBarPane extends Component<Props, State> {
                             fileName={fileName}
                             subscribeToTopic={fileTopic} publishToTopic={fileTopic}
                             subscribeToActionTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
-                    </ThemeProvider>
+                    </ThemeProvider> 
                 )
             case "DiffEditor":
                 return <DiffEditor id={this.activeTabEditorId} key={this.activeTabEditorId}

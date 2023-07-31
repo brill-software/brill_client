@@ -129,7 +129,7 @@ class TabName extends Component<Props, State> {
         const textChanged = this.state.textChanged
         const tabClass = activeTab ? classes.tabActive : classes.tabInActive
         const tabXClass = activeTab ? classes.tabActiveX : classes.tabInActiveX
-        const tabWidth = (name.length * 10) + 5
+        const tabWidth = this.calcTabWidth(name)
 
         if (textChanged) {
             return (
@@ -158,6 +158,18 @@ class TabName extends Component<Props, State> {
                 </div> 
             )
         }
+    }
+
+    calcTabWidth(tabName: string): number {
+        let result = 0
+        for (let i = 0; i < tabName.length; i++) {
+            if ((tabName[i] >= 'A' && tabName[i] <= 'Z') || tabName[i] == '_' ) {
+                result += 13
+            } else {
+                result += 10
+            }
+        }
+        return result
     }
 
     static defaultStyles(theme: Theme): any {

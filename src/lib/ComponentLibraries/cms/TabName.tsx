@@ -163,7 +163,7 @@ class TabName extends Component<Props, State> {
     calcTabWidth(tabName: string): number {
         let result = 0
         for (let i = 0; i < tabName.length; i++) {
-            if ((tabName[i] >= 'A' && tabName[i] <= 'Z') || tabName[i] == '_' ) {
+            if ((tabName[i] >= 'A' && tabName[i] <= 'Z') || tabName[i] === '_' ) {
                 result += 13
             } else {
                 result += 10

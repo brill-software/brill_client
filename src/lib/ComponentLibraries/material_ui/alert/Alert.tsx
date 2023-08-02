@@ -2,7 +2,7 @@
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { MB, Token } from "lib/MessageBroker/MB"
 import React, {Component} from "react"
-import { Alert, AlertTitle, AlertColor } from "@mui/lab"
+import { Alert, AlertTitle, AlertColor } from "@mui/material"
 import Draggable from "react-draggable"
 import { Html } from "lib/utils/HtmlUtils"
 

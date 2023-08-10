@@ -110,7 +110,7 @@ export default class Table extends Component<Props, State> {
         return (
             <div {...other}>
                 <MuiTableContainer component={MuiPaper}>
-                    <MuiTable size={size}>
+                    <MuiTable size={size} {...other}>
                         <MuiTableHead>
                             <MuiTableRow>
                                 {this.createHeaderCells()}

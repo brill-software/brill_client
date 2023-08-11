@@ -156,7 +156,15 @@ export class TopicEntry {
     }
 
     public callCallbacks(): void {
-        this.callback.map(func => this.deliver(func))
+        this.callback.map(func => this.deliverImmediately(func))
+    }
+
+    private deliverImmediately(callback: CallbackFunction): void {
+        try {
+            setTimeout(callback, 0, this.topic, this.data)
+        } catch (ex) {
+            console.log("Exception while calling callback method")
+        }
     }
 
     public callErrorCallbacks(): void {

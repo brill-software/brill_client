@@ -37,8 +37,7 @@ interface State {
 const htmlTags: string[] = ["h1", "h2", "h3", "h4", "h5", "h6", "p", "blockquote", "pre", "code","ul", "ol", "table", "th", "tr", "td"] 
 
 class Xhtml extends Component<Props, State> {
-    token1: Token
-    token2: Token
+    tokens: Token[] = []
     nodeRef: React.RefObject<unknown>[] = []
 
     constructor(props: Props) {
@@ -48,17 +47,17 @@ class Xhtml extends Component<Props, State> {
 
     componentDidMount() {
         if (this.props.subscribeToTopic) {
-            this.token1 = MB.subscribe(this.props.subscribeToTopic, 
+            this.tokens.push(MB.subscribe(this.props.subscribeToTopic, 
                 (topic, content) => this.dataLoadedCallback(topic, content), 
-                (topic, error) => this.errorCallback(topic, error))     
+                (topic, error) => this.errorCallback(topic, error)))   
         } else {
             const els = this.processPage("<xhtml>" + this.props.text + "</xhtml>")
             this.setState({elements: els})
         }
         if (this.props.subscribeToIndexTopic) {
-            this.token2 = MB.subscribe(this.props.subscribeToIndexTopic, 
+            this.tokens.push(MB.subscribe(this.props.subscribeToIndexTopic, 
                 (topic, id) => this.scrollCallback(topic, id), 
-                (topic, error) => this.errorCallback(topic, error))
+                (topic, error) => this.errorCallback(topic, error)))
         }
     }
 
@@ -70,8 +69,7 @@ class Xhtml extends Component<Props, State> {
     }
 
     componentWillUnmount() {
-        MB.unsubscribe(this.token1)
-        MB.unsubscribe(this.token2, true)
+        MB.unsubscribeAll(this.tokens)
     }
 
     dataLoadedCallback(topic: string, content: any) {
@@ -168,7 +166,8 @@ class Xhtml extends Component<Props, State> {
             props["style"] = style
         }
         const imgEl = React.createElement("img", props)
-        MB.subscribe(imageTopic, (topic, data) => this.imageLoaded(topic, data, ref), (topic, error) => this.errorCallback(topic, error))
+        this.tokens.push(MB.subscribe(imageTopic, (topic, data) => this.imageLoaded(topic, data, ref), 
+                            (topic, error) => this.errorCallback(topic, error)))
         return imgEl
     }
 
@@ -192,7 +191,9 @@ class Xhtml extends Component<Props, State> {
     imageLoaded(topic: string, image: string, createdRef: any) {
         if (createdRef && createdRef.current) {
             createdRef.current.src = image
-        }  
+        } else {
+            console.error(`createdRef is null. Unable to display image ${topic}`)
+        }
     }
 
     /**

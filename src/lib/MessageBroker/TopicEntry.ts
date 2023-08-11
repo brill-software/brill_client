@@ -165,7 +165,9 @@ export class TopicEntry {
 
     public deliver(callback: CallbackFunction): void {
         try {
-            setTimeout(callback, 0, this.topic, this.data)
+            // A timeout value of 1 is used rather than 0, so that any code after
+            // a subscription call gets to run first, before the callback is called.
+            setTimeout(callback, 1, this.topic, this.data)
         } catch (ex) {
             console.log("Exception while calling callback method")
         }
@@ -177,7 +179,7 @@ export class TopicEntry {
                 const topicWithFieldName = this.topic + "#" + fieldName
                 const fieldValue = this.data[fieldName]
                 if (fieldValue !== undefined) {
-                    setTimeout(callback, 0, topicWithFieldName, fieldValue)
+                    setTimeout(callback, 1, topicWithFieldName, fieldValue)
                 }
             }
         } catch (ex) {
@@ -187,7 +189,7 @@ export class TopicEntry {
 
     public deliverError(errorCallback: CallbackFunction): void {
         try {
-            setTimeout(errorCallback, 0, this.topic, this.error)
+            setTimeout(errorCallback, 1, this.topic, this.error)
         } catch (ex) {
             console.log("Excpetion while calling error callback method")
         }

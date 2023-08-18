@@ -191,9 +191,9 @@ class TextEditor extends Component<Props, State> {
             const editorText = this.editor.getValue()
             const cursorLineNumber = viewState ? viewState.cursorState[0].position.lineNumber : 1
             const cursorColumn = viewState ? viewState.cursorState[0].position.column : 1
-            const textChanged = editorText !== this.initialText
+            // const textChanged = editorText !== this.initialText
             UnsavedChanges.add(EdType.TEXT_EDITOR, this.props.subscribeToTopic, this.state.model, viewState, 
-                editorText, cursorLineNumber, cursorColumn, textChanged, this.externalChangesMade, "")
+                editorText, cursorLineNumber, cursorColumn, this.changed, this.externalChangesMade, "")
         }
         MB.unsubscribeAll(this.tokens)
     }

@@ -22,6 +22,8 @@ export default class PagePreviewActionsIcons extends Component<Props, State> {
                     publishToTopic={publishToTopic} action="save" />
                 <IconButton iconName="ListAltTwoTone" tooltip="Topics" 
                     publishToTopic={publishToTopic} action="topics" />
+                <IconButton iconName="Launch" tooltip="View Page" 
+                    publishToTopic={publishToTopic} action="view" />
             </div>
         )
     }

@@ -84,4 +84,14 @@ export class UnsavedChanges {
             console.warn(`Unable to remove unsaved changes for ${topic}`)
         }  
     }
+
+    static hasUnsavedChanges() {
+        // eslint-disable-next-line
+        for (const [key, value] of this.map) {
+            if (value.textChanged) {
+                return true
+            }
+        }
+        return false
+    }
 }

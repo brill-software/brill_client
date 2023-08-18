@@ -11,6 +11,9 @@ import { EdType, UnsavedChanges } from "./UnsavedChanges"
 import { CurrentEditor } from "./CurrentEditor"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 import TopicsPopover from "lib/ComponentLibraries/cms/TopicsPopover"
+import Router from "lib/Router/Router"
+import { TopicUtils } from "lib/utils/TopicUtils"
+import AlertDialog from "../dialog/AlertDialog"
 
 /**
  * Page Preview of a page including preview of any unsaved changes.
@@ -117,6 +120,20 @@ export default class PagePreview extends Component<Props, State> {
             MB.publish(`brill_cms.PagePreview.topicsDialog.open.${this.props.id}`,"")
             return
         }
+        if (command === "view") {
+            if (this.state.page?.rootComponent.module !== "react/ErrorBoundary") {
+                MB.publish(`brill_cms.PagePreview.noErrorBoundary.open.${this.props.id}`,
+                    "This page has no top level Error Boundary and might be intended to be embedded in another page.")
+                return
+            }
+            if (this.changedText || UnsavedChanges.hasUnsavedChanges()) {
+                MB.publish(`brill_cms.PagePreview.unsavedChanges.open.${this.props.id}`,
+                    "Please save all unsaved changes first. ")
+                return
+            }
+            Router.goToPage(TopicUtils.getRoute(this.props.subscribeToTopic))
+            return
+        }
     }
 
     discardChanges() {
@@ -145,8 +162,12 @@ export default class PagePreview extends Component<Props, State> {
             <div id={id} {...other} >
                 {reactElements}            
                 <ConfirmDialog title="Please confirm" prompt=""
-                    subscribeToTopic={`PagePreview.discardChangesDialog.open.${this.props.id}`}
-                    publishToTopic={`PagePreview.discardChanges.${this.props.id}`} />
+                    subscribeToTopic={`PagePreview.discardChangesDialog.open.${id}`}
+                    publishToTopic={`PagePreview.discardChanges.${id}`} />
+                <AlertDialog title="No Error Boundary" prompt=""
+                    subscribeToTopic={`brill_cms.PagePreview.noErrorBoundary.open.${id}`} />
+                <AlertDialog title="Unsaved Changes" prompt=""
+                    subscribeToTopic={`brill_cms.PagePreview.unsavedChanges.open.${id}`} />
                 <TopicsPopover subscribeToTopic={`brill_cms.PagePreview.topicsDialog.open.${id}`} />
             </div>
         )

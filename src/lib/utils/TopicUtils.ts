@@ -64,8 +64,8 @@ export class TopicUtils {
     }
 
     /**
-     * Gets the file path from the a Topic without the leading slash.
-     * e.g. git:delete:/my_app/test.json will return my_app/test.json
+     * Changes the file name of a topic.
+     * e.g. file:/my_app/oldFileName.json and newFileName.json will return file:/my_app/newFileName.json
      */
     static changeFileName(topic: string, newFileName: string): string {
         let result = topic
@@ -75,4 +75,16 @@ export class TopicUtils {
         }
         return result
     }
+
+    /**
+     * Gets a route from a topic.
+     * e.g. json:/myapp/home.json returns /myapp/home
+     */
+    static getRoute(topic: string): string {
+        const firstSlash = topic.indexOf('/')
+        const pagesStart = topic.indexOf("/Pages/")
+        const lastDot = topic.lastIndexOf('.')
+        return topic.substring(firstSlash, pagesStart) + topic.substring(pagesStart + 6, lastDot)
+    }
+
 }

@@ -170,6 +170,9 @@ export class IconUtils {
             case "Undo":
                 resolved = require("@mui/icons-material/Undo.js").default
                 break
+            case "Launch":
+                resolved = require("@mui/icons-material/Launch.js").default
+                break
 
             // CMS Files Tree View icons specified in the CMS themes
             case "SubjectTwoTone":

@@ -259,7 +259,7 @@ class PageEditor extends Component<Props, State> {
             attribs["key"] = component.id
         }
 
-        if (component.children === undefined) {
+        if (component.children === undefined || component.children.length === 0) {
             // Disable mouse events on the component, unless id contains a caret (^) character.
             if (!component.id.includes("^")) {
                 if (!attribs["style"]) {

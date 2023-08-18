@@ -128,7 +128,7 @@ export default class PagePreview extends Component<Props, State> {
             }
             if (this.changedText || UnsavedChanges.hasUnsavedChanges()) {
                 MB.publish(`brill_cms.PagePreview.unsavedChanges.open.${this.props.id}`,
-                    "Please save all unsaved changes first. ")
+                    "Please save all changes first. ")
                 return
             }
             Router.goToPage(TopicUtils.getRoute(this.props.subscribeToTopic))

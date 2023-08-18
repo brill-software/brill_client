@@ -70,7 +70,7 @@ export class PageService {
             attribs["key"] = "A-" + IdGen.next()
         }
         
-        if (component.children === undefined) {
+        if (component.children === undefined || component.children.length === 0) {
             return React.createElement(module.default, attribs as any)
         }
         let childReactElements: Array<React.CElement<any, any>> = new Array<React.CElement<any, any>>()

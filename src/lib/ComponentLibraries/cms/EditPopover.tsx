@@ -58,6 +58,7 @@ class EditPopover extends Component<Props, State> {
     attrValueField: string[] = []
     attrValueError: string[] = []
     focusIndex: number = -1
+    firstFieldInError: number = -1
 
     constructor(props: Props) {
         super(props)
@@ -120,13 +121,6 @@ class EditPopover extends Component<Props, State> {
         this.setState({ open: false })
     }
 
-    onPopoverCloseHandler(event: any) {
-        // event.stopPropagation()
-        // this.setState({open: false})
-        console.log("Popover close handler called")
-    }
-
-
     onFieldClick(event: any) {
         // Stop clicks on fields also selecting components on the page.
         event.stopPropagation()
@@ -155,6 +149,21 @@ class EditPopover extends Component<Props, State> {
         let elements: React.CElement<any, any>[] = []
 
         for (let index = 0; index < this.attrNameField.length; index++) {
+            
+            // On initial render after a save, set the focus to the first field with an error 
+            // and postion the cursor at the location specified in the error message if any.
+            let extraProps: any = {}
+            if (index === this.firstFieldInError) {
+                extraProps.autoFocus = true
+                const startPos = this.attrValueError[index].indexOf("JSON at position ")
+                if (startPos !== -1) {
+                    const attrFieldRef: React.RefObject<unknown> = React.createRef()
+                    extraProps.inputRef = attrFieldRef
+                    setTimeout(() => this.setJsonErrorCursorPos(this.attrValueError[index].substring(startPos + 17), attrFieldRef), 1)     
+                }
+                this.firstFieldInError = -1
+            }
+
             elements.push(
                 <div style={{ display: "flex", flexDirection: "row" }} key={IdGen.next()}>
                     {/* Name field */}
@@ -173,6 +182,7 @@ class EditPopover extends Component<Props, State> {
                         error={this.attrValueError[index].length > 0}
                         helperText={this.attrValueError[index]}
                         onKeyDown={event => this.onKeyDown(event)}
+                        {...extraProps}
                     />
                     {/* Add button */}
                     <div className={this.props.classes.iconRoot}>
@@ -186,6 +196,13 @@ class EditPopover extends Component<Props, State> {
             )
         }
         return elements
+    }
+
+    setJsonErrorCursorPos(cursorPos: string, attrFieldRef: React.RefObject<any>) {
+        if (attrFieldRef === undefined || attrFieldRef.current === undefined || attrFieldRef.current === null) {
+            return
+        }
+        attrFieldRef.current.selectionStart = cursorPos
     }
 
     async onSaveHandler(event: any) {
@@ -209,17 +226,25 @@ class EditPopover extends Component<Props, State> {
             return
         }
 
+        this.firstFieldInError = -1
         let attribs = new Attributes()
         for (let i = 0; i < this.attrNameField.length; i++) {
             if (this.attrNameField[i].length > 0) {
                 try {
+                    this.attrValueError[i] = ""
                     attribs[this.attrNameField[i]] = FieldUtils.convertToObj(this.attrValueField[i])
                 } catch (e) {
                     this.attrValueError[i] = ErrorUtils.cvt(e).message
-                    this.setState({ errorExists: true })
-                    return
+                    if (this.firstFieldInError === -1){
+                        this.firstFieldInError = i
+                        this.setState({ errorExists: true })
+                    }   
                 }
             }
+        }
+
+        if (this.firstFieldInError !== -1) {
+            return
         }
 
         const newComponent = new PageComponent(this.idFieldValue, this.moduleFieldValue, attribs)

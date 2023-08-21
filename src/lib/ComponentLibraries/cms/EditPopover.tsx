@@ -15,7 +15,7 @@ import DeleteTwoTone from "@mui/icons-material/DeleteTwoTone"
 import { FieldUtils } from "lib/utils/FieldUtils"
 import { ComponentManager } from "lib/ComponentManager/ComponentManager"
 import Draggable from "react-draggable"
-import ThemeProvider from "../material_ui/theme/ThemeProvider"
+// import ThemeProvider from "../material_ui/theme/ThemeProvider"
 import withStyles from "@mui/styles/withStyles"
 
 /**
@@ -45,8 +45,8 @@ interface State {
 }
 
 class EditPopover extends Component<Props, State> {
-    private static MINIMUM_WIDTH: number = 700
-    private static MAXIMUM_WIDTH: number = 1500
+    private static MINIMUM_WIDTH: number = 900
+    private static MAXIMUM_WIDTH: number = 1300
 
     unsubscribeToken: Token
     component: PageComponent
@@ -286,8 +286,8 @@ class EditPopover extends Component<Props, State> {
         const attributeFields: React.CElement<any, any>[] = this.createAttributeFields()
 
         return (
-            <ThemeProvider themeTopic="json:/brill_cms/Themes/brill_cms_theme_light.json"
-                themeTopicDark="json:/brill_cms/Themes/brill_cms_theme_dark.json" >
+            // <ThemeProvider themeTopic="json:/brill_cms/Themes/brill_cms_theme_light.json"
+            //     themeTopicDark="json:/brill_cms/Themes/brill_cms_theme_dark.json" >
                 <Draggable handle=".handle">
                     <Popover style={{ margin: "2px" }}
                         open={this.state.open}
@@ -344,7 +344,7 @@ class EditPopover extends Component<Props, State> {
                         </DialogActions>
                     </Popover>
                 </Draggable>
-            </ThemeProvider>
+            // </ThemeProvider>
         )
     }
 

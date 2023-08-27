@@ -7,6 +7,7 @@ import { Theme } from "../theme/Theme"
 import withStyles from "@mui/styles/withStyles"
 import { Typography } from "@mui/material"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
+import { Base64 } from "js-base64"
 
 /**
  * Markdown Viewer - uses the markdown-to-jsx library.
@@ -51,7 +52,7 @@ class MarkdownViewer extends Component<Props, State> {
     dataLoadedCallback(topic: string, data: any) {
         let text = ""
         if (data.base64) {
-            text = atob(data.base64)
+            text = Base64.decode(data.base64)
         } else {
             if (typeof data === "object") {
                 text = JSON.stringify(data,null, 4)

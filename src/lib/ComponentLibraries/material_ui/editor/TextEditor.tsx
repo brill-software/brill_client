@@ -15,6 +15,7 @@ import { TextUtils } from "lib/utils/TextUtils";
 import { CurrentEditor } from "./CurrentEditor";
 import { getLanguageService, TextDocument } from "vscode-json-languageservice"
 import withTheme from "@mui/styles/withTheme"
+import { Base64 } from "js-base64";
 
 /**
  * Text editor - based on the Microsoft Visual Studio Code Monaco Editor.
@@ -162,7 +163,7 @@ class TextEditor extends Component<Props, State> {
             return
         }
 
-        this.initialText = (data.base64) ? atob(data.base64) : JSON.stringify(data, null, 4)
+        this.initialText = (data.base64) ? Base64.decode(data.base64) : JSON.stringify(data, null, 4)
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
 
         // Prevent overwriting any unsaved changes and already set view state. 
@@ -175,7 +176,7 @@ class TextEditor extends Component<Props, State> {
 
     secondDataLoadedCallback(topic: string, data: any) {
         MB.unsubscribe(this.unsubscribeSecondToken)
-        this.initialText = (topic.startsWith("json:/")) ? JSON.stringify(data, null, 4) : atob(data.base64)
+        this.initialText = (topic.startsWith("json:/")) ? JSON.stringify(data, null, 4) : Base64.decode(data.base64)
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
         if (this.changed || this.textAlreadyLoaded) {
             this.textAlreadyLoaded = false
@@ -202,7 +203,7 @@ class TextEditor extends Component<Props, State> {
         const editorText = this.editor?.getValue()
 
         if (editorText !== undefined && editorText !== this.initialText && this.props.publishToTopic) { // Only save if there are changes
-            const content = {base64: btoa(editorText)}
+            const content = {base64: Base64.encode(editorText)}
             this.ignoreNextDataLoadedCallback = true
             MB.publish(this.props.publishToTopic, content)
             this.initialText = editorText
@@ -276,7 +277,7 @@ class TextEditor extends Component<Props, State> {
     schemasLoadedCallback(topic: string, schemas: any) {
         let schemasObj: object = {}
         if (topic.startsWith("file:/")) {
-            schemasObj = JsonParser.parse(atob(schemas.base64))
+            schemasObj = JsonParser.parse(Base64.decode(schemas.base64))
         } else {
             schemasObj = schemas // Assume json:/
         }

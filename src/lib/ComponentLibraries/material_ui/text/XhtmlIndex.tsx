@@ -9,6 +9,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 import withStyles from "@mui/styles/withStyles"
+import { Base64 } from "js-base64"
 
 /**
  * Xhtml Index - Provides a tree index for a Xhtml component.
@@ -72,7 +73,7 @@ class XhtmlIndex extends Component<Props, State> {
     }
 
     dataLoadedCallback(topic: string, content: any) {
-        let text = atob(content.base64)
+        let text = Base64.decode(content.base64)
         const treeData = this.processPage("<xml>" + text + "</xml>")
         this.setState({treeData: treeData})
     }

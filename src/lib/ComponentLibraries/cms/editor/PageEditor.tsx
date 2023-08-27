@@ -20,6 +20,7 @@ import DraggableBox, { CurrentSelection, DraggableBoxData } from "./DraggableBox
 import { CurrentEditor } from "lib/ComponentLibraries/material_ui/editor/CurrentEditor"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 import withStyles from "@mui/styles/withStyles"
+import { Base64 } from "js-base64"
 
 /**
  * The CMS Page Editor.
@@ -409,7 +410,7 @@ class PageEditor extends Component<Props, State> {
 
     save() {
         if (this.changed) {
-            const content = {base64: btoa(this.changedText)}
+            const content = {base64: Base64.encode(this.changedText)}
             this.resetEditor(this.changedText)  
             // Stop the publish from causing a re-render of the editor.
             this.ignoreNextLoadPageCallback = true

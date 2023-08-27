@@ -14,6 +14,7 @@ import TopicsPopover from "lib/ComponentLibraries/cms/TopicsPopover"
 import Router from "lib/Router/Router"
 import { TopicUtils } from "lib/utils/TopicUtils"
 import AlertDialog from "../dialog/AlertDialog"
+import { Base64 } from "js-base64"
 
 /**
  * Page Preview of a page including preview of any unsaved changes.
@@ -105,7 +106,7 @@ export default class PagePreview extends Component<Props, State> {
     commandCallback(topic: string, command: string) {
         CurrentEditor.set(this.props.id)
         if (command === "save" && this.textChanged) {
-            const content = { base64: btoa(this.changedText) }
+            const content = { base64: Base64.encode(this.changedText) }
             MB.publish(this.props.publishToTopic, content)
             this.textChanged = false
             MB.publish(this.props.publishTextChangedTopic, false)

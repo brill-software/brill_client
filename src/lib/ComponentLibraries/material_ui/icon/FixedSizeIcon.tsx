@@ -6,6 +6,7 @@ import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { IconUtils } from "lib/utils/IconUtils"
 import { Html } from "lib/utils/HtmlUtils"
 import withStyles from "@mui/styles/withStyles"
+import { Base64 } from "js-base64"
 
 /**
  * Supports Icons that are 24x24 and have a single colour. Supports Material UI Icons from
@@ -60,7 +61,7 @@ class FixedSizeIcon extends Component<Props, State> {
 
     dataLoadedCallback(topic: string, base64SvgHtml: any) {
         if (base64SvgHtml?.base64) {
-            const svgHtml: string = atob(base64SvgHtml.base64)
+            const svgHtml: string = Base64.decode(base64SvgHtml.base64)
             this.setState({svgHtml: svgHtml})
         }
     }

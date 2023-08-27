@@ -8,6 +8,7 @@ import { IdGen } from "lib/utils/IdGen"
 import parse from "style-to-object"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 import withStyles from "@mui/styles/withStyles"
+import { Base64 } from "js-base64"
 
 /**
  * Xhtml - Displays a XHTML document.
@@ -73,7 +74,7 @@ class Xhtml extends Component<Props, State> {
     }
 
     dataLoadedCallback(topic: string, content: any) {
-        let text = atob(content.base64)
+        let text = Base64.decode(content.base64)
         const els = this.processPage("<xhtml>" + text + "</xhtml>")
         this.setState({elements: els})
     }

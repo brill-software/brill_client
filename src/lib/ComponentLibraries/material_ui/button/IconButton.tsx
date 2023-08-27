@@ -8,6 +8,7 @@ import { IconUtils } from "lib/utils/IconUtils"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { Html } from "lib/utils/HtmlUtils"
 import withStyles from "@mui/styles/withStyles"
+import { Base64 } from "js-base64"
 
 /**
  * Icon Button component.
@@ -62,7 +63,7 @@ class IconButton extends Component<Props, State> {
 
     dataLoadedCallback(topic: string, base64SvgHtml: any) {
         if (base64SvgHtml?.base64) {
-            const svgHtml: string = atob(base64SvgHtml.base64)
+            const svgHtml: string = Base64.decode(base64SvgHtml.base64)
             this.setState({svgHtml: svgHtml})
         }
     }

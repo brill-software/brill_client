@@ -13,6 +13,7 @@ import { TopicUtils } from "lib/utils/TopicUtils"
 import { JsonParser } from "lib/utils/JsonParser"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 import withTheme from "@mui/styles/withTheme"
+import { Base64 } from "js-base64"
 
 /**
  * Text Diff Editor - based on the Microsoft Visual Studio Code Monaco Diff Editor.
@@ -100,7 +101,7 @@ class DiffEditor extends Component<Props, State> {
     save(editor: monacoEditor.editor.IStandaloneDiffEditor) {
         const editorText = this.editor.getModifiedEditor().getValue()
         if (editorText !== undefined && editorText !== this.initialText && this.props.publishToTopic) { // Only save if there are changes
-            const content = {base64: btoa(editorText)}
+            const content = {base64: Base64.encode(editorText)}
             this.ignoreNextDataLoadedCallback = true
             MB.publish(this.props.publishToTopic, content)
             this.initialText = editorText
@@ -163,7 +164,7 @@ class DiffEditor extends Component<Props, State> {
     schemasLoadedCallback(topic: string, schemas: any) {
         let schemasObj: object = {}
         if (topic.startsWith("file:/")) {
-            schemasObj = JsonParser.parse(atob(schemas.base64))
+            schemasObj = JsonParser.parse(Base64.decode(schemas.base64))
         } else {
             schemasObj = schemas // Assume json:/
         }
@@ -171,7 +172,7 @@ class DiffEditor extends Component<Props, State> {
     }
 
     dataLoadedOriginalCallback(topic: string, content: any) {
-        const originalText = (topic.startsWith("json:/")) ? JSON.stringify(content,null, 4) : atob(content.base64)
+        const originalText = (topic.startsWith("json:/")) ? JSON.stringify(content,null, 4) : Base64.decode(content.base64)
         this.setState({originalText: originalText})
     }
 
@@ -189,14 +190,14 @@ class DiffEditor extends Component<Props, State> {
             this.unsubscribeSecondToken = MB.subscribe(secondTopic, (topic, data) => this.secondDataLoadedCallback(topic, data), (topic, error) => this.errorCallback(topic, error))
             return
         }
-        const text = (topic.startsWith("json:/")) ? JSON.stringify(data,null, 4) : atob(data.base64)
+        const text = (topic.startsWith("json:/")) ? JSON.stringify(data,null, 4) : Base64.decode(data.base64)
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
         this.setEditorText(topic, text)
     }
 
     secondDataLoadedCallback(topic: string, data: any) {
         MB.unsubscribe(this.unsubscribeSecondToken)
-        const text = (topic.startsWith("json:/")) ? JSON.stringify(data,null, 4) : atob(data.base64)
+        const text = (topic.startsWith("json:/")) ? JSON.stringify(data,null, 4) : Base64.decode(data.base64)
         monaco.languages.json.jsonDefaults.setDiagnosticsOptions({allowComments: (TopicUtils.getFileExtension(topic) === "jsonc")})
         this.setEditorText(topic, text)
     } 

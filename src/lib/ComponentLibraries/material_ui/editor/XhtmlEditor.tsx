@@ -13,6 +13,7 @@ import ConfirmDialog from "lib/ComponentLibraries/material_ui/dialog/ConfirmDial
 import AlertDialog from "lib/ComponentLibraries/material_ui/dialog/AlertDialog"
 import { CurrentEditor } from "./CurrentEditor"
 import withStyles from "@mui/styles/withStyles"
+import {Base64} from "js-base64"
 
 /**
  * XHTML WYSIWYG Editor - based on the Facebook daft-js Rich Text Editor.
@@ -141,7 +142,7 @@ class XhtmlEditor extends Component<Props, State> {
             console.log("Xhtml editor: no content.")
             return
         }
-        const html = atob(content.base64)
+        const html = Base64.decode(content.base64)
         if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
             const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
             if (change.editor === EdType.XHTML_EDITOR) {
@@ -274,7 +275,7 @@ class XhtmlEditor extends Component<Props, State> {
 
     customSaveCommand(editorState: EditorState) {
         const xhtml = this.convertStateToHtml(this.state.editorState.getCurrentContent())
-        const content = {base64: btoa(xhtml)}
+        const content = {base64: Base64.encode(xhtml)}
         // Publishing results in a Data Loaded callback which would loose the cursor position, so supress.
         this.ignoreNextDataLoadedCallback = true
         this.changed = false

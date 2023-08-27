@@ -7,6 +7,7 @@ import { UnsavedChanges } from "lib/ComponentLibraries/material_ui/editor/Unsave
 import ConfirmDialog from "lib/ComponentLibraries/material_ui/dialog/ConfirmDialog"
 import { CurrentEditor } from "./CurrentEditor"
 import { TopicUtils } from "lib/utils/TopicUtils"
+import { Base64 } from "js-base64"
 
 /**
  * Preview of a XHTML page, including any unsaved changes.
@@ -53,7 +54,7 @@ export default class XhtmlPreview extends Component<Props, State> {
     }
     
     dataLoadedCallback(topic: string, content: any) {
-        const xhtml = atob(content.base64)
+        const xhtml = Base64.decode(content.base64)
         this.originalXhtml = xhtml
         if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
             const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
@@ -70,7 +71,7 @@ export default class XhtmlPreview extends Component<Props, State> {
     commandCallback(topic: string, command: string) {
         CurrentEditor.set(this.props.id)
         if (command === "save" && this.textChanged) {
-            const content = {base64: btoa(this.state.text)}
+            const content = {base64: Base64.encode(this.state.text)}
             MB.publish(this.props.publishToTopic, content)
             this.textChanged = false
             MB.publish(this.props.publishTextChangedTopic, false)

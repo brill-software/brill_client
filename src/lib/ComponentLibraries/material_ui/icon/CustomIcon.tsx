@@ -2,6 +2,7 @@
 import React, {Component} from "react"
 import { MB, Token  } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
+import { Base64 } from "js-base64"
 
 /**
  * Supports Custom Icons that are loaded from the Topic /Icons/custom/*.svg. The Icons are loaded as html.
@@ -33,7 +34,7 @@ export default class CustomIcon extends Component<Props, State> {
 
     dataLoadedCallback(topic: string, base64SvgHtml: any) {
         if (base64SvgHtml.base64) {
-            const svgHtml: string = atob(base64SvgHtml.base64)
+            const svgHtml: string = Base64.decode(base64SvgHtml.base64)
             this.setState({svgHtml: svgHtml})
         }
     }

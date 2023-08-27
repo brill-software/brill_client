@@ -1,8 +1,10 @@
 // © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
 
+import { Base64 } from "js-base64"
+
 /**
- * Conversion Utilities.
- * 
+ * Conversion Utilities. 
+ *  
  */
 
 export class ConversionUtils {
@@ -13,6 +15,6 @@ export class ConversionUtils {
         for (let i = 0; i < bytes.byteLength; i++) {
             binary += String.fromCharCode(bytes[i])
         }
-        return btoa(binary)
+        return Base64.encode(binary)
     }
 }

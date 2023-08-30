@@ -145,17 +145,18 @@ class XhtmlEditor extends Component<Props, State> {
         const html = Base64.decode(content.base64)
         if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
             const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
-            if (change.editor === EdType.XHTML_EDITOR) {
-                this.initialHtml = html
-                this.changed = change.textChanged
-                this.externalChangesMade = change.externalChangesMade
-                MB.publish(this.props.publishTextChangedTopic, change.textChanged)
-                this.setState({editorState: change.viewState})
-                this.setFocus()
-                UnsavedChanges.remove(this.props.subscribeToTopic)
-                return
-            }
-            if (change.editor === EdType.TEXT_EDITOR) {
+            // if (change.editor === EdType.XHTML_EDITOR) {
+            //     this.initialHtml = html
+            //     this.changed = change.textChanged
+            //     this.externalChangesMade = change.externalChangesMade
+            //     MB.publish(this.props.publishTextChangedTopic, change.textChanged)
+
+            //     this.setState({editorState: change.viewState})
+            //     this.setFocus()
+            //     UnsavedChanges.remove(this.props.subscribeToTopic)
+            //     return
+            // }
+            if (change.editor === EdType.TEXT_EDITOR || change.editor === EdType.XHTML_EDITOR) {
                 this.initialHtml = html
                 this.changed = change.textChanged
                 this.externalChangesMade = change.externalChangesMade

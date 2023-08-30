@@ -32,6 +32,8 @@ import withStyles from "@mui/styles/withStyles"
 import MarkdownViewerActionIcons from "./editorIcons/MarkdownViewerActionIcons"
 import MarkdownViewer from "../material_ui/editor/MarkdownViewer"
 import ThemeProvider from "../material_ui/theme/ThemeProvider"
+import HtmlEditor from "../material_ui/editor/HtmlEditor"
+import HtmlEditorActionIcons from "./editorIcons/HtmlEditorActionIcons"
 
 /**
  * Brill CMS Edit Pane - this is the main control class that determines which editor is displayed.
@@ -363,6 +365,10 @@ class TabBarPane extends Component<Props, State> {
                 return <XhtmlEditorActionIcons key={IdGen.next()} 
                         subscribeToTopic={`tabBarPane.editor.currentStyle.${this.activeTabEditorId}`} 
                         publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
+            case "HtmlEditor":
+                return <HtmlEditorActionIcons key={IdGen.next()} 
+                    subscribeToTopic={`tabBarPane.editor.currentStyle.${this.activeTabEditorId}`} 
+                    publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
             case "XhtmlPreview":
                 return <XhtmlPreviewActionIcons key={IdGen.next()} publishToTopic={`tabBarPane.editor.${this.activeTabEditorId}`} />
             case "PageEditor":
@@ -435,6 +441,14 @@ class TabBarPane extends Component<Props, State> {
                         currentSelectionTopic={`tabBarPane.pageEditor.currentSelection.${this.activeTabEditorId}`} />
             case "XhtmlEditor":
                 return <XhtmlEditor id={this.activeTabEditorId} key={this.activeTabEditorId} 
+                        fileName={fileName}
+                        subscribeToTopic={fileTopic} 
+                        subscribeToActionTopic={`tabBarPane.editor.${this.activeTabEditorId}`}
+                        publishToTopic={fileTopic}
+                        publishCurrentStyleTo={`tabBarPane.editor.currentStyle.${this.activeTabEditorId}`} 
+                        publishTextChangedTopic={`tabBarPane.textChanged.${this.activeDocumentId}`} />
+            case "HtmlEditor":
+                return <HtmlEditor id={this.activeTabEditorId} key={this.activeTabEditorId} 
                         fileName={fileName}
                         subscribeToTopic={fileTopic} 
                         subscribeToActionTopic={`tabBarPane.editor.${this.activeTabEditorId}`}

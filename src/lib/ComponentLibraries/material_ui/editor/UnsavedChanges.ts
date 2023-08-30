@@ -16,6 +16,7 @@
 export enum EdType {
     TEXT_EDITOR = "TextEditor", // Also used by the DiffEditor
     XHTML_EDITOR = "XhtmlEditor",
+    HTML_EDITOR = "HtmlEditor",
     PAGE_EDITOR = "PageEditor"
 }
 export class Change {

@@ -256,6 +256,7 @@ class XhtmlEditor extends Component<Props, State> {
             case "header-one":
             case "header-two":
             case "header-three":
+            case "header-four":
             case "header-five":
             case "header-six":
             case "unstyled":

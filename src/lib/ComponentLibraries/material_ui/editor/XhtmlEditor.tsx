@@ -24,9 +24,9 @@ import { TopicUtils } from "lib/utils/TopicUtils"
  * 
  */
 
-const blockStyles = ["header-one", "header-two", "header-three", "header-four", "header-five", "header-six", "unstyled", "pre", "code-block", "blockquote", 
-                    "ordered-list-item", "unordered-list-item"]
-const inlineStyles = ["BOLD", "ITALIC", "UNDERLINE", "STRIKETHROUGH", "CODE"]
+// const blockStyles = ["header-one", "header-two", "header-three", "header-four", "header-five", "header-six", "unstyled", "pre", "code-block", "blockquote", 
+//                     "ordered-list-item", "unordered-list-item"]
+// const inlineStyles = ["BOLD", "ITALIC", "UNDERLINE", "STRIKETHROUGH", "CODE"]
 
 interface Props {
     id: string
@@ -61,11 +61,11 @@ class XhtmlEditor extends Component<Props, State> {
     externalChangesMade: boolean = false
     firstDataLoadedCallback: boolean = true
     lastEditorState: EditorState
-    editorRef: React.RefObject<any>
+    //editorRef: React.RefObject<any>
 
     constructor(props: Props) {
         super(props)
-        this.editorRef = React.createRef()
+        // this.editorRef = React.createRef()
         this.state = {editorState: EditorState.createEmpty(), confirmDialogOpen: false, toolbarHidden: true}
     }
 
@@ -160,42 +160,12 @@ class XhtmlEditor extends Component<Props, State> {
             return
         }
         const html = Base64.decode(content.base64)
-        console.log("Html to load = " + html)
 
         if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
-            const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
-            if (change.editor === EdType.XHTML_EDITOR) {
-                this.initialHtml = html
-                this.changed = change.textChanged
-                MB.publish(this.props.publishTextChangedTopic, change.textChanged)
-                this.setState({editorState: change.viewState})
-                this.setFocus()
-                UnsavedChanges.remove(this.props.subscribeToTopic)
-                return
-            }
-            if (change.editor === EdType.TEXT_EDITOR) {
-                this.initialHtml = html
-                this.changed = change.textChanged
-                this.externalChangesMade = change.externalChangesMade
-                MB.publish(this.props.publishTextChangedTopic, change.textChanged)
-                const blockPos = CursorHandler.convertToXhtmlEditor(change.text, change.cursorLineNumber, change.cursorColumn)       
-                const blocksFromHtml = htmlToDraft(change.text)
-                const contentState = ContentState.createFromBlockArray(blocksFromHtml.contentBlocks, blocksFromHtml.entityMap)
-                let editorState = EditorState.createWithContent(contentState)
-                let selectionState = editorState.getSelection()
-                const blockArray = editorState.getCurrentContent().getBlocksAsArray()
-                if (blockPos.blockNumber >= 0 && blockPos.blockNumber < blockArray.length) {
-                    const blockKey = blockArray[blockPos.blockNumber].getKey()
-                    selectionState = selectionState.merge({anchorKey: blockKey, anchorOffset: blockPos.offset, focusKey: blockKey, focusOffset: blockPos.offset})
-                    editorState = EditorState.forceSelection(editorState, selectionState)
-                }     
-                this.setState({editorState: editorState}, () => this.setFocus() )
-                UnsavedChanges.remove(this.props.subscribeToTopic)
-                return
-            }
+            this.restoreUnsavedChanges(html)
+            return
         }
-
-        // No unsaved changes
+        // No unsaved changes so use loaded content.
         MB.publish(this.props.publishTextChangedTopic, false)
         const blocksFromHTML = htmlToDraft(html)
         const contentState = ContentState.createFromBlockArray(
@@ -224,43 +194,89 @@ class XhtmlEditor extends Component<Props, State> {
         }
     }
 
+    restoreUnsavedChanges(initialHtml: string) {
+        const change = UnsavedChanges.getChange(this.props.subscribeToTopic)
+        switch (change.editor) {
+            case EdType.XHTML_EDITOR:
+                this.initialHtml = initialHtml
+                this.changed = change.textChanged
+                MB.publish(this.props.publishTextChangedTopic, change.textChanged)
+                this.setState({editorState: change.viewState}, () => this.setFocus())
+                break
+
+            case EdType.TEXT_EDITOR:
+                this.initialHtml = initialHtml
+                this.changed = change.textChanged
+                this.externalChangesMade = change.externalChangesMade
+                MB.publish(this.props.publishTextChangedTopic, change.textChanged)
+                const blockPos = CursorHandler.convertToXhtmlEditor(change.text, change.cursorLineNumber, change.cursorColumn)       
+                const blocksFromHtml = htmlToDraft(change.text)
+                const contentState = ContentState.createFromBlockArray(blocksFromHtml.contentBlocks, blocksFromHtml.entityMap)
+                let editorState = EditorState.createWithContent(contentState)
+                let selectionState = editorState.getSelection()
+                const blockArray = editorState.getCurrentContent().getBlocksAsArray()
+                if (blockPos.blockNumber >= 0 && blockPos.blockNumber < blockArray.length) {
+                    const blockKey = blockArray[blockPos.blockNumber].getKey()
+                    selectionState = selectionState.merge({anchorKey: blockKey, anchorOffset: blockPos.offset, focusKey: blockKey, focusOffset: blockPos.offset})
+                    editorState = EditorState.forceSelection(editorState, selectionState)
+                }     
+                this.setState({editorState: editorState}, () => this.setFocus() )
+                break
+
+            default:
+                console.log(`XhtmlEditor: unexpected unsaved changes editor type: ${change.editor}`)  
+        }
+        UnsavedChanges.remove(this.props.subscribeToTopic)
+    }
+
     commandCallback(topic: string, action: any) {
         CurrentEditor.set(this.props.id)
         this.setFocus()
         const {command, url, width, height} = action
-        if (command === "save") {
-            this.saveCommand()
-            return
+
+        switch (command) {
+            case "save":
+                this.saveCommand()
+                break
+            case "undo":
+                this.onChange(EditorState.undo(this.state.editorState))
+                break
+            case "redo":
+                this.onChange(EditorState.redo(this.state.editorState))
+                break
+            case "insertImage":
+                this.onChange(this.insertImage(url, width, height))
+                break
+            case "flipToolbar":
+                this.setState({toolbarHidden: !this.state.toolbarHidden})
+                break
+            case "revent":
+                this.revert()
+                break
+            case "header-one":
+            case "header-two":
+            case "header-three":
+            case "header-five":
+            case "header-six":
+            case "unstyled":
+            case "pre":
+            case "code-block":
+            case "blockquote":
+            case "ordered-list-item":
+            case "unordered-list-item":
+                this.onChange(RichUtils.toggleBlockType(this.state.editorState, command))
+                break
+            case "BOLD":
+            case "ITALIC":
+            case "UNDERLINE":
+            case "STRIKETHROUGH":
+            case "CODE":
+                this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, command))
+                break
+            default:
+                console.log(`XhtmlEditor: unrecognsed command: ${command}`)
+                break
         }
-        if (command === "undo") {
-            this.onChange(EditorState.undo(this.state.editorState))
-            return
-        }
-        if (command === "redo") {
-            this.onChange(EditorState.redo(this.state.editorState))
-            return
-        }
-        if (command === "insertImage") {
-            this.onChange(this.insertImage(url, width, height))
-            return
-        }
-        if (command === "flipToolbar") {
-            this.setState({toolbarHidden: !this.state.toolbarHidden})
-            return
-        }
-        if (blockStyles.indexOf(command) !== -1) {
-            this.onChange(RichUtils.toggleBlockType(this.state.editorState, command))
-            return
-        }
-        if (inlineStyles.indexOf(command) !== -1) {
-            this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, command))
-            return
-        }
-        if (command === "revert" && this.changed) {
-            this.revert()
-            return
-        }
-        console.log(`XhtmlEditor: unrecognsed command: ${command}`)
     }
 
     saveCommand() { 
@@ -275,8 +291,10 @@ class XhtmlEditor extends Component<Props, State> {
     }
 
     revert() {
-        MB.publish(`XhtmlEditor.discardChangesDialog.open.${this.props.id}`, 
+        if (this.changed) {
+            MB.publish(`XhtmlEditor.discardChangesDialog.open.${this.props.id}`, 
             `Are you sure you want to discard your changes to ${this.props.fileName} and revert back to the last saved version?`)
+        }
     }
 
     discardChanges() {
@@ -345,9 +363,9 @@ class XhtmlEditor extends Component<Props, State> {
     }
 
     setFocus() {
-        if (this.editorRef.current) {
-             this.editorRef.current.focusEditor()
-        }
+        // if (this.editorRef.current) {
+        //      this.editorRef.current.focusEditor()
+        // }
     }
  
     render() {
@@ -356,7 +374,7 @@ class XhtmlEditor extends Component<Props, State> {
         return (
             <div className={classes.root}>
                 <Editor
-                    ref={this.editorRef}
+                    // ref={this.editorRef}
                     key={key}
                     toolbarHidden={this.state.toolbarHidden}
                     editorState={editorState}

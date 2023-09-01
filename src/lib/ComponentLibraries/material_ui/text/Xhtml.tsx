@@ -150,6 +150,7 @@ class Xhtml extends Component<Props, State> {
             return this.createErrorElement("<b>Attribute Error:</b><br />An &lt;img&gt; tag must have a <b>src</b> attribute, which specifies the image topic.")
         }
         const imageTopic = this.getAttribute(imgNode, "src")
+        // TODO ***** Need to handle new html format that has the height and width in the style attribute. *****
         let props: any = {key: IdGen.next(), src: "", ref: ref}
         // Convert the height and width to a style attribute
         let width = this.getAttribute(imgNode, "width")

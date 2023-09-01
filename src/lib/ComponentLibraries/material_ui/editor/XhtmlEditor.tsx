@@ -143,7 +143,7 @@ class XhtmlEditor extends Component<Props, State> {
             // Prevent a new line character inside a <pre> block from creating a new block.
             const selection = this.lastEditorState.getSelection()
             const blockType = this.lastEditorState.getCurrentContent().getBlockForKey(selection.getStartKey()).getType()
-            if (blockType === 'code' && this.lastEditorState) {
+            if ((blockType === "code" || blockType === "code-block") && this.lastEditorState) {
                 const newContentState = Modifier.insertText(this.lastEditorState.getCurrentContent(), this.lastEditorState.getSelection(), '\n')
                 const newEditorState = EditorState.push(this.lastEditorState, newContentState, "insert-characters")
                 this.setState({editorState: newEditorState})
@@ -186,7 +186,10 @@ class XhtmlEditor extends Component<Props, State> {
             this.changed = true
             MB.publish(this.props.publishTextChangedTopic, true)
         }
-        const editorState = EditorState.createWithContent(contentState)
+        let editorState = EditorState.createWithContent(contentState)
+        // Force the focus by getting the current selection and doing a forceSelection.
+        const selection = editorState.getSelection()
+        editorState = EditorState.forceSelection(editorState, selection)
         if (this.firstDataLoadedCallback) {
             this.setState({editorState: editorState}, () => this.setFocus() )   
         } else {
@@ -231,12 +234,14 @@ class XhtmlEditor extends Component<Props, State> {
 
     commandCallback(topic: string, action: any) {
         CurrentEditor.set(this.props.id)
-        this.setFocus()
         const {command, url, width, height} = action
 
         switch (command) {
             case "save":
                 this.saveCommand()
+                const s = this.state.editorState.getSelection()
+                let newState = EditorState.forceSelection(this.state.editorState, s)
+                this.setState({editorState: newState})
                 break
             case "undo":
                 this.onChange(EditorState.undo(this.state.editorState))
@@ -245,10 +250,12 @@ class XhtmlEditor extends Component<Props, State> {
                 this.onChange(EditorState.redo(this.state.editorState))
                 break
             case "insertImage":
-                this.onChange(this.insertImage(url, width, height))
+                this.onChange(this.insertImage(url, (width ? width : "auto"), (height ? height : "auto")))
                 break
             case "flipToolbar":
-                this.setState({toolbarHidden: !this.state.toolbarHidden})
+                const se = this.state.editorState.getSelection()
+                let newS = EditorState.forceSelection(this.state.editorState, se)
+                this.setState({editorState: newS, toolbarHidden: !this.state.toolbarHidden})
                 break
             case "revent":
                 this.revert()
@@ -265,14 +272,23 @@ class XhtmlEditor extends Component<Props, State> {
             case "blockquote":
             case "ordered-list-item":
             case "unordered-list-item":
-                this.onChange(RichUtils.toggleBlockType(this.state.editorState, command))
-                break
+            //     this.onChange(RichUtils.toggleBlockType(this.state.editorState, command))
+            //     break
+                 const selection = this.state.editorState.getSelection()
+                 let newEditorState = RichUtils.toggleBlockType(this.state.editorState, command)
+                 newEditorState = EditorState.forceSelection(newEditorState, selection)
+                 this.onChange(newEditorState)
+                 break
             case "BOLD":
             case "ITALIC":
             case "UNDERLINE":
             case "STRIKETHROUGH":
             case "CODE":
-                this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, command))
+                // this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, command))
+                 const sel = this.state.editorState.getSelection()
+                 let newEdState = RichUtils.toggleInlineStyle(this.state.editorState, command)
+                 newEdState = EditorState.forceSelection(newEdState, sel)
+                 this.onChange(newEdState)
                 break
             default:
                 console.log(`XhtmlEditor: unrecognsed command: ${command}`)

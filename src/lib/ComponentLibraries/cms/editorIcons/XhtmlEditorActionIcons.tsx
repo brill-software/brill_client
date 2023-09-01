@@ -45,6 +45,8 @@ export default class XhtmlEditorActionsIcons extends Component<Props, State> {
                     publishToTopic={publishToTopic} action={{command: "ordered-list-item"}} />
                 <ImageIcon key={IdGen.next()}
                     publishToTopic={publishToTopic} />
+                <IconButton key={IdGen.next()} iconName="Handyman" tooltip="Display/Hide extra toolbar" 
+                    publishToTopic={publishToTopic} action={{command: "flipToolbar"}} />
             </div>
         )
     }

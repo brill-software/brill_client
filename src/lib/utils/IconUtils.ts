@@ -173,6 +173,9 @@ export class IconUtils {
             case "Launch":
                 resolved = require("@mui/icons-material/Launch.js").default
                 break
+            case "Handyman":
+                resolved = require("@mui/icons-material/Handyman.js").default
+                break
 
             // CMS Files Tree View icons specified in the CMS themes
             case "SubjectTwoTone":

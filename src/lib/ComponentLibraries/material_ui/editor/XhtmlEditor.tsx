@@ -399,7 +399,13 @@ class XhtmlEditor extends Component<Props, State> {
 
     static defaultStyles(theme: Theme): any {
         return  {
-            root: {padding: "0px 35px 25px 30px"},
+            /**
+             * <p> text is treated as sytle "Normal" by draft-js and unfortunately it doesn't add a <p>
+             * tag or put a class name on any of the sorounding tags that can be targetted. This means
+             * that the font size is the browser default size and can't be changed. The only option
+             * available to make the lines look similar to the Preview mode is to increase the line height.
+             */
+            root: {padding: "0px 35px 25px 30px", lineHeight: "28px"},
             '@global': {
                 h1: { ...theme.typography.h1 },
                 h2: { ...theme.typography.h2 },
@@ -407,14 +413,14 @@ class XhtmlEditor extends Component<Props, State> {
                 h4: { ...theme.typography.h4 },
                 h5: { ...theme.typography.h5 },
                 h6: { ...theme.typography.h6 },
-                p:  { ...theme.typography.body1 },
+                p:  { ...theme.typography.body1 }, // Not currently used by draft-js
                 blockquote: { ...theme.typography.blockquote },
                 pre: { ...theme.typography.pre },
                 code: { ...theme.typography.code },
                 ul: { ...theme.typography.ul},
                 ol: { ...theme.typography.ol},
                 img: { ...theme.typography.img },
-                figure: { ...theme.typography.body1 }
+                figure: { ...theme.typography.body1 } // Not supported by draft-js
             }
         }
     }

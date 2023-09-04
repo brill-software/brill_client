@@ -179,7 +179,7 @@ class Xhtml extends Component<Props, State> {
                             (topic, error) => this.errorCallback(topic, error)))
         return imgEl
     }
-    
+
     /**
      * Handles a <figure> tag, which is expected to contain an <img> tag.
      */

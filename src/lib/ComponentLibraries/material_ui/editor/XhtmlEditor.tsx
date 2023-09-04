@@ -24,10 +24,6 @@ import { TopicUtils } from "lib/utils/TopicUtils"
  * 
  */
 
-// const blockStyles = ["header-one", "header-two", "header-three", "header-four", "header-five", "header-six", "unstyled", "pre", "code-block", "blockquote", 
-//                     "ordered-list-item", "unordered-list-item"]
-// const inlineStyles = ["BOLD", "ITALIC", "UNDERLINE", "STRIKETHROUGH", "CODE"]
-
 interface Props {
     id: string
     theme: Theme
@@ -61,11 +57,9 @@ class XhtmlEditor extends Component<Props, State> {
     externalChangesMade: boolean = false
     firstDataLoadedCallback: boolean = true
     lastEditorState: EditorState
-    //editorRef: React.RefObject<any>
 
     constructor(props: Props) {
         super(props)
-        // this.editorRef = React.createRef()
         this.state = {editorState: EditorState.createEmpty(), confirmDialogOpen: false, toolbarHidden: true}
     }
 
@@ -187,11 +181,8 @@ class XhtmlEditor extends Component<Props, State> {
             MB.publish(this.props.publishTextChangedTopic, true)
         }
         let editorState = EditorState.createWithContent(contentState)
-        // Force the focus by getting the current selection and doing a forceSelection.
-        const selection = editorState.getSelection()
-        editorState = EditorState.forceSelection(editorState, selection)
         if (this.firstDataLoadedCallback) {
-            this.setState({editorState: editorState}, () => this.setFocus() )   
+            this.setState({editorState: this.setFocus(editorState)} )   
         } else {
             this.setState({editorState: editorState})
         }
@@ -204,7 +195,7 @@ class XhtmlEditor extends Component<Props, State> {
                 this.initialHtml = initialHtml
                 this.changed = change.textChanged
                 MB.publish(this.props.publishTextChangedTopic, change.textChanged)
-                this.setState({editorState: change.viewState}, () => this.setFocus())
+                this.setState({editorState: this.setFocus(change.viewState)})
                 break
 
             case EdType.TEXT_EDITOR:
@@ -223,11 +214,11 @@ class XhtmlEditor extends Component<Props, State> {
                     selectionState = selectionState.merge({anchorKey: blockKey, anchorOffset: blockPos.offset, focusKey: blockKey, focusOffset: blockPos.offset})
                     editorState = EditorState.forceSelection(editorState, selectionState)
                 }     
-                this.setState({editorState: editorState}, () => this.setFocus() )
+                this.setState({editorState: editorState})
                 break
 
             default:
-                console.log(`XhtmlEditor: unexpected unsaved changes editor type: ${change.editor}`)  
+                console.log(`XhtmlEditor: unexpected unsaved changes: editor type: ${change.editor}`)  
         }
         UnsavedChanges.remove(this.props.subscribeToTopic)
     }
@@ -239,9 +230,7 @@ class XhtmlEditor extends Component<Props, State> {
         switch (command) {
             case "save":
                 this.saveCommand()
-                const s = this.state.editorState.getSelection()
-                let newState = EditorState.forceSelection(this.state.editorState, s)
-                this.setState({editorState: newState})
+                this.setState({editorState: this.setFocus(this.state.editorState)})
                 break
             case "undo":
                 this.onChange(EditorState.undo(this.state.editorState))
@@ -253,9 +242,7 @@ class XhtmlEditor extends Component<Props, State> {
                 this.onChange(this.insertImage(url, (width ? width : "auto"), (height ? height : "auto")))
                 break
             case "flipToolbar":
-                const se = this.state.editorState.getSelection()
-                let newS = EditorState.forceSelection(this.state.editorState, se)
-                this.setState({editorState: newS, toolbarHidden: !this.state.toolbarHidden})
+                this.setState({editorState: this.setFocus(this.state.editorState), toolbarHidden: !this.state.toolbarHidden})
                 break
             case "revent":
                 this.revert()
@@ -272,23 +259,14 @@ class XhtmlEditor extends Component<Props, State> {
             case "blockquote":
             case "ordered-list-item":
             case "unordered-list-item":
-            //     this.onChange(RichUtils.toggleBlockType(this.state.editorState, command))
-            //     break
-                 const selection = this.state.editorState.getSelection()
-                 let newEditorState = RichUtils.toggleBlockType(this.state.editorState, command)
-                 newEditorState = EditorState.forceSelection(newEditorState, selection)
-                 this.onChange(newEditorState)
+                 this.onChange(this.setFocus(RichUtils.toggleBlockType(this.state.editorState, command)))
                  break
             case "BOLD":
             case "ITALIC":
             case "UNDERLINE":
             case "STRIKETHROUGH":
             case "CODE":
-                // this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, command))
-                 const sel = this.state.editorState.getSelection()
-                 let newEdState = RichUtils.toggleInlineStyle(this.state.editorState, command)
-                 newEdState = EditorState.forceSelection(newEdState, sel)
-                 this.onChange(newEdState)
+                 this.onChange(this.setFocus(RichUtils.toggleInlineStyle(this.state.editorState, command)))
                 break
             default:
                 console.log(`XhtmlEditor: unrecognsed command: ${command}`)
@@ -357,8 +335,8 @@ class XhtmlEditor extends Component<Props, State> {
       }
 
     convertStateToHtml(contentState: ContentState): string {
-        const html = draftToHtml(convertToRaw(contentState))
-        // Convert any <br>'s to proper XHTML.
+        const html = draftToHtml(convertToRaw(contentState), undefined, undefined)
+        // Unfortunately draftToHtml puts in <br>'s instead of <br/>'s.
         const xhtml = html.replace(new RegExp("<br>","g"), "<br/>")
         return xhtml
     }
@@ -379,10 +357,20 @@ class XhtmlEditor extends Component<Props, State> {
         return "not-handled"
     }
 
-    setFocus() {
-        // if (this.editorRef.current) {
-        //      this.editorRef.current.focusEditor()
-        // }
+    /**
+     * Sets the focus.
+     * 
+     * Since upgrading to React 18 and draft-js 0.11.7, using editorRef.current.focus() or editorRef.current.focusEditor
+     * to set the focus doesn't work correctly.
+     * 
+     * The only way currently that works is to get and set the current selection and update the state. The editor state
+     * is passed in and a new editor state returned. The caller must then call onChange or do a this.setState({editorState: ...}).
+     * 
+     */
+    setFocus(editorState: EditorState): EditorState {
+        const selection = editorState.getSelection()
+        let newState = EditorState.forceSelection(editorState, selection)
+        return newState       
     }
  
     render() {
@@ -391,12 +379,9 @@ class XhtmlEditor extends Component<Props, State> {
         return (
             <div className={classes.root}>
                 <Editor
-                    // ref={this.editorRef}
                     key={key}
                     toolbarHidden={this.state.toolbarHidden}
                     editorState={editorState}
-                    wrapperClassName="demo=wrapper"
-                    editorClassName="demo-editor"
                     onEditorStateChange={(editorState) => this.onChange(editorState)}
                     handleKeyCommand={(command: any, editorState: any, eventTimeStamp: any) => this.handleKeyCommand(command, editorState, eventTimeStamp)}
                     spellCheck
@@ -430,9 +415,9 @@ class XhtmlEditor extends Component<Props, State> {
                 ol: { ...theme.typography.ol},
                 img: { ...theme.typography.img },
                 figure: { ...theme.typography.body1 }
-            },
+            }
         }
     }
 }
 
-export default withStyles(XhtmlEditor.defaultStyles, { withTheme: true})(XhtmlEditor)
+export default withStyles(XhtmlEditor.defaultStyles, {withTheme: true})(XhtmlEditor)

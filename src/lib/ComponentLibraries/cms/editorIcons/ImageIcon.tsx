@@ -86,11 +86,11 @@ class ImageIcon extends Component<Props, State> {
                     <TextField style={{paddingBottom: "10px"}} onChange={event => this.onFieldChange(event)} autoFocus 
                         margin="dense" label="Image Topic" type="text" fullWidth
                         onKeyDown={event => this.onKeyDown(event)} />
-                    <TextField style={{paddingBottom: "10px"}} onChange={event => this.onWidthFieldChange(event)}
-                        margin="dense" label="Width [optional]" type="text" fullWidth
+                    <TextField defaultValue="auto"  style={{paddingBottom: "10px"}} onChange={event => this.onWidthFieldChange(event)}
+                        margin="dense" label="Width" type="text" fullWidth
                         onKeyDown={event => this.onKeyDown(event)} />
-                    <TextField style={{paddingBottom: "10px"}} onChange={event => this.onHeightFieldChange(event)} 
-                        margin="dense" label="Height [optional]" type="text" fullWidth
+                    <TextField defaultValue="auto" style={{paddingBottom: "10px"}} onChange={event => this.onHeightFieldChange(event)} 
+                        margin="dense" label="Height" type="text" fullWidth
                         onKeyDown={event => this.onKeyDown(event)} />    
                 </DialogContent>
                 <DialogActions style={{padding: "10px"}}> 

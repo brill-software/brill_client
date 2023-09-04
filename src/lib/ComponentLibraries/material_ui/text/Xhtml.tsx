@@ -9,6 +9,7 @@ import parse from "style-to-object"
 import LoadingIndicator from "lib/ComponentLibraries/html/LoadingIndicator"
 import withStyles from "@mui/styles/withStyles"
 import { Base64 } from "js-base64"
+import { Html } from "lib/utils/HtmlUtils"
 
 /**
  * Xhtml - Displays a XHTML document.
@@ -99,11 +100,12 @@ class Xhtml extends Component<Props, State> {
                 reactElements.push(this.createHtmlElement(node, this.nodeRef[i]))
             } else         
             if (node.nodeName === "img") {
-                reactElements.push(this.createImgElement(node, this.nodeRef[i]))
+                 reactElements.push(this.createImgElement(node, this.nodeRef[i]))
             } else
             if (node.nodeName === "figure") {
-                reactElements.push(this.createFigureElement(node, this.nodeRef[i]))
-            } else
+                 reactElements.push(this.createFigureElement(node, this.nodeRef[i]))
+            } 
+            else
             if (node.nodeName === "parsererror") {
                 MB.error(this.props.subscribeToTopic, new ErrorMsg("Error parsing XHML page.", node.innerText))
                 reactElements.push(this.createParserErrorElement(node))
@@ -150,29 +152,34 @@ class Xhtml extends Component<Props, State> {
             return this.createErrorElement("<b>Attribute Error:</b><br />An &lt;img&gt; tag must have a <b>src</b> attribute, which specifies the image topic.")
         }
         const imageTopic = this.getAttribute(imgNode, "src")
-        // TODO ***** Need to handle new html format that has the height and width in the style attribute. *****
         let props: any = {key: IdGen.next(), src: "", ref: ref}
-        // Convert the height and width to a style attribute
-        let width = this.getAttribute(imgNode, "width")
-        let height = this.getAttribute(imgNode, "height")
-        if (width || height) {
-            let style: any = {}
-            if (width) {
-                width = width.endsWith("px") ? width : width + "px"
-                style["width"] = width
-            }
-            if (height) {
-                height = height.endsWith("px") ? height : height + "px"
-                style["height"] = height
-            }
-            props["style"] = style
+       
+        if (this.hasAttribute(imgNode, "style")) {
+            const styleStr = this.getAttribute(imgNode, "style")
+            props["style"] = Html.toObject(styleStr)
+        } else {
+             // Old format - Convert the height and width to a style attribute
+            let width = this.getAttribute(imgNode, "width")
+            let height = this.getAttribute(imgNode, "height")
+            if (width || height) {
+                let style: any = {}
+                if (width) {
+                    width = width.endsWith("px") ? width : width + "px"
+                    style["width"] = width
+                }
+                if (height) {
+                    height = height.endsWith("px") ? height : height + "px"
+                    style["height"] = height
+                }
+                props["style"] = style
+            }   
         }
         const imgEl = React.createElement("img", props)
         this.tokens.push(MB.subscribe(imageTopic, (topic, data) => this.imageLoaded(topic, data, ref), 
                             (topic, error) => this.errorCallback(topic, error)))
         return imgEl
     }
-
+    
     /**
      * Handles a <figure> tag, which is expected to contain an <img> tag.
      */

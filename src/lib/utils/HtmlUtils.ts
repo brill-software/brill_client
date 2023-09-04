@@ -22,6 +22,24 @@ export class Html {
     static sanitize(html: string): string {
         return DOMPurify.sanitize(html, {ALLOWED_TAGS: Html.ALLOWED_TAGS, ALLOWED_ATTR: Html.ALLOWED_ATTRIBUTES})
     }
+
+    /**
+     * Converts a HTML attribute value to an object.
+     * 
+     * @param htmlAttrValue 
+     * @returns 
+     */
+    static toObject(htmlAttrValue: string): Object {
+        let result: any = {}
+        const array = htmlAttrValue.split(";")
+        for (let i = 0; i < array.length; i++) {
+            const row = array[i].split(':')
+            const name = row[0]
+            const value = row[1].trimStart()
+            result[name] = value
+        }
+        return result
+    }
 }
 
 export class CursorPosition {

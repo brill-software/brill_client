@@ -113,6 +113,7 @@ export default class TextField extends Component<Props, State> {
                 error={this.state.error} 
                 helperText={this.state.helperText}
                 value={this.state.value}
+                InputLabelProps={{shrink: true}}
             />            
         )
     }

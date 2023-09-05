@@ -114,6 +114,7 @@ export default class TextField extends Component<Props, State> {
                 helperText={this.state.helperText}
                 value={this.state.value}
                 InputLabelProps={{shrink: true}}
+                {...other}
             />            
         )
     }

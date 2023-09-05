@@ -22,6 +22,14 @@ import { TopicUtils } from "lib/utils/TopicUtils"
  * 
  * The styles for h1 to h6 etc. are obtained from the current theme.
  * 
+ * Known Issues:
+ * 
+ * 1) Not WYSIWG for <p> text. draft-js treats the text as 'normal' and doesn't enclose it within a <p> tag.
+ * 
+ * 2) draft-js throws an error if a <figure> tag is encountered. Fix added to strip <figure> tags.
+ * 
+ * 3) Images are not displayed. This is because the image src is a topic and draft-js doesn't know about topics.
+ * 
  */
 
 interface Props {
@@ -153,7 +161,12 @@ class XhtmlEditor extends Component<Props, State> {
             console.log("Xhtml editor: no content.")
             return
         }
-        const html = Base64.decode(content.base64)
+
+        let html = Base64.decode(content.base64)
+
+        // draft-js can't handle <figure> tags, so remove any.
+        html = html.replace(new RegExp("<figure>","g"), "")
+        html = html.replace(new RegExp("</figure>","g"), "")
 
         if (UnsavedChanges.exists(this.props.subscribeToTopic)) {
             this.restoreUnsavedChanges(html)
@@ -170,7 +183,7 @@ class XhtmlEditor extends Component<Props, State> {
         if (this.initialHtml !== html) {
             const fileName = TopicUtils.getFileName(this.props.subscribeToTopic)
             let msg = `The file ${fileName} may contain modifications that were made outside of the WYSIWYG editor.`
-            if (this.initialHtml.indexOf("<table")) {
+            if (this.initialHtml.indexOf("<table") !== -1) {
                 msg += " Tables are not supported and will be stripped from the file."
             } else {
                 msg += " Any unsupported tags will be stripped from the file."

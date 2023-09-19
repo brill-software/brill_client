@@ -85,7 +85,7 @@ class MenuButton extends Component<Props, State> {
             bar: {
                 width: "100%", 
                 height: "5px", 
-                background: "yellow",
+                background: theme.palette.secondary.main,
                 ...theme.components?.MenuButton?.styleOverrides?.bar
             }
         }

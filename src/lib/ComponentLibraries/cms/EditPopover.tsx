@@ -232,6 +232,10 @@ class EditPopover extends Component<Props, State> {
             if (this.attrNameField[i].length > 0) {
                 try {
                     this.attrValueError[i] = ""
+                    const mediaPos = this.attrValueField[i].indexOf("@media")
+                    if (mediaPos !== -1) {
+                        throw Error(`HTML doesn't support @media queries in style attributes. Use a Theme instead. JSON at position ${mediaPos}`)
+                    }
                     attribs[this.attrNameField[i]] = FieldUtils.convertToObj(this.attrValueField[i])
                 } catch (e) {
                     this.attrValueError[i] = ErrorUtils.cvt(e).message

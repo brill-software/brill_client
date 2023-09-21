@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
 import React from "react"
 import { Rectangle } from "./Rectangle"
 import { Overlaps } from "./Overlaps"

@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
 import React, { Component } from "react"
 import { Button, DialogActions, DialogContent, DialogContentText, IconButton, List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Typography } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"

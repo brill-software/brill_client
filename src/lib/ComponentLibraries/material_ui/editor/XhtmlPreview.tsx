@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
 import React, {Component} from "react"
 import Xhtml from "lib/ComponentLibraries/material_ui/text/Xhtml"
 import { MB, Token } from "lib/MessageBroker/MB"

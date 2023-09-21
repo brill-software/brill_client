@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
 import React, {Component} from "react"
 import ReactResizeDetector from "react-resize-detector"
 import { MB, Token } from "lib/MessageBroker/MB"

@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Message Broker, distributed under the MIT License.
 import { MB } from "./MB"
 import { ErrorMsg } from "./ErrorMsg"
 import { User } from "lib/ComponentLibraries/material_ui/button/LoginButton"

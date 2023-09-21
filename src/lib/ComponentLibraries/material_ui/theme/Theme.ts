@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
 import { Theme as MuiTheme} from "@mui/material"
 import { Mixins as MuiMixins } from "@mui/material/styles/createMixins"
 // TODO import { Overrides as MuiOverrides} from "@mui/material/styles/overrides"

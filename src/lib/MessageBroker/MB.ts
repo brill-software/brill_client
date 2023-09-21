@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Message Broker, distributed under the MIT License.
 import { WebSocketClient } from "lib/MessageBroker/WebSocketClient"
 import { Filter, CallbackFunction, TopicEntry } from "lib/MessageBroker/TopicEntry"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"

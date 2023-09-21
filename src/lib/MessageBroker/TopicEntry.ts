@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2021 Brill Software Limited - Brill Message Broker, distributed under the MIT License.
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { ErrorUtils } from "lib/utils/ErrorUtils"
 

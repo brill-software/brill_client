@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2022 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
 import React, {Component} from "react"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import withStyles from "@mui/styles/withStyles"

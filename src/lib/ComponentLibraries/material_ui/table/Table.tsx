@@ -1,4 +1,4 @@
-// © 2023 Brill Software Limited - Brill Framework, distributed under the MIT license.
+// © 2023 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
 import React, { Component } from "react"
 import { TableContainer as MuiTableContainer, Paper as MuiPaper, Table as MuiTable, TableBody as MuiTableBody, TableHead as MuiTableHead, TableRow as MuiTableRow, TableCell as MuiTableCell } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"

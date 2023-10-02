@@ -72,7 +72,7 @@ class MarkdownViewer extends Component<Props, State> {
         const { id, theme, classes, subscribeToTopic, filter, ...other } = this.props
 
         if (!this.state.text) {
-            return <LoadingIndicator />
+            return null
         }
 
         return (
@@ -91,7 +91,8 @@ class MarkdownViewer extends Component<Props, State> {
                             code: {component: Typography, props: {variant: "code"}},
                             blockquote: {component: Typography, props: {variant: "blockquote"}},
                             ul: {component: Typography, props: {variant: "ul"}},
-                            ol: {component: Typography, props: {variant: "ol"}},
+                            // Mui Typography doesn't appear to support ordered list items.
+                            // ol: {component: Typography, props: {variant: "ol"}},
                             img: {component: Typography, props: {variant: "img"}}
                         }
                     }}

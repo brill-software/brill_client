@@ -75,9 +75,12 @@ class Xhtml extends Component<Props, State> {
     }
 
     dataLoadedCallback(topic: string, content: any) {
-        let text = Base64.decode(content.base64)
-        const els = this.processPage("<xhtml>" + text + "</xhtml>")
-        this.setState({elements: els})
+        let text = ""
+        if (typeof content === 'string') {
+            text = content
+        } else {
+            text = Base64.decode(content.base64)
+        }
     }
 
     /**

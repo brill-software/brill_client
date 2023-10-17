@@ -81,6 +81,8 @@ class Xhtml extends Component<Props, State> {
         } else {
             text = Base64.decode(content.base64)
         }
+        const els = this.processPage("<xhtml>" + text + "</xhtml>")
+        this.setState({elements: els})
     }
 
     /**

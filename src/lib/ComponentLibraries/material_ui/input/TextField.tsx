@@ -77,6 +77,13 @@ export default class TextField extends Component<Props, State> {
             MB.publish(this.props.publishToTopic, event.target.value)
         }
     }
+
+    onKeyPress(event: any) {
+        if (event.keyCode === 13) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+    }
     
     validationCallback(topic: string, value: string): boolean {
         let failed: boolean = false
@@ -109,7 +116,9 @@ export default class TextField extends Component<Props, State> {
         }
 
         return (
-            <MuiTextField {...other} onChange={event => this.onChangeHandler(event)}
+            <MuiTextField {...other} 
+                onChange={event => this.onChangeHandler(event)}
+                onKeyDown={event => this.onKeyPress(event)}
                 error={this.state.error} 
                 helperText={this.state.helperText}
                 value={this.state.value}

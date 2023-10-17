@@ -240,6 +240,11 @@ export class IconUtils {
                 resolved = require("@mui/icons-material/SettingsBackupRestore.js").default
                 break
 
+            // Chatbot
+            case "Send":
+                resolved = require("@mui/icons-material/Send.js").default
+                break
+
             default:
                 console.warn(`Material UI Icon ${name} not currently supported. Update IconUtils.ts to add support.`);
                 resolved = require("@mui/icons-material/ErrorTwoTone.js").default

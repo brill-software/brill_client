@@ -79,7 +79,7 @@ class ChatbotButton extends Component<Props, State> {
         MB.unsubscribe(this.token)
     }
 
-    handleSuccessResponse(topic: string, responseData: any) {
+    async handleSuccessResponse(topic: string, responseData: any) {
         this.setState({disabled: false})
         this.messages = responseData.messages
         
@@ -87,20 +87,39 @@ class ChatbotButton extends Component<Props, State> {
         MB.publish(this.props.subscribeToTopic + ".initial_message", "")
 
         if (this.props.publishToTopic) {
-            let xhtml = ""
+            let markdown = ""
+            let lastMsgStartPos = 0
             for (let i = 0; i < this.messages.length; i++) {
                 switch (this.messages[i].role) {
                     case "user":
-                        xhtml += "\n**" + this.messages[i].content + "**\n\n"  
+                        markdown += "\n**" + this.messages[i].content + "**\n\n"  
                         break
                     case "assistant":
-                        xhtml += this.messages[i].content + "\n"
+                        lastMsgStartPos = markdown.length
+                        markdown += this.messages[i].content + "\n"
                         break
                     case "system":
                         break    
                 }
             }
-            MB.publish(this.props.publishToTopic, xhtml)
+
+            // Display the last answer in delayed sections to give a chatbot like appearance.
+            let pos = lastMsgStartPos
+            while (pos < markdown.length) {
+                pos += 30
+                if (pos > markdown.length) { 
+                    pos = markdown.length
+                } else {
+                    // Advance to the next space.
+                    const nextSpace = markdown.indexOf(' ', pos)
+                    if (nextSpace !== -1) {
+                        pos = nextSpace
+                    }
+                }
+                const dotEnding = (pos < markdown.length) ? " **•**" : ""
+                MB.publish(this.props.publishToTopic, markdown.substring(0,pos) + dotEnding)
+                await new Promise(r => setTimeout(r, 500));
+            }
         }
         if (this.props.route) {
             if (this.props.route.toLowerCase() === "back") {
@@ -110,11 +129,6 @@ class ChatbotButton extends Component<Props, State> {
             }      
         }
     }
-
-    // convertToXhtml(content: string): string {
-
-
-    // }
 
     handleErrorResponse(topic: string, response: any) {
         this.setState({disabled: false, errorMsg: response.detail})

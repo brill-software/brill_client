@@ -127,7 +127,7 @@ export default class PagePreview extends Component<Props, State> {
                     "This page has no top level Error Boundary and might be intended to be embedded in another page.")
                 return
             }
-            if (this.changedText || UnsavedChanges.hasUnsavedChanges()) {
+            if (this.textChanged || UnsavedChanges.hasUnsavedChanges()) {
                 MB.publish(`brill_cms.PagePreview.unsavedChanges.open.${this.props.id}`,
                     "Please save all changes first. ")
                 return

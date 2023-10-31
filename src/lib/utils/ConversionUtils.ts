@@ -15,6 +15,6 @@ export class ConversionUtils {
         for (let i = 0; i < bytes.byteLength; i++) {
             binary += String.fromCharCode(bytes[i])
         }
-        return Base64.encode(binary)
+        return btoa(binary)
     }
 }

@@ -31,7 +31,11 @@ class LinkButton extends Component<Props, State> {
     }
 
     onClickHandler() {
-        Router.goToPage(this.props.route)
+        if (this.props.route.toLowerCase() === "back") {
+                Router.goBackToPreviousPage()
+        } else {
+                Router.goToPage(this.props.route)
+        }   
     }
 
     render() {

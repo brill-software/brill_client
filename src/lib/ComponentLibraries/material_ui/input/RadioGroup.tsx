@@ -1,4 +1,4 @@
-// © 2023 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2023 Brill Software Limited - Brill MUI Components, distributed under the MIT License.
 import React, { Component } from "react"
 import { FormControl as MuiFormControl, FormLabel as MuiFormLabel, RadioGroup as MuiRadioGroup, FormControlLabel as MuiFormControlLabel, Radio as MuiRadio } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"

@@ -1,4 +1,4 @@
-// © 2023 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2023 Brill Software Limited - Brill Utils, distributed under the MIT License.
 import DOMPurify from "dompurify"
 
 /**

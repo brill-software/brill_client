@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2021 Brill Software Limited - Brill MUI Components, distributed under the MIT License.
 import React, {Component} from "react"
 import IconButton from "@mui/material/IconButton"
 import Tooltip from "@mui/material/Tooltip"

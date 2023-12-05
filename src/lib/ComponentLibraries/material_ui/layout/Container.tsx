@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2021 Brill Software Limited - Brill MUI Components, distributed under the MIT License.
 import React, {Component} from "react"
 import { Container as MuiContainer } from "@mui/material"
 

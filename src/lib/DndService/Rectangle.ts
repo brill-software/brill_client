@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2021 Brill Software Limited - Brill Framework, distributed under the MIT License.
 
 /**
  * A rectangle representing an area on the page.

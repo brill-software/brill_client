@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 import React, {ChangeEvent, Component} from "react"
 import { Menu, MenuItem, PopoverPosition, Tooltip, Typography } from "@mui/material"
 import { TreeView as MuiTreeView, TreeItem as MuiTreeItem } from "@mui/lab"

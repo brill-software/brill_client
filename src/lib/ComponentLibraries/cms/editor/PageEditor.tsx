@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 import React, { Component } from "react"
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"
 import { ComponentManager } from "lib/ComponentManager/ComponentManager"

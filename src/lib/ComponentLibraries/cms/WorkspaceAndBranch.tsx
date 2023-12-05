@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 import React, { Component } from "react"
 import { Menu, MenuItem, PopoverPosition, Typography as MuiTypography } from "@mui/material"
 import { MB, Token } from "lib/MessageBroker/MB"

@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2021 Brill Software Limited - Brill MUI Components, distributed under the MIT License.
 
 /**
  * Keeps a track of the last editor that had the focus or that the user performed some action with.

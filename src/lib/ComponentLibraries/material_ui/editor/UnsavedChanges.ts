@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2021 Brill Software Limited - Brill MUI Components, distributed under the MIT License.
 
 /**
  * Unsaved editor changes tracker

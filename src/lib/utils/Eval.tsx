@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2021 Brill Software Limited - Brill Utils, distributed under the MIT License.
 /* eslint no-new-func: 0 */
 
 import { ErrorUtils } from "./ErrorUtils"

@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 import React, {Component} from "react"
 import { MB, Token } from "lib/MessageBroker/MB"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"

@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 
 /**
  * File Clipboard for Copy and Paste. The Clipboard is retained across workspace and branch switches.

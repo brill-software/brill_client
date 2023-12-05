@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 import React, { Component } from "react"
 import { Button, DialogActions, DialogContent, IconButton as MuiIconButton, Popover, TextField, Typography } from '@mui/material'
 import { Theme } from "lib/ComponentLibraries/material_ui/theme/Theme"

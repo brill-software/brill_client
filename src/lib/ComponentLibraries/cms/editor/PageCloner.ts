@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 import { Page, PageComponent } from "lib/PageService/Page"
 import { EditType, PageEdit } from "lib/ComponentLibraries/cms/editor/PageEdit"
 import { MB } from "lib/MessageBroker/MB"

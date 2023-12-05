@@ -1,4 +1,4 @@
-// © 2022 Brill Software Limited - Brill CMS, distributed under the Brill Software Apps license.
+// © 2022 Brill Software Limited - Brill CMS, distributed under the MIT License.
 /**
  * UndoTracker - used by the PageEditor to track changes and support undo and redo operations.
  * 

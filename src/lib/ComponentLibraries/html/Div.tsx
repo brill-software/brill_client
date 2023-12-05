@@ -1,4 +1,4 @@
-// © 2021 Brill Software Limited - Brill Framework, distributed under the Brill Software Proprietry License.
+// © 2021 Brill Software Limited - Brill HTML Components, distributed under the MIT License.
 import React, {Component} from "react"
 import { ErrorMsg } from "lib/MessageBroker/ErrorMsg"
 import { MB, Token } from "lib/MessageBroker/MB"
